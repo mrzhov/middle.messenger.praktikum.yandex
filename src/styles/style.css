@@ -1,0 +1,17 @@
+@import "partials/partials.css";
+
+.search-form {
+   &__content {
+
+   }
+
+   &__input {
+      border: none;
+      border-bottom: 1px solid tomato;
+   }
+
+   &__button {
+      background-color: rgb(150, 170, 150);
+      border: none;
+   }
+}
