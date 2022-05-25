@@ -1,0 +1,20 @@
+@define-mixin size $width, $height: $width {
+   width: $width;
+   height: $height;
+}
+
+@define-mixin font $size: false, $lh: false, $weight: false,  $color: false {
+   color: #000000;
+   @if $size {
+      font-size: $size;
+   }
+   @if $lh {
+      line-height: $lh;
+   }
+   @if $weight {
+      font-weight: $weight;
+   }
+   @if $color {
+      color: $color;
+   }
+}

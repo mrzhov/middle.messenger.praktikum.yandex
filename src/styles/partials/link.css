@@ -1,0 +1,10 @@
+.link {
+   @extend .text-xs;
+   @extend .font-medium;
+   text-decoration: none;
+   color: $blue;
+
+   &:hover {
+      text-decoration: underline;
+   }
+}

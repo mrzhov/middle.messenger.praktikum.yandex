@@ -1,0 +1,10 @@
+{
+  "title": "Sign in",
+  "button": {
+    "children": "Sign in"
+  },
+  "link": {
+    "href": "../pages/registry.hbs",
+    "children": "Sign up"
+  }
+}

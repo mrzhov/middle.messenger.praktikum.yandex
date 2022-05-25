@@ -9,7 +9,10 @@
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "^1.0.9",
     "parcel": "^2.5.0",
+    "postcss-extend": "^1.0.5",
     "postcss-import": "^14.1.0",
-    "postcss-nested": "^5.0.6"
+    "postcss-mixins": "^9.0.2",
+    "postcss-nested": "^5.0.6",
+    "postcss-simple-vars": "^6.0.3"
   }
 }

@@ -1,0 +1,23 @@
+.w-0 {
+   width: 0;
+}
+
+.w-full {
+   width: 100%;
+}
+
+.w-screen {
+   width: 100vh;
+}
+
+.h-0 {
+   height: 0;
+}
+
+.h-full {
+   height: 100%;
+}
+
+.h-screen {
+   height: 100vh;
+}

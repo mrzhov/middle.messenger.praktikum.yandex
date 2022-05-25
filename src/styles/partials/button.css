@@ -1,11 +1,15 @@
 .btn {
-   background-color: transparent;
-   border: none;
-   font-size: 1rem;
-   padding: 0.5rem 1rem;
+   @extend .text-sm;
+   @extend .font-medium;
+   color: $white;
+   background-color: $blue;
+   width: 100%;
+   max-width: 280px;
+   border-radius: 0.5rem;
+   padding: 0.75rem;
+   transition: background-color .1s;
 
-   &__dark {
-      background-color: black;
-      color: white;
+   &:hover {
+      background-color: $blue-darken;
    }
 }

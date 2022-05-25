@@ -1,0 +1,13 @@
+<div class="card auth-card">
+    <div class="card-content text-center">
+        <h4 class="text-xl font-medium">{{props.title}}</h4>
+        <div class="auth-card__form">
+            <p>input 1</p>
+            <p>input 2</p>
+        </div>
+        <div class="auth-card__actions">
+            {{> button children=props.button.children}}
+            {{> link href=props.link.href children=props.link.children}}
+        </div>
+    </div>
+</div>
