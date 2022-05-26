@@ -2,4 +2,5 @@
 @import "mixins.css";
 @import "partials/index.css";
 @import "shared/index.css";
+@import "layouts/index.css";
 @import "reset.css";
