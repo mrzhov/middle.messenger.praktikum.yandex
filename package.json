@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Danil Ryzhov",
   "scripts": {
-    "start": "parcel src/pages/index.hbs --no-cache && parcel watch src/*",
+    "start": "parcel src/pages/index.hbs --no-cache && parcel watch ./*",
     "build": "parcel build src/pages/index.hbs --no-cache --public-url ./"
   },
   "devDependencies": {

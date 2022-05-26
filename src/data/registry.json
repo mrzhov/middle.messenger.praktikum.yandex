@@ -6,5 +6,38 @@
   "link": {
     "href": "../pages/login.hbs",
     "children": "Sign in"
-  }
+  },
+  "fields": [
+    {
+      "name": "first_name",
+      "label": "First name"
+    },
+    {
+      "name": "second_name",
+      "label": "Second name"
+    },
+    {
+      "name": "phone",
+      "label": "Phone"
+    },
+    {
+      "name": "email",
+      "label": "Email",
+      "type": "email"
+    },
+    {
+      "name": "login",
+      "label": "Login"
+    },
+    {
+      "name": "password",
+      "label": "Password",
+      "type": "password"
+    },
+    {
+      "name": "password-repeat",
+      "label": "Repeat password",
+      "type": "password"
+    }
+  ]
 }

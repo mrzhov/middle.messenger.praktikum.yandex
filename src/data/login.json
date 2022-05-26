@@ -6,5 +6,16 @@
   "link": {
     "href": "../pages/registry.hbs",
     "children": "Sign up"
-  }
+  },
+  "fields": [
+    {
+      "name": "login",
+      "label": "Login"
+    },
+    {
+      "name": "password",
+      "label": "Password",
+      "type": "password"
+    }
+  ]
 }

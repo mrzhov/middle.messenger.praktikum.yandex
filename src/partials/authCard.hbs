@@ -2,8 +2,7 @@
     <div class="card-content text-center">
         <h4 class="text-xl font-medium">{{props.title}}</h4>
         <div class="auth-card__form">
-            <p>input 1</p>
-            <p>input 2</p>
+            {{> form fields=props.fields}}
         </div>
         <div class="auth-card__actions">
             {{> button children=props.button.children}}

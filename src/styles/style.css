@@ -1,6 +1,6 @@
 @import "variables/index.css";
-@import "mixins.css";
-@import "partials/index.css";
-@import "shared/index.css";
-@import "layouts/index.css";
 @import "reset.css";
+@import "mixins.css";
+@import "shared/index.css";
+@import "partials/index.css";
+@import "layouts/index.css";
