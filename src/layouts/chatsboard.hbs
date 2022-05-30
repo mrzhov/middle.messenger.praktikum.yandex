@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="../styles/style.css">
+    {{#each css}}
+        <link rel="stylesheet" href="../styles/{{this}}">
+    {{/each}}
+    <title>
+        {{#if title}}
+            {{title}}
+        {{else}}
+            Messenger
+        {{/if}}
+    </title>
+</head>
+<body>
+<div class="flex w-screen">
+    {{> sidebar/sidebar}}
+    <div class="chat-container">
+        {{{body}}}
+    </div>
+</div>
+</body>
+</html>

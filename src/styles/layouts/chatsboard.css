@@ -1,0 +1,9 @@
+.chat-container {
+   width: calc(100% - 500px);
+}
+
+@media screen and (max-width: 1024px) {
+   .chat-container {
+      width: 60%;
+   }
+}

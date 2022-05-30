@@ -1,0 +1,12 @@
+.sidebar-navigation {
+   padding: 1rem;
+   width: calc(100% - 2rem);
+   display: flex;
+   justify-content: space-between;
+
+   & > div {
+      img {
+         @mixin size 28px;
+      }
+   }
+}
