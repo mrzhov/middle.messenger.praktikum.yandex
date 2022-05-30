@@ -1,0 +1,42 @@
+.chat-list {
+   height: calc(100% - 68px - 61px);
+   overflow-y: auto;
+   scrollbar-gutter: stable;
+
+   &::-webkit-scrollbar {
+      width: 0.5rem;
+   }
+
+   &::-webkit-scrollbar-track {
+      background-color: transparent;
+   }
+
+   &::-webkit-scrollbar-thumb {
+      background-color: rgba(177, 195, 213, 0.8);
+      border-radius: 0.5rem;
+   }
+}
+
+.chat-list-item {
+   width: 100%;
+   padding: 0.5rem 0 0.5rem 1rem;
+   display: flex;
+   align-items: center;
+
+   &-avatar {
+      @mixin size 46px;
+      background-color: $grey-5;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+   }
+
+   &-content {
+      width: calc(100% - 46px - 0.5rem);
+      & > div:first-child {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         margin-bottom: 0.5rem;
+      }
+   }
+}

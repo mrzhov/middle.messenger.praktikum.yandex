@@ -1,5 +1,6 @@
-@import "sidebar-search.css";
-@import "sidebar-navigation.css";
+@import "search.css";
+@import "chat-list.css";
+@import "navigation.css";
 
 .sidebar {
    @extend .h-screen;
