@@ -9,6 +9,7 @@ nav, section {
    padding: 0;
    border: 0;
    vertical-align: baseline;
+   box-sizing: border-box;
 }
 
 article, aside, details, figcaption, figure,
@@ -50,6 +51,7 @@ input {
    padding: 0;
    outline: none;
    background-color: transparent;
+   box-sizing: border-box;
 }
 
 html {
