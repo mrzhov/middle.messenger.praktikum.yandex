@@ -1,8 +1,11 @@
 $white: #ffffff;
+$white-1: rgba(255, 255, 255, 0.05);
 $black: #000000;
 $grey-1: #e5eaf1;
-$grey-2: #bac1cb;
-$blue: #1c93e3;
-$blue-hover: #1187d7;
-$blue-darken: hsl(204 86% 18%);
-$blue-darken-1: hsl(204 90% 28%);
+$grey-2: #cad0d9;
+$grey-3: #B1C3D5;
+$blue: #2EA6FF;
+$blue-hover: #2b9ff5;
+$blue-darken: #18222D;
+$blue-darken-1: #0f6eab;
+$blue-darken-2: rgb(51 65 85);

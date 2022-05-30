@@ -6,7 +6,7 @@
    @extend .justify-between;
    @extend .flex-col;
    width: 500px;
-   border-right: 1px solid rgb(51 65 85);
+   border-right: 1px solid $blue-darken-2;
 }
 
 @media screen and (max-width: 1024px) {

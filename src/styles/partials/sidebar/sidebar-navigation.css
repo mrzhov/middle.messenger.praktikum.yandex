@@ -1,12 +1,42 @@
 .sidebar-navigation {
-   padding: 1rem;
-   width: calc(100% - 2rem);
+   width: 100%;
    display: flex;
    justify-content: space-between;
+   border-top: 1px solid $blue-darken-2;
+}
 
-   & > div {
-      img {
-         @mixin size 28px;
+.sidebar-navigation-item {
+   width: 50%;
+   display: flex;
+   justify-content: center;
+   padding: 1rem 0;
+   cursor: pointer;
+   transition: background-color .1s;
+
+   svg {
+      @mixin size 28px;
+      stroke: $grey-3;
+      transition: stroke .1s;
+   }
+
+   &:hover {
+      svg {
+         transform: scale(1.05);
+      }
+   }
+
+   &.active {
+      background-color: $white-1;
+      cursor: default;
+
+      svg {
+         stroke: $blue;
+      }
+
+      &:hover {
+         svg {
+            transform: scale(1);
+         }
       }
    }
 }
