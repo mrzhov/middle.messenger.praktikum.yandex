@@ -18,9 +18,17 @@
     </title>
 </head>
 <body>
-<div class="bg-img-container">
-    <canvas class="bg-img" width="50" height="50"></canvas>
+<div class="flex w-screen">
+    <div class="sidebar-container">
+        {{#if sidebarProps.isSettings}}
+            {{> sidebar/sidebar-settings props=sidebarProps}}
+        {{else}}
+            {{> sidebar/sidebar-chat props=sidebarProps}}
+        {{/if}}
+    </div>
+    <main class="main-container">
+        {{{body}}}
+    </main>
 </div>
-{{{body}}}
 </body>
 </html>

@@ -1,18 +1,3 @@
 @import "search.css";
 @import "chat-list.css";
 @import "navigation.css";
-
-.sidebar {
-   @extend .h-screen;
-   @extend .flex;
-   @extend .justify-between;
-   @extend .flex-col;
-   width: 500px;
-   border-right: 1px solid $blue-darken-2;
-}
-
-@media screen and (max-width: 1024px) {
-   .sidebar {
-      width: 40%;
-   }
-}

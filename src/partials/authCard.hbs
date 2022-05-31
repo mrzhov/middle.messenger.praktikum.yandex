@@ -5,7 +5,9 @@
             {{> form fields=props.fields}}
         </div>
         <div class="space-y-2">
-            {{> button children=props.button.children}}
+            <a href="./index.hbs">
+                {{> button children=props.button.children}}
+            </a>
             {{> link href=props.link.href children=props.link.children}}
         </div>
     </div>
