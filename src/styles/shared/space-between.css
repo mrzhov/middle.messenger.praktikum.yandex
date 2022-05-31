@@ -1,0 +1,23 @@
+.space-x-1 {
+   & > *:not(:first-child) {
+      margin-left: 0.25rem;
+   }
+}
+
+.space-x-2 {
+   & > *:not(:first-child) {
+      margin-left: 0.5rem;
+   }
+}
+
+.space-y-1 {
+   & > *:not(:first-child) {
+      margin-top: 0.25rem;
+   }
+}
+
+.space-y-2 {
+   & > *:not(:first-child) {
+      margin-top: 0.5rem;
+   }
+}

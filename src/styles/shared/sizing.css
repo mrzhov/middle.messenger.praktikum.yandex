@@ -1,17 +1,9 @@
-.w-0 {
-   width: 0;
-}
-
 .w-full {
    width: 100%;
 }
 
 .w-screen {
    width: 100vw;
-}
-
-.h-0 {
-   height: 0;
 }
 
 .h-full {

@@ -4,8 +4,14 @@ title: Home page
 
 {{!< chatsboard}}
 
-<!--<main>-->
-<!--  <h1>Welcome from index.hbs</h1>-->
-<!--  <a href="./login.hbs">Sign in</a>-->
-<!--  <a href="./registry.hbs">Sign up</a>-->
-<!--</main>-->
+<main>
+    <div class="h-screen flex-center">
+        <div>
+            <p>Выберите чат, чтобы отправить сообщение</p>
+            <div class="flex-center space-x-2">
+                {{> link href="./login.hbs" children="Sign in"}}
+                {{> link href="./registry.hbs" children="Sign up"}}
+            </div>
+        </div>
+    </div>
+</main>

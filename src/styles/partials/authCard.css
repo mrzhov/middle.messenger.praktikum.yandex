@@ -9,9 +9,3 @@
    min-height: 200px;
    height: fit-content;
 }
-
-.auth-card__actions {
-   & > *:not(:first-child) {
-      margin-top: 0.5rem;
-   }
-}
