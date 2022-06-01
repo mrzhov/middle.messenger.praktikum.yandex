@@ -15,7 +15,24 @@
    background-color: $black-2;
    height: calc(100vh - 69px);
 
-   .btn {
-      max-width: 130px;
+   &-wrapper {
+      padding: 2rem;
+   }
+
+   &.change-password {
+      form {
+         width: 85%;
+         max-width: 800px;
+      }
+
+      a {
+         width: 85%;
+      }
+   }
+
+   &.exit-warning {
+      .btn {
+         max-width: 130px;
+      }
    }
 }
