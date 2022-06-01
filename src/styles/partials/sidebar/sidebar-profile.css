@@ -2,26 +2,30 @@
    display: flex;
    align-items: center;
    justify-content: space-between;
-   border-radius: 0.5rem;
+   border-radius: 0.75rem;
    padding: 1rem;
+   cursor: pointer;
 
    &-container {
       padding: 1rem;
    }
 
-   &-arrow {
-      @mixin size 20px;
-   }
-
    &.selected {
       background-color: $blue-1;
+      cursor: default;
 
       .subtext {
          color: $white;
       }
 
-      .sidebar-profile-arrow {
+      .sidebar-settings-arrow {
          display: none;
+      }
+   }
+
+   &:hover {
+      .sidebar-settings-arrow {
+         transform: translateX(0.25rem);
       }
    }
 }

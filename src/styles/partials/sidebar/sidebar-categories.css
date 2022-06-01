@@ -1,0 +1,47 @@
+.sidebar-categories {
+   &-container {
+      padding: 0 1rem;
+   }
+}
+
+.sidebar-categories-item {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   border-radius: 0.75rem;
+   padding: 0.5rem 1rem;
+   cursor: pointer;
+
+   &-icon {
+      @mixin size 26px;
+      margin-right: 0.75rem;
+      border-radius: 0.5rem;
+
+      svg {
+         @mixin size 18px;
+      }
+
+      &.bg-orange {
+         background-color: darkorange;
+      }
+
+      &.bg-red {
+         background-color: red;
+      }
+   }
+
+   &.selected {
+      background-color: $blue-1;
+      cursor: default;
+
+      .sidebar-settings-arrow {
+         display: none;
+      }
+   }
+
+   &:hover {
+      .sidebar-settings-arrow {
+         transform: translateX(0.25rem);
+      }
+   }
+}

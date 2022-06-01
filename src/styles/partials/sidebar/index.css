@@ -2,6 +2,7 @@
 @import "chat-list.css";
 @import "navigation.css";
 @import "sidebar-profile.css";
+@import "sidebar-categories.css";
 
 .sidebar-top {
    padding: 1rem;
@@ -21,4 +22,9 @@
    letter-spacing: 0.05em;
    display: inline-block;
    color: $blue;
+}
+
+.sidebar-settings-arrow {
+   @mixin size 20px;
+   transition: transform .1s ease;
 }
