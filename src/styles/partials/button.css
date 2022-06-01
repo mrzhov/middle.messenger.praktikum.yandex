@@ -12,4 +12,12 @@
    &:hover {
       background-color: $blue-hover;
    }
+
+   &.error {
+      background-color: $red;
+
+      &:hover {
+         background-color: $red-hover;
+      }
+   }
 }

@@ -12,7 +12,7 @@
     {{/each}}
     <title>
         {{#if title}}
-            {{title}}
+            Messenger: {{title}}
         {{else}}
             Messenger
         {{/if}}
@@ -27,9 +27,14 @@
             {{> sidebar/sidebar-chat props=sidebarProps}}
         {{/if}}
     </div>
-    <main class="main-container">
+    <div class="page-container">
+        {{#if title}}
+            <header class="page-header flex-center">
+                <h3 class="text">{{title}}</h3>
+            </header>
+        {{/if}}
         {{{body}}}
-    </main>
+    </div>
 </div>
 </body>
 </html>

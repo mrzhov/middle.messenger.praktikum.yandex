@@ -17,6 +17,11 @@
    line-height: 1.5rem; /* 24px */
 }
 
+.text-xl {
+   font-size: 1.25rem; /* 16px */
+   line-height: 1.75rem; /* 24px */
+}
+
 .font-normal {
    font-weight: 400;
 }

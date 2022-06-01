@@ -1,13 +1,16 @@
 ---
-title: Settings page
+title: Предупреждение о выходе
 sidebarProps:
     pageId: exitWarning
 ---
 
 {{!< base}}
 
-<main>
-    <div class="h-screen flex-center">
-        <p>Предупреждение о выходе</p>
+<main class="settings-page flex-center">
+    <div class="flex-center flex-col space-y-2">
+        <p class="text-xl">Вы уверены, что хотите выйти?</p>
+        <a href="./login.hbs" class="w-full flex-center">
+            {{> button classes="error" children="Выйти"}}
+        </a>
     </div>
 </main>
