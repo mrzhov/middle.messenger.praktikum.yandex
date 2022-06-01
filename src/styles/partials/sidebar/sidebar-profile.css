@@ -1,0 +1,27 @@
+.sidebar-profile {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   border-radius: 0.5rem;
+   padding: 1rem;
+
+   &-container {
+      padding: 2rem 1rem;
+   }
+
+   &-arrow {
+      @mixin size 20px;
+   }
+
+   &.selected {
+      background-color: $blue-1;
+
+      .subtext {
+         color: $white;
+      }
+
+      .sidebar-profile-arrow {
+         display: none;
+      }
+   }
+}

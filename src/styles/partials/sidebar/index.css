@@ -1,6 +1,7 @@
 @import "search.css";
 @import "chat-list.css";
 @import "navigation.css";
+@import "sidebar-profile.css";
 
 .sidebar-top {
    padding: 1rem;
