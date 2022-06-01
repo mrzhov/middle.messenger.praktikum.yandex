@@ -8,11 +8,16 @@
       padding: 1rem;
       cursor: pointer;
       text-decoration: none;
+      border-radius: 0.75rem;
 
       &:hover {
          .sidebar-settings-arrow {
             transform: translateX(0.25rem);
          }
+      }
+
+      &:active {
+         background-color: $black-1;
       }
    }
 
@@ -25,6 +30,10 @@
 
       a {
          cursor: default;
+         
+         &:active {
+            background-color: transparent;
+         }
       }
 
       .subtext {

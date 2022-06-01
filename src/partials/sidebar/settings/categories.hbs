@@ -1,7 +1,7 @@
 <div class="sidebar-categories-container">
     <ul class="sidebar-categories">
         <li class="sidebar-categories-item {{#if (eq props.pageId "changePassword")}}selected{{/if}}">
-            <a href="./change-password.hbs">
+            <a href="{{#if (eq props.pageId "changePassword")}}javascript:;{{else}}./change-password.hbs{{/if}}">
                 <div class="flex items-center">
                     <div class="flex-center sidebar-categories-item-icon bg-orange">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -18,7 +18,7 @@
             </a>
         </li>
         <li class="sidebar-categories-item {{#if (eq props.pageId "exitWarning")}}selected{{/if}}">
-            <a href="./exit-warning.hbs">
+            <a href="{{#if (eq props.pageId "exitWarning")}}javascript:;{{else}}./exit-warning.hbs{{/if}}">
                 <div class="flex items-center">
                     <div class="flex-center sidebar-categories-item-icon bg-red">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

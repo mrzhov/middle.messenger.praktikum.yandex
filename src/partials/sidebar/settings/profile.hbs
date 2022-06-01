@@ -1,6 +1,6 @@
 <div class="sidebar-profile-container">
     <div class="sidebar-profile {{#if (eq props.pageId "profile")}}selected{{/if}}">
-        <a href="./profile.hbs">
+        <a href="{{#if (eq props.pageId "profile")}}javascript:;{{else}}./profile.hbs{{/if}}">
             <div class="flex items-center">
                 <div class="mock-avatar"></div>
                 <div>
