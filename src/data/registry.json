@@ -1,42 +1,42 @@
 {
-  "title": "Sign up",
+  "title": "Регистрация",
   "button": {
-    "children": "Sign up"
+    "children": "Зарегистрироваться"
   },
   "link": {
     "href": "../pages/login.hbs",
-    "children": "Sign in"
+    "children": "Войти"
   },
   "fields": [
     {
       "name": "first_name",
-      "label": "First name"
+      "label": "Имя"
     },
     {
       "name": "second_name",
-      "label": "Second name"
+      "label": "Фамилия"
     },
     {
       "name": "phone",
-      "label": "Phone"
+      "label": "Телефон"
     },
     {
       "name": "email",
-      "label": "Email",
+      "label": "Почта",
       "type": "email"
     },
     {
       "name": "login",
-      "label": "Login"
+      "label": "Логин"
     },
     {
       "name": "password",
-      "label": "Password",
+      "label": "Пароль",
       "type": "password"
     },
     {
       "name": "password-repeat",
-      "label": "Repeat password",
+      "label": "Повторите пароль",
       "type": "password"
     }
   ]

@@ -1,20 +1,20 @@
 {
-  "title": "Sign in",
+  "title": "Вход",
   "button": {
-    "children": "Sign in"
+    "children": "Войти"
   },
   "link": {
     "href": "../pages/registry.hbs",
-    "children": "Sign up"
+    "children": "Нет аккаунта?"
   },
   "fields": [
     {
       "name": "login",
-      "label": "Login"
+      "label": "Логин"
     },
     {
       "name": "password",
-      "label": "Password",
+      "label": "Пароль",
       "type": "password"
     }
   ]
