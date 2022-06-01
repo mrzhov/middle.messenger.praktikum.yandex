@@ -1,10 +1,20 @@
 .sidebar-profile {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
    border-radius: 0.75rem;
-   padding: 1rem;
-   cursor: pointer;
+
+   a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+
+      &:hover {
+         .sidebar-settings-arrow {
+            transform: translateX(0.25rem);
+         }
+      }
+   }
 
    &-container {
       padding: 1rem;
@@ -12,7 +22,10 @@
 
    &.selected {
       background-color: $blue-1;
-      cursor: default;
+
+      a {
+         cursor: default;
+      }
 
       .subtext {
          color: $white;
@@ -20,12 +33,6 @@
 
       .sidebar-settings-arrow {
          display: none;
-      }
-   }
-
-   &:hover {
-      .sidebar-settings-arrow {
-         transform: translateX(0.25rem);
       }
    }
 }

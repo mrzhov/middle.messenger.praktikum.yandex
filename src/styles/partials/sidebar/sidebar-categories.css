@@ -5,12 +5,21 @@
 }
 
 .sidebar-categories-item {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
    border-radius: 0.75rem;
-   padding: 0.5rem 1rem;
-   cursor: pointer;
+   a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      text-decoration: none;
+
+      &:hover {
+         .sidebar-settings-arrow {
+            transform: translateX(0.25rem);
+         }
+      }
+   }
 
    &-icon {
       @mixin size 26px;
@@ -19,6 +28,7 @@
 
       svg {
          @mixin size 18px;
+         stroke: $white;
       }
 
       &.bg-orange {
@@ -32,16 +42,13 @@
 
    &.selected {
       background-color: $blue-1;
-      cursor: default;
+
+      a {
+         cursor: default;
+      }
 
       .sidebar-settings-arrow {
          display: none;
-      }
-   }
-
-   &:hover {
-      .sidebar-settings-arrow {
-         transform: translateX(0.25rem);
       }
    }
 }
