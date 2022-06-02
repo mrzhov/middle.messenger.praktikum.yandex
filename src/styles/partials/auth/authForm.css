@@ -3,8 +3,9 @@
    width: 100%;
 
    label {
-      @extend .text-xs;
       @extend .font-normal;
+      font-size: 0.75rem;
+      line-height: 1rem;
       position: absolute;
       display: block;
       transition: 0.2s;
