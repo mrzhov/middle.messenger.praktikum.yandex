@@ -6,11 +6,13 @@ sidebarProps:
 
 {{!< base}}
 
-<main class="settings-page exit-warning flex-center">
+<main class="settings-page flex-center">
     <div class="flex-center flex-col space-y-2">
         <p class="text-xl">Вы уверены, что хотите выйти?</p>
-        <a href="./login.hbs" class="w-full flex-center">
-            {{> button classes="error" children="Выйти"}}
-        </a>
+        <div class="submit-container">
+            <a href="./login.hbs" class="flex-center">
+                {{> button classes="error" children="Выйти"}}
+            </a>
+        </div>
     </div>
 </main>

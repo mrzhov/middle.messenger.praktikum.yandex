@@ -7,12 +7,6 @@
    border-right: 1px solid $blue-darken-2;
 }
 
-@media screen and (max-width: 1024px) {
-   .sidebar-container {
-      width: 40%;
-   }
-}
-
 .page {
    &-container {
       width: calc(100% - 500px);
@@ -26,6 +20,10 @@
 }
 
 @media screen and (max-width: 1024px) {
+   .sidebar-container {
+      width: 40%;
+   }
+
    .page-container {
       width: 60%;
    }

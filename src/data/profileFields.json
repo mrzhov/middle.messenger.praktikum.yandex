@@ -1,0 +1,30 @@
+{
+  "fields": [
+    {
+      "name": "first_name",
+      "label": "Имя",
+      "value": "Ivan"
+    },
+    {
+      "name": "second_name",
+      "label": "Фамилия",
+      "value": "Ivanov"
+    },
+    {
+      "name": "phone",
+      "label": "Телефон",
+      "value": "+7 999 111 22 33"
+    },
+    {
+      "name": "email",
+      "label": "Почта",
+      "type": "email",
+      "value": "test@yandex.ru"
+    },
+    {
+      "name": "login",
+      "label": "Логин",
+      "value": "@ivan123"
+    }
+  ]
+}
