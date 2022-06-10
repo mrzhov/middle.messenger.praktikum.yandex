@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/style.css">
+    {{#each css}}
+        <link rel="stylesheet" href="../styles/{{this}}">
+    {{/each}}
+    <title>
+        {{#if title}}
+            Messenger: {{title}}
+        {{else}}
+            Messenger
+        {{/if}}
+    </title>
+</head>
+<body>
+<div class="flex w-screen">
+    <div class="sidebar-container">
+        {{#if sidebarProps.pageId}}
+            {{> sidebar/sidebar-settings props=sidebarProps}}
+        {{else}}
+            {{> sidebar/sidebar-chat props=sidebarProps}}
+        {{/if}}
+    </div>
+    <div class="page-container">
+        {{#if title}}
+            <header class="page-header flex-center">
+                <h3 class="text">{{title}}</h3>
+            </header>
+        {{/if}}
+        {{{body}}}
+    </div>
+</div>
+</body>
+</html>

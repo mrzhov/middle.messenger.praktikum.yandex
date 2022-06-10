@@ -1,0 +1,56 @@
+.search-form-field {
+   position: relative;
+   width: 100%;
+
+   label {
+      @extend .text-sm;
+      @extend .font-normal;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      transition: transform .2s ease, left .2s ease;
+      cursor: text;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: $grey-3;
+
+      svg {
+         @mixin size 18px;
+         stroke: $grey-3;
+         margin: 0 0.5rem 1px 0 ;
+      }
+   }
+
+   input {
+      @extend .text-sm;
+      @extend .font-normal;
+      padding: 0.5rem;
+      width: 100%;
+      color: $white;
+      display: block;
+      background-color: $grey-4;
+      border-radius: 0.5rem;
+
+      &:required, &:invalid {
+         box-shadow: none;
+      }
+
+      &::placeholder {
+         color: transparent;
+      }
+
+      &:focus ~ label {
+         left: 0.5rem;
+         transform: translate(0, -50%);
+
+         svg {
+            display: none;
+         }
+      }
+
+      &:not(:placeholder-shown) ~ label {
+         display: none;
+      }
+   }
+}

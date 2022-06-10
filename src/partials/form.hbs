@@ -1,0 +1,14 @@
+<form action="" class="w-full space-y-3">
+    {{#each fields}}
+        <div class="form-field">
+            <input
+                id="{{this.name}}"
+                type="{{#if this.type}}{{this.type}}{{else}}text{{/if}}"
+                name="{{this.name}}"
+                placeholder="{{this.label}}"
+                value="{{#if this.value}}{{this.value}}{{/if}}"
+            />
+            <label for="{{this.name}}">{{this.label}}</label>
+        </div>
+    {{/each}}
+</form>

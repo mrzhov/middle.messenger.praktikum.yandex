@@ -1,0 +1,23 @@
+.btn {
+   @extend .text-sm;
+   @extend .font-medium;
+   color: $white;
+   background-color: $blue;
+   width: 100%;
+   max-width: 280px;
+   border-radius: 0.5rem;
+   padding: 0.75rem;
+   transition: background-color .1s;
+
+   &:hover {
+      background-color: $blue-hover;
+   }
+
+   &.error {
+      background-color: $red;
+
+      &:hover {
+         background-color: $red-hover;
+      }
+   }
+}

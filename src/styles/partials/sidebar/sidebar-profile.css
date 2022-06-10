@@ -1,0 +1,46 @@
+.sidebar-profile {
+   border-radius: 0.75rem;
+
+   a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      cursor: pointer;
+      border-radius: 0.75rem;
+
+      &:hover {
+         .sidebar-settings-arrow {
+            transform: translateX(0.25rem);
+         }
+      }
+
+      &:active {
+         background-color: $black-1;
+      }
+   }
+
+   &-container {
+      padding: 1rem;
+   }
+
+   &.selected {
+      background-color: $blue-1;
+
+      a {
+         cursor: default;
+
+         &:active {
+            background-color: transparent;
+         }
+      }
+
+      .subtext {
+         color: $white;
+      }
+
+      .sidebar-settings-arrow {
+         display: none;
+      }
+   }
+}

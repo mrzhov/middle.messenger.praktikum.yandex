@@ -1,0 +1,73 @@
+html, body, div, span,
+h1, h2, h3, h4, h5, h6, p,
+a, img, strong, ol, ul, li,
+form, label,
+table, tbody, thead, tr, th, td,
+footer, header,
+nav, section {
+   margin: 0;
+   padding: 0;
+   border: 0;
+   vertical-align: baseline;
+   box-sizing: border-box;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, menu, nav, section {
+   display: block;
+}
+
+html, body {
+   height: 100%;
+}
+
+ol, ul {
+   list-style: none;
+}
+
+table {
+   border-collapse: collapse;
+   border-spacing: 0;
+}
+
+a {
+   cursor: pointer;
+   text-decoration: none;
+}
+
+button {
+   text-decoration: none;
+   border: 0;
+   padding: 0;
+   cursor: pointer;
+   user-select: none;
+   outline: none;
+   background-color: transparent;
+}
+
+input {
+   font-family: $font-family-base;
+   text-decoration: none;
+   border: 0;
+   padding: 0;
+   outline: none;
+   background-color: transparent;
+   box-sizing: border-box;
+}
+
+html {
+   font-size: 16px;
+}
+
+body {
+   font-family: $font-family-base;
+   color: $body-color;
+   background-color: $body-bg;
+   padding: 0;
+   line-height: 1;
+}
+
+h1, h2, h3, h4, h5, h6, p, a {
+   @extend .text-base;
+   @extend .font-normal;
+}

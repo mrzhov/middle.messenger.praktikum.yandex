@@ -1,0 +1,38 @@
+@import "search.css";
+@import "chat-list.css";
+@import "navigation.css";
+@import "sidebar-profile.css";
+@import "sidebar-categories.css";
+
+.sidebar-top {
+   padding: 1rem;
+   height: 69px;
+
+   &.border-bottom {
+      border-bottom: 1px solid $blue-darken-2;
+   }
+}
+
+.app-logo {
+   display: flex;
+   align-items: center;
+   svg {
+      @mixin size 24px;
+      margin-right: 0.5rem;
+   }
+
+   h2 {
+      font-family: 'Lato', sans-serif;
+      font-weight: 900;
+      font-size: 1.25rem;
+      font-style: italic;
+      letter-spacing: 0.05em;
+      display: inline-block;
+      color: $blue;
+   }
+}
+
+.sidebar-settings-arrow {
+   @mixin size 20px;
+   transition: transform .1s ease;
+}

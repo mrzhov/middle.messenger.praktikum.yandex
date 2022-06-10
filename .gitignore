@@ -1,0 +1,10 @@
+# dependencies
+/node_modules
+
+# parcel
+/.parcel-cache/
+/dist/
+
+# misc
+.DS_Store
+/.idea/

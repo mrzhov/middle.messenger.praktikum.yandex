@@ -1,0 +1,27 @@
+.form-field {
+   position: relative;
+   width: 100%;
+
+   label {
+      display: none;
+   }
+
+   input {
+      @extend .text-sm;
+      @extend .font-normal;
+      color: $white;
+      width: 100%;
+      display: block;
+      padding: 1rem;
+      background-color: $blue-darken;
+      border-radius: 0.75rem;
+
+      &:required, &:invalid {
+         box-shadow: none;
+      }
+
+      &::placeholder {
+         color: $grey-3;
+      }
+   }
+}

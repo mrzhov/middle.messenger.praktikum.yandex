@@ -1,0 +1,21 @@
+{
+  "title": "Вход",
+  "button": {
+    "children": "Войти"
+  },
+  "link": {
+    "href": "../pages/registry.hbs",
+    "children": "Нет аккаунта?"
+  },
+  "fields": [
+    {
+      "name": "login",
+      "label": "Логин"
+    },
+    {
+      "name": "password",
+      "label": "Пароль",
+      "type": "password"
+    }
+  ]
+}

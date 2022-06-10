@@ -1,0 +1,5 @@
+@import "colors.css";
+
+$font-family-base: 'Inter', sans-serif;
+$body-color: $white;
+$body-bg: $blue-darken;
