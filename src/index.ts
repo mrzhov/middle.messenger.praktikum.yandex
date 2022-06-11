@@ -1,6 +1,6 @@
-import {Button} from "@/components/button";
+import { Button } from '@/components/button';
 
 document.addEventListener('DOMContentLoaded', () => {
-   const button = new Button();
-   console.log(button);
-})
+	const button = new Button();
+	console.log(button);
+});
