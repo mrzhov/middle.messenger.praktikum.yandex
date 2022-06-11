@@ -1,9 +1,17 @@
 import { Block } from '@/shared/core';
 
+import type { ButtonProps } from './button.types';
+
 class Button extends Block {
-	constructor() {
-		super();
-		console.log('Button is initialized!');
+	constructor({ text, onClick }: ButtonProps) {
+		super({ text, events: { click: onClick } });
+	}
+
+	render(): string {
+		// language=hbs
+		return `
+			<button class="btn">{{text}}</button>
+		`;
 	}
 }
 
