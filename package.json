@@ -33,7 +33,10 @@
     "typescript": "4.7.3"
   },
   "alias": {
+    "@/shared": "./src/shared",
+    "@/assets": "./src/assets",
     "@/components": "./src/components",
-    "@/shared": "./src/shared"
+    "@/pages": "./src/pages",
+    "@/layouts": "./src/layouts"
   }
 }

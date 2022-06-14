@@ -121,7 +121,7 @@ abstract class Block<P = any> {
 			const content = component.getContent();
 			stub.replaceWith(content);
 
-			const layoutContent = content.querySelector('[data-layout="1"]');
+			const layoutContent = content.querySelector('[data-layout]');
 
 			if (layoutContent && stubChilds.length) {
 				layoutContent.append(...stubChilds);

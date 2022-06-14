@@ -40,11 +40,14 @@
         "react/jsx-filename-extension": [0],
         "import/extensions": [
           "error",
-          "never"
+          "never",
+          {
+            "css": "always"
+          }
         ],
         "class-methods-use-this": "off",
-        "no-param-reassign": ["error", { "props": false }]
-      }
+        "no-param-reassign": ["error", { "props": false }],
+        "@typescript-eslint/no-useless-constructor": "off"}
     }
   ]
 }

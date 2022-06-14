@@ -1,28 +1,15 @@
-import { Button } from '@/components/button';
-import { registerComponent, renderDOM } from '@/shared/core';
+import '@/assets/styles/global.css';
 
-registerComponent(Button);
+import { LoginPage } from '@/pages/login';
+import { renderDOM } from '@/shared/core';
+import { registerComponents } from '@/shared/utils';
+
+registerComponents();
 
 document.addEventListener('DOMContentLoaded', () => {
-	const button = new Button({
-		text: 'Click me',
-		events: {
-			click: () => {
-				console.log('check');
-			},
-		},
-	});
+	// DEV: Раскомментировать нужную страницу для отображения
 
-	setTimeout(() => {
-		button.setProps({
-			text: 'Click me please',
-			events: {
-				click: () => {
-					console.log('check 123');
-				},
-			},
-		});
-	}, 1000);
+	const App = new LoginPage();
 
-	renderDOM(button);
+	renderDOM(App);
 });
