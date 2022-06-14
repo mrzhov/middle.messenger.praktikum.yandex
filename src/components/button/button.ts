@@ -3,8 +3,9 @@ import { Block } from '@/shared/core';
 import type { ButtonProps } from './button.types';
 
 class Button extends Block {
-	constructor({ text, onClick }: ButtonProps) {
-		super({ text, events: { click: onClick } });
+	// eslint-disable-next-line @typescript-eslint/no-useless-constructor
+	constructor(props: ButtonProps) {
+		super(props);
 	}
 
 	render(): string {

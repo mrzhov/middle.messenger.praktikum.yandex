@@ -1,4 +1,5 @@
 import Handlebars from 'handlebars';
+import { nanoid } from 'nanoid';
 
 import EventBus from './EventBus';
 
@@ -16,21 +17,29 @@ abstract class Block<P = any> {
 		return document.createElement(tagName);
 	}
 
+	id: string = nanoid(6);
 	private element: Nullable<HTMLElement> = null;
-	protected readonly props: P;
-	private readonly eventBus: EventBus<Events>;
+	private readonly eventBus: () => EventBus<Events>;
+	protected props: P;
+	protected state: any = {};
+	protected children: Record<string, Block> = {};
+	protected refs: Record<string, HTMLElement> = {};
 
 	protected constructor(props?: P) {
-		this.eventBus = new EventBus<Events>();
+		const eventBus = new EventBus<Events>();
+		this.eventBus = () => eventBus;
 
-		this.props = this.makePropsProxy(props || ({} as P));
+		this.getStateFromProps(props);
 
-		this.registerEvents(this.eventBus);
+		this.props = this.makeProxy(props || ({} as P));
+		this.state = this.makeProxy(this.state);
 
-		this.eventBus.emit(Block.EVENTS.INIT);
+		this.registerEvents(eventBus);
+
+		eventBus.emit(Block.EVENTS.INIT);
 	}
 
-	private makePropsProxy(props: P): P {
+	private makeProxy(props: P): P {
 		const self = this;
 		return new Proxy(props as unknown as object, {
 			get(target: Record<string, unknown>, p: string) {
@@ -39,7 +48,7 @@ abstract class Block<P = any> {
 			},
 			set(target: Record<string, unknown>, p: string, value: unknown): boolean {
 				target[p] = value;
-				self.eventBus.emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
+				self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
 				return true;
 			},
 			deleteProperty() {
@@ -57,7 +66,7 @@ abstract class Block<P = any> {
 
 	private init() {
 		this.createResources();
-		this.eventBus.emit(Block.EVENTS.FLOW_RENDER, this.props);
+		this.eventBus().emit(Block.EVENTS.FLOW_RENDER, this.props);
 	}
 
 	private componentDidMount(props: P) {}
@@ -72,13 +81,13 @@ abstract class Block<P = any> {
 	private flowRender() {
 		const fragment = this.compile();
 
-		// this._removeEvents();
+		this.removeEvents();
 		const newElement = fragment.firstElementChild!;
 
 		this.element!.replaceWith(newElement);
 
 		this.element = newElement as HTMLElement;
-		// this._addEvents();
+		this.addEvents();
 	}
 
 	private createResources() {
@@ -92,60 +101,65 @@ abstract class Block<P = any> {
 	private compile(): DocumentFragment {
 		const fragment = document.createElement('template');
 
-		/**
-		 * Рендерим шаблон
-		 */
 		const template = Handlebars.compile(this.render());
 		fragment.innerHTML = template({
-			// ...this.state,
+			...this.state,
 			...this.props,
-			// children: this.children,
-			// refs: this.refs,
+			children: this.children,
+			refs: this.refs,
 		});
 
-		// /**
-		//  * Заменяем заглушки на компоненты
-		//  */
-		// Object.entries(this.children).forEach(([id, component]) => {
-		// 	/**
-		// 	 * Ищем заглушку по id
-		// 	 */
-		// 	const stub = fragment.content.querySelector(`[data-id="${id}"]`);
-		//
-		// 	if (!stub) {
-		// 		return;
-		// 	}
-		//
-		// 	const stubChilds = stub.childNodes.length ? stub.childNodes : [];
-		//
-		// 	/**
-		// 	 * Заменяем заглушку на component._element
-		// 	 */
-		// 	const content = component.getContent();
-		// 	stub.replaceWith(content);
-		//
-		// 	/**
-		// 	 * Ищем элемент layout-а, куда вставлять детей
-		// 	 */
-		// 	const layoutContent = content.querySelector('[data-layout="1"]');
-		//
-		// 	if (layoutContent && stubChilds.length) {
-		// 		layoutContent.append(...stubChilds);
-		// 	}
-		// });
+		Object.entries(this.children).forEach(([id, component]) => {
+			const stub = fragment.content.querySelector(`[data-id="${id}"]`);
 
-		/**
-		 * Возвращаем фрагмент
-		 */
+			if (!stub) {
+				return;
+			}
+
+			const stubChilds = stub.childNodes.length ? stub.childNodes : [];
+
+			const content = component.getContent();
+			stub.replaceWith(content);
+
+			const layoutContent = content.querySelector('[data-layout="1"]');
+
+			if (layoutContent && stubChilds.length) {
+				layoutContent.append(...stubChilds);
+			}
+		});
+
 		return fragment.content;
 	}
 
+	private addEvents() {
+		const { events } = this.props as any;
+
+		if (!events) {
+			return;
+		}
+
+		Object.entries(events).forEach(([event, listener]) => {
+			this.element!.addEventListener(event, listener as () => any);
+		});
+	}
+
+	private removeEvents() {
+		const { events } = this.props as any;
+
+		if (!events || !this.element) {
+			return;
+		}
+
+		Object.entries(events).forEach(([event, listener]) => {
+			this.element!.removeEventListener(event, listener as () => any);
+		});
+	}
+
 	getContent(): HTMLElement {
-		// Хак, чтобы вызвать CDM только после добавления в DOM
 		if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
 			setTimeout(() => {
 				if (this.element?.parentNode?.nodeType !== Node.DOCUMENT_FRAGMENT_NODE) {
-					this.eventBus.emit(Block.EVENTS.FLOW_CDM, this.props);
+					this.eventBus().emit(Block.EVENTS.FLOW_CDM, this.props);
 				}
 			}, 100);
 		}
@@ -159,6 +173,18 @@ abstract class Block<P = any> {
 		}
 
 		Object.assign(this.props, nextProps);
+	}
+
+	setState = (nextState: any) => {
+		if (!nextState) {
+			return;
+		}
+
+		Object.assign(this.state, nextState);
+	};
+
+	protected getStateFromProps(props?: any): void {
+		this.state = {};
 	}
 
 	abstract render(): string;
