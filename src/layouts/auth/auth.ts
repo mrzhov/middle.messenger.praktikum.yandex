@@ -1,5 +1,3 @@
-import './auth.css';
-
 import { Block } from '@/shared/core';
 
 class AuthLayout extends Block {

@@ -1,6 +1,9 @@
 import '@/assets/styles/global.css';
 
-import { LoginPage } from '@/pages/login';
+import { ServerErrorPage } from '@/pages/500';
+// import { NotFoundPage } from '@/pages/404';
+// import { RegistryPage } from '@/pages/registry';
+// import { LoginPage } from '@/pages/login';
 import { renderDOM } from '@/shared/core';
 import { registerComponents } from '@/shared/utils';
 
@@ -9,7 +12,10 @@ registerComponents();
 document.addEventListener('DOMContentLoaded', () => {
 	// DEV: Раскомментировать нужную страницу для отображения
 
-	const App = new LoginPage();
+	// const App = new LoginPage();
+	// const App = new RegistryPage();
+	// const App = new NotFoundPage();
+	const App = new ServerErrorPage();
 
 	renderDOM(App);
 });

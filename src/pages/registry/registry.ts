@@ -1,8 +1,8 @@
 import { Block } from '@/shared/core';
 
-import content from './login.content';
+import content from './registry.content';
 
-class LoginPage extends Block {
+class RegistryPage extends Block {
 	constructor() {
 		super();
 	}
@@ -18,6 +18,27 @@ class LoginPage extends Block {
 							<div class="auth-card__form">
 								<form class="space-y-3">
 									{{{Input
+										name="first_name"
+										label="Имя"
+									}}}
+										
+									{{{Input
+										name="second_name"
+										label="Фамилия"
+									}}}
+										
+									{{{Input
+										name="phone"
+										label="Телефон"
+									}}}
+										
+									{{{Input
+										name="email"
+										label="Почта"
+										type="email"
+									}}}
+										
+									{{{Input
 										name="login"
 										label="Логин"
 									}}}
@@ -25,6 +46,12 @@ class LoginPage extends Block {
 									{{{Input
 										name="password"
 										label="Пароль"
+										type="password"
+									}}}
+
+									{{{Input
+										name="password-repeat"
+										label="Повторите пароль"
 										type="password"
 									}}}
 								</form>
@@ -46,4 +73,4 @@ class LoginPage extends Block {
 	}
 }
 
-export default LoginPage;
+export default RegistryPage;

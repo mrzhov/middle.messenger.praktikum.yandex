@@ -1,9 +1,9 @@
 import type { AuthPageContent } from '@/shared/types';
 
 const content: AuthPageContent = {
-	title: 'Вход',
-	buttonText: 'Войти',
-	linkText: 'Нет аккаунта?',
+	title: 'Регистрация',
+	buttonText: 'Зарегистрироваться',
+	linkText: 'Войти',
 	linkHref: '#',
 };
 
