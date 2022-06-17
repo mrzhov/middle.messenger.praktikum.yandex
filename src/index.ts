@@ -1,6 +1,7 @@
 import '@/assets/styles/global.css';
 
-import { ServerErrorPage } from '@/pages/500';
+// import { ServerErrorPage } from '@/pages/500';
+import { HomePage } from '@/pages/home';
 // import { NotFoundPage } from '@/pages/404';
 // import { RegistryPage } from '@/pages/registry';
 // import { LoginPage } from '@/pages/login';
@@ -15,7 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	// const App = new LoginPage();
 	// const App = new RegistryPage();
 	// const App = new NotFoundPage();
-	const App = new ServerErrorPage();
+	// const App = new ServerErrorPage();
+	const App = new HomePage();
 
 	renderDOM(App);
 });
