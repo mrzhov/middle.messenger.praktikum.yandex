@@ -10,7 +10,7 @@ class BaseLayout extends Block {
 		return `
 			<div class="flex w-screen">
 				<div class="sidebar-container">
-					Sidebar
+					{{{SidebarChat}}}
 				</div>
 				<div class="page-container">
 					<div data-layout></div>
