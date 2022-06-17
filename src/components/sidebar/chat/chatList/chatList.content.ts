@@ -3,7 +3,7 @@ import type { ChatListItem } from '@/shared/types';
 type Content = { mockChatList: Array<ChatListItem> } & Record<string, unknown>;
 
 const content: Content = {
-	mockChatList: [
+	mockProfile: [
 		{
 			id: '1',
 			name: 'Илья',

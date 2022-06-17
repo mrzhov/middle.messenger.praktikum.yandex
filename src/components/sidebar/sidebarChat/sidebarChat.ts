@@ -1,8 +1,8 @@
 import { Block } from '@/shared/core';
-import type { PropsWithPageId } from '@/shared/types';
+import type { TitleAndPageId } from '@/shared/types';
 
-class SidebarChat extends Block<PropsWithPageId> {
-	constructor(props: PropsWithPageId) {
+class SidebarChat extends Block<TitleAndPageId['pageId']> {
+	constructor(props: TitleAndPageId['pageId']) {
 		super(props);
 	}
 

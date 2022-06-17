@@ -3,9 +3,13 @@ import { Block } from '@/shared/core';
 import chatListContent from './chatList.content';
 
 class ChatList extends Block {
+	constructor() {
+		super();
+	}
+
 	protected getStateFromProps() {
 		this.state = {
-			chatList: chatListContent.mockChatList,
+			chatList: chatListContent.mockProfile,
 		};
 	}
 

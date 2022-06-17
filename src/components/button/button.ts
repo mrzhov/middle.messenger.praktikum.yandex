@@ -8,11 +8,11 @@ class Button extends Block {
 	}
 
 	render(): string {
-		const { text } = this.props;
+		const { text, classes } = this.props;
 
 		// language=hbs
 		return `
-			<button class="btn">${text}</button>
+			<button class="btn ${classes || ''}">${text}</button>
 		`;
 	}
 }

@@ -1,8 +1,8 @@
 import { Block } from '@/shared/core';
-import type { PropsWithPageId } from '@/shared/types';
+import type { TitleAndPageId } from '@/shared/types';
 
-class BaseLayout extends Block<PropsWithPageId> {
-	constructor(props: PropsWithPageId) {
+class BaseLayout extends Block<TitleAndPageId> {
+	constructor(props: TitleAndPageId) {
 		super(props);
 	}
 
@@ -11,9 +11,18 @@ class BaseLayout extends Block<PropsWithPageId> {
 		return `
 			<div class="flex w-screen">
 				<div class="sidebar-container">
-					{{{SidebarChat pageId=pageId}}}
+					{{#if pageId}}
+						{{{SidebarSettings pageId=pageId}}}
+					{{else}}
+						{{{SidebarChat pageId=pageId}}}
+					{{/if}}
 				</div>
 				<div class="page-container">
+					{{#if title}}
+						<header class="page-header flex-center">
+							<h3 class="text">{{title}}</h3>
+						</header>
+					{{/if}}
 					<div data-layout></div>
 				</div>
 			</div>
