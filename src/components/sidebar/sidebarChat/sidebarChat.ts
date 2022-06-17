@@ -12,6 +12,8 @@ class SidebarChat extends Block {
 				<div class="sidebar-top">
 					{{{Search}}}
 				</div>
+				{{{ChatList}}}
+				{{{Navigation}}}
 			</div>
 		`;
 	}
