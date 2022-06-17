@@ -1,8 +1,9 @@
 import { Block } from '@/shared/core';
+import type { PropsWithPageId } from '@/shared/types';
 
-class SidebarChat extends Block {
-	constructor() {
-		super();
+class SidebarChat extends Block<PropsWithPageId> {
+	constructor(props: PropsWithPageId) {
+		super(props);
 	}
 
 	render(): string {
@@ -13,7 +14,7 @@ class SidebarChat extends Block {
 					{{{Search}}}
 				</div>
 				{{{ChatList}}}
-				{{{Navigation}}}
+				{{{Navigation pageId=pageId}}}
 			</div>
 		`;
 	}

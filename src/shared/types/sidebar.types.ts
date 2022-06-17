@@ -8,3 +8,7 @@ export type ChatListItem = {
 		time: string;
 	};
 };
+
+export type PropsWithPageId = {
+	pageId?: string;
+};

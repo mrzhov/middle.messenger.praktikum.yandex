@@ -8,7 +8,7 @@ class HomePage extends Block {
 	render(): string {
 		// language=hbs
 		return `
-			{{#BaseLayout }}
+			{{#BaseLayout}}
 				<main>
 					<div class="h-screen flex-center">
 						<div>
