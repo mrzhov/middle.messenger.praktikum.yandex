@@ -3,8 +3,8 @@ import { Block } from '@/shared/core';
 import type { ButtonProps } from './button.types';
 
 class Button extends Block {
-	constructor(props: ButtonProps) {
-		super(props);
+	constructor({ onClick, ...props }: ButtonProps) {
+		super({ events: { click: onClick }, ...props });
 	}
 
 	render(): string {

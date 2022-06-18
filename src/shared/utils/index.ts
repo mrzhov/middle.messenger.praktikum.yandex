@@ -1,2 +1,3 @@
-export { default as registerComponents } from './registerComponents';
+export * from './registerComponents';
 export * from './registerHelpers';
+export * from './routingListener';

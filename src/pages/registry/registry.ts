@@ -1,10 +1,22 @@
 import { Block } from '@/shared/core';
-
-import content from './registry.content';
+import { changeRoute } from '@/shared/utils';
 
 class RegistryPage extends Block {
 	constructor() {
 		super();
+	}
+
+	protected getStateFromProps() {
+		this.state = {
+			buttonClickHandler: () => {
+				changeRoute('/');
+			},
+			linkClickHandler: (event: MouseEvent) => {
+				event.preventDefault();
+				const path = (event.target as HTMLAnchorElement).getAttribute('href')!;
+				changeRoute(path);
+			},
+		};
 	}
 
 	render(): string {
@@ -14,7 +26,7 @@ class RegistryPage extends Block {
 				<main class="h-screen flex-center">
 					<div class="card auth-card">
 						<div class="card-content text-center">
-							<h4 class="text-xl font-medium">${content.title}</h4>
+							<h4 class="text-xl font-medium">Регистрация</h4>
 							<div class="auth-card__form">
 								<form class="space-y-3">
 									{{{Input
@@ -65,11 +77,13 @@ class RegistryPage extends Block {
 							</div>
 							<div class="space-y-2">
 								{{{Button
-									text="${content.buttonText}"
+									text="Зарегистрироваться"
+									onClick=buttonClickHandler
 								}}}
 								{{{Link
-									text="${content.linkText}"
-									href="${content.linkHref}"
+									text="Войти"
+									href="/login"
+									onClick=linkClickHandler
 								}}}
 							</div>
 						</div>

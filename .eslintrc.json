@@ -9,7 +9,9 @@
   "overrides": [
     // Configuration for TypeScript files
     {
-      "files": ["**/*.ts"],
+      "files": [
+        "**/*.ts"
+      ],
       "plugins": [
         "@typescript-eslint",
         "unused-imports",
@@ -33,11 +35,26 @@
         "unused-imports/no-unused-imports": "error",
         "unused-imports/no-unused-vars": [
           "error",
-          { "argsIgnorePattern": "^_" }
+          {
+            "argsIgnorePattern": "^_"
+          }
         ],
-        "@typescript-eslint/lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
-        "no-underscore-dangle": ["error", { "allowAfterThis": true }],
-        "react/jsx-filename-extension": [0],
+        "@typescript-eslint/lines-between-class-members": [
+          "error",
+          "always",
+          {
+            "exceptAfterSingleLine": true
+          }
+        ],
+        "no-underscore-dangle": [
+          "error",
+          {
+            "allowAfterThis": true
+          }
+        ],
+        "react/jsx-filename-extension": [
+          0
+        ],
         "import/extensions": [
           "error",
           "never",
@@ -46,8 +63,15 @@
           }
         ],
         "class-methods-use-this": "off",
-        "no-param-reassign": ["error", { "props": false }],
-        "@typescript-eslint/no-useless-constructor": "off"}
+        "no-param-reassign": [
+          "error",
+          {
+            "props": false
+          }
+        ],
+        "@typescript-eslint/no-useless-constructor": "off",
+        "no-restricted-globals": "off"
+      }
     }
   ]
 }

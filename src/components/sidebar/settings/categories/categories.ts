@@ -12,7 +12,7 @@ class Categories extends Block<TitleAndPageId['pageId']> {
 			<div class="sidebar-categories-container">
 				<ul class="sidebar-categories">
 					<li class="sidebar-categories-item {{#if (eq pageId "changePassword")}}selected{{/if}}">
-						<a href="{{#if (eq pageId "changePassword")}}javascript:;{{else}}./change-password.hbs{{/if}}">
+						<a href="{{#if (eq pageId "changePassword")}}javascript:;{{else}}/change-password{{/if}}">
 							<div class="flex items-center">
 								<div class="flex-center sidebar-categories-item-icon bg-orange">
 									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -29,7 +29,7 @@ class Categories extends Block<TitleAndPageId['pageId']> {
 						</a>
 					</li>
 					<li class="sidebar-categories-item {{#if (eq pageId "exitWarning")}}selected{{/if}}">
-						<a href="{{#if (eq pageId "exitWarning")}}javascript:;{{else}}./exit-warning.hbs{{/if}}">
+						<a href="{{#if (eq pageId "exitWarning")}}javascript:;{{else}}/exit-warning{{/if}}">
 							<div class="flex items-center">
 								<div class="flex-center sidebar-categories-item-icon bg-red">
 									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

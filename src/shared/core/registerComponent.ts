@@ -1,12 +1,6 @@
 import type { HelperOptions } from 'handlebars';
 import Handlebars from 'handlebars';
 
-import type Block from './Block';
-
-interface BlockConstructable<Props = any> {
-	new (props: Props): Block;
-}
-
 function registerComponent<Props extends any>(Component: BlockConstructable<Props>) {
 	Handlebars.registerHelper(
 		Component.name,

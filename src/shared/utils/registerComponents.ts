@@ -13,7 +13,7 @@ import { AuthLayout } from '@/layouts/auth';
 import { BaseLayout } from '@/layouts/base';
 import { registerComponent } from '@/shared/core';
 
-export default () => {
+export const registerComponents = () => {
 	registerComponent(AuthLayout);
 	registerComponent(BaseLayout);
 	registerComponent(Button);
