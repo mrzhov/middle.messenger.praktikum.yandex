@@ -22,6 +22,38 @@ class ProfilePage extends Block {
 									</div>
 								</div>
 							</div>
+							<form class="space-y-3">
+								{{{Input
+									name="first_name"
+									label="Имя"
+									value="Ivan"
+								}}}
+									
+								{{{Input
+									name="second_name"
+									label="Фамилия"
+									value="Ivanov"
+								}}}
+									
+								{{{Input
+									name="phone"
+									label="Телефон"
+									value="+7 999 111 22 33"
+								}}}
+									
+								{{{Input
+									name="email"
+									label="Почта"
+									type="email"
+									value="test@yandex.ru"
+								}}}
+									
+								{{{Input
+									name="login"
+									label="Логин"
+									value="@ivan123"
+								}}}
+							</form>
 							<div class="submit-container">
 								{{{Button text="Сохранить"}}}
 							</div>

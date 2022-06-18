@@ -20,39 +20,46 @@ class RegistryPage extends Block {
 									{{{Input
 										name="first_name"
 										label="Имя"
+										classes="auth-form-field"
 									}}}
 										
 									{{{Input
 										name="second_name"
 										label="Фамилия"
+										classes="auth-form-field"
 									}}}
 										
 									{{{Input
 										name="phone"
 										label="Телефон"
+										classes="auth-form-field"
 									}}}
 										
 									{{{Input
 										name="email"
 										label="Почта"
 										type="email"
+										classes="auth-form-field"
 									}}}
 										
 									{{{Input
 										name="login"
 										label="Логин"
+										classes="auth-form-field"
 									}}}
 
 									{{{Input
 										name="password"
 										label="Пароль"
 										type="password"
+										classes="auth-form-field"
 									}}}
 
 									{{{Input
 										name="password-repeat"
 										label="Повторите пароль"
 										type="password"
+										classes="auth-form-field"
 									}}}
 								</form>
 							</div>

@@ -20,12 +20,14 @@ class LoginPage extends Block {
 									{{{Input
 										name="login"
 										label="Логин"
+										classes="auth-form-field"
 									}}}
 
 									{{{Input
 										name="password"
 										label="Пароль"
 										type="password"
+										classes="auth-form-field"
 									}}}
 								</form>
 							</div>

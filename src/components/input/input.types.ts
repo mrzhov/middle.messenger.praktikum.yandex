@@ -5,4 +5,5 @@ export type InputProps = {
 	value?: string;
 	error?: string;
 	onChange?: () => void;
+	classes?: 'form-field' | 'auth-form-field';
 };
