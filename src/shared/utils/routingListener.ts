@@ -7,16 +7,17 @@ import { ChangePasswordPage } from '@/pages/settings/changePassword';
 import { ExitWarningPage } from '@/pages/settings/exitWarning';
 import { ProfilePage } from '@/pages/settings/profile';
 import { renderDOM } from '@/shared/core';
+import { PagesRoutes } from '@/shared/types';
 
 const pagesDictionary: Record<string, BlockConstructable> = {
-	'/login': LoginPage,
-	'/registry': RegistryPage,
-	'/': HomePage,
-	'/404': NotFoundPage,
-	'/500': ServerErrorPage,
-	'/settings/profile': ProfilePage,
-	'/settings/change-password': ChangePasswordPage,
-	'/settings/exit-warning': ExitWarningPage,
+	[PagesRoutes.LOGIN]: LoginPage,
+	[PagesRoutes.REGISTRY]: RegistryPage,
+	[PagesRoutes.HOME]: HomePage,
+	[PagesRoutes.NOTFOUND]: NotFoundPage,
+	[PagesRoutes.SERVERERROR]: ServerErrorPage,
+	[PagesRoutes.PROFILE]: ProfilePage,
+	[PagesRoutes.CHANGEPASSWORD]: ChangePasswordPage,
+	[PagesRoutes.EXITWARNING]: ExitWarningPage,
 };
 
 const locationObserverCallback = () => {

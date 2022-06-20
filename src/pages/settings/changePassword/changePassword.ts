@@ -8,7 +8,7 @@ class ChangePasswordPage extends Block {
 	render(): string {
 		// language=hbs
 		return `
-			{{#BaseLayout pageId="changePassword" title="Изменить пароль"}}
+			{{#BaseLayout title="Изменить пароль"}}
 				<main class="settings-page with-form">
 					<div class="settings-page-wrapper">
 						<div class="flex-center flex-col w-full space-y-4">

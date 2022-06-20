@@ -9,7 +9,7 @@ class ProfilePage extends Block {
 	render(): string {
 		// language=hbs
 		return `
-			{{#BaseLayout pageId="profile" title="Изменить профиль"}}
+			{{#BaseLayout title="Изменить профиль"}}
 				<main class="settings-page with-form">
 					<div class="settings-page-wrapper">
 						<div class="flex-center flex-col w-full space-y-6">

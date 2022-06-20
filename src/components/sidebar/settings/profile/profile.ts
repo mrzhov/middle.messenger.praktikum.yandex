@@ -1,5 +1,6 @@
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
+import { PagesRoutes } from '@/shared/types';
 import { changeRoute, findParentElementByCondition } from '@/shared/utils';
 
 import content from './profile.content';
@@ -14,15 +15,18 @@ const click = (event: MouseEvent) => {
 };
 
 class Profile extends Block {
-	constructor(props: any) {
-		super({ events: { click }, ...props });
+	constructor() {
+		super({ events: { click } });
 	}
 
 	render(): string {
+		const { pathname } = window.location;
+		const isProfilePage = pathname === PagesRoutes.PROFILE;
+
 		// language=hbs
 		return `
 			<div class="sidebar-profile-container">
-				<div class="sidebar-profile {{#if (eq pageId "profile")}}active{{/if}}">
+				<div class="sidebar-profile ${isProfilePage ? 'active' : ''}">
 					<a href="/settings/profile">
 						<div class="flex items-center">
 							<div class="mock-avatar"></div>

@@ -8,7 +8,7 @@ class ExitWarningPage extends Block {
 	render(): string {
 		// language=hbs
 		return `
-			{{#BaseLayout pageId="exitWarning" title="Предупреждение о выходе"}}
+			{{#BaseLayout title="Предупреждение о выходе"}}
 				<main class="settings-page flex-center">
 					<div class="flex-center flex-col space-y-2">
 						<p class="text-xl">Вы уверены, что хотите выйти?</p>

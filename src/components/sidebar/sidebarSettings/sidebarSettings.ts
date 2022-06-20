@@ -1,13 +1,17 @@
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
-import type { TitleAndPageId } from '@/shared/types';
+import { PagesRoutes } from '@/shared/types';
 
-class SidebarSettings extends Block<TitleAndPageId['pageId']> {
-	constructor(props: TitleAndPageId['pageId']) {
-		super(props);
+class SidebarSettings extends Block {
+	constructor() {
+		super();
 	}
 
 	render(): string {
+		const { pathname } = window.location;
+		const isChangePasswordPage = pathname === PagesRoutes.CHANGEPASSWORD;
+		const isExitWarningPage = pathname === PagesRoutes.EXITWARNING;
+
 		// language=hbs
 		return `
 			<div class="w-full h-full flex flex-col">
@@ -20,17 +24,17 @@ class SidebarSettings extends Block<TitleAndPageId['pageId']> {
 					</div>
 				</div>
 				<div class="grow">
-					{{{Profile pageId=pageId}}}
+					{{{Profile}}}
 					<div class="sidebar-categories-container">
 						<ul class="sidebar-categories">
-							<li class="sidebar-categories-item {{#if (eq pageId "changePassword")}}selected{{/if}}">
+							<li class="sidebar-categories-item ${isChangePasswordPage ? 'active' : ''}">
 								{{{CategoryItem
 									text="Изменить пароль"
 									href="/settings/change-password"
 									iconName="changePassword"
 								}}}
 							</li>
-							<li class="sidebar-categories-item {{#if (eq pageId "exitWarning")}}selected{{/if}}">
+							<li class="sidebar-categories-item ${isExitWarningPage ? 'active' : ''}">
 								{{{CategoryItem
 									text="Выйти"
 									href="/settings/exit-warning"
@@ -40,7 +44,7 @@ class SidebarSettings extends Block<TitleAndPageId['pageId']> {
 						</ul>
 					</div>
 				</div>
-				{{{Navigation pageId=pageId}}}
+				{{{Navigation}}}
 			</div>
 		`;
 	}

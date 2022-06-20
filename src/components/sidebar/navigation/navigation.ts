@@ -1,6 +1,5 @@
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
-import type { TitleAndPageId } from '@/shared/types';
 import { changeRoute, findParentElementByCondition } from '@/shared/utils';
 
 const click = (event: MouseEvent) => {
@@ -13,18 +12,21 @@ const click = (event: MouseEvent) => {
 };
 
 class Navigation extends Block {
-	constructor(props: TitleAndPageId) {
-		super({ events: { click }, ...props });
+	constructor() {
+		super({ events: { click } });
 	}
 
 	render(): string {
+		const { pathname } = window.location;
+		const isSettingsArea = pathname.includes('/settings');
+
 		// language=hbs
 		return `
 			<div class="navigation">
-				<div class="navigation-item {{#unless pageId}}active{{/unless}}">
+				<div class="navigation-item ${!isSettingsArea ? 'active' : ''}">
 					<a href="/">${icons.chat}</a>
 				</div>
-				<div class="navigation-item {{#if pageId}}active{{/if}}">
+				<div class="navigation-item ${isSettingsArea ? 'active' : ''}">
 					<a href="/settings/profile">${icons.settings}</a>
 				</div>
 			</div>
