@@ -1,4 +1,4 @@
-.form-field {
+.input-standard {
    position: relative;
    width: 100%;
 
@@ -24,4 +24,77 @@
          color: $grey-3;
       }
    }
+}
+
+.input-standard-error {
+
+}
+
+.input-gradient {
+   position: relative;
+   width: 100%;
+
+   label {
+      @extend .font-normal;
+      font-size: 0.75rem;
+      line-height: 1rem;
+      position: absolute;
+      display: block;
+      transition: 0.2s;
+      cursor: text;
+      top: 0;
+      color: $blue;
+   }
+
+   input {
+      @extend .text-sm;
+      @extend .font-normal;
+      color: $white;
+      width: 100%;
+      display: block;
+      padding: 1rem 0 0.25rem;
+      border-bottom: 2px solid $blue;
+      transition: border-color 0.2s;
+
+      &:required, &:invalid {
+         box-shadow: none;
+      }
+
+      &::placeholder {
+         color: transparent;
+      }
+
+      &:placeholder-shown ~ label {
+         top: 12px;
+         color: $grey-2;
+         font-size: 0.875rem;
+         line-height: 1.25rem;
+      }
+
+      &:focus {
+         border-image: linear-gradient(to right, #11998e, #38ef7d) 1;
+      }
+
+      &:focus ~ label {
+         top: 0;
+         color: #38ef7d;
+         font-weight: 700;
+         font-size: 0.75rem;
+         line-height: 1rem;
+      }
+   }
+}
+
+.input-gradient-error {
+   input {
+      border-bottom-color: $red;
+   }
+}
+
+.form-field-error-message {
+   @extend .text-xs;
+   @extend .font-medium;
+   color: $red;
+   text-align: left;
+   margin-top: 0.25rem;
 }

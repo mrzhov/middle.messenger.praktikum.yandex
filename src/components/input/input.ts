@@ -2,20 +2,33 @@ import { Block } from '@/shared/core';
 
 import type { InputProps } from './input.types';
 
+const getClasses = (variant: InputProps['variant'], error: InputProps['error']) => {
+	if (variant === 'standard') {
+		return `input-standard${error ? ' input-standard-error' : ''}`;
+	}
+	if (variant === 'gradient') {
+		return `input-gradient${error ? ' input-gradient-error' : ''}`;
+	}
+	return '';
+};
+
 class Input extends Block<InputProps> {
-	constructor({ classes = 'form-field', ...other }: InputProps) {
-		super({ classes, ...other });
+	constructor({ variant = 'standard', ...other }: InputProps) {
+		super({ variant, ...other });
 	}
 
 	render(): string {
-		const { type } = this.props;
+		const { type, variant, error } = this.props;
+		const classes = getClasses(variant, error);
 
 		// language=hbs
 		return `
-      <div class="{{classes}}">
+      <div class="${classes}">
         <input id="{{name}}" type="${type || 'text'}" placeholder="{{label}}" value="{{value}}">
 				<label for="{{name}}">{{label}}</label>
-				<div class="error">{{#if error}}{{error}}{{/if}}</div>
+				{{#if error}}
+					<div class="form-field-error-message">{{error}}</div>
+				{{/if}}
       </div>
     `;
 	}

@@ -1,5 +1,6 @@
 import { Block } from '@/shared/core';
 import { changeRoute } from '@/shared/utils';
+import { loginValidator } from '@/shared/validators';
 
 class LoginPage extends Block {
 	constructor() {
@@ -8,8 +9,47 @@ class LoginPage extends Block {
 
 	protected getStateFromProps() {
 		this.state = {
-			buttonClickHandler: () => {
-				changeRoute('/');
+			values: {
+				login: '',
+				password: '',
+			},
+			errors: {
+				login: '',
+				password: '',
+			},
+			onLogin: (event: MouseEvent) => {
+				event.preventDefault();
+
+				const loginData = {
+					login: (this.refs.login.firstElementChild as HTMLInputElement).value.trim(),
+					password: (this.refs.password.firstElementChild as HTMLInputElement).value.trim(),
+				};
+
+				const nextState = {
+					values: { ...loginData },
+					errors: {
+						login: '',
+						password: '',
+					},
+				};
+
+				nextState.errors.login = loginValidator(loginData.login);
+
+				// if (!loginData.login) {
+				// 	nextState.errors.login = 'Пожалуйста, введите логин';
+				// }
+				//
+				// if (loginData.login.length < 4) {
+				// 	nextState.errors.login = 'Login should contain more than 3 chars';
+				// }
+				//
+				// if (!loginData.password) {
+				// 	nextState.errors.password = 'Пожалуйста, введите пароль';
+				// }
+
+				this.setState(nextState);
+
+				console.log('login:', loginData);
 			},
 			linkClickHandler: (event: MouseEvent) => {
 				event.preventDefault();
@@ -20,6 +60,8 @@ class LoginPage extends Block {
 	}
 
 	render(): string {
+		const { errors, values } = this.state;
+
 		// language=hbs
 		return `
 			{{#AuthLayout }}
@@ -27,33 +69,37 @@ class LoginPage extends Block {
 					<div class="card auth-card">
 						<div class="card-content text-center">
 							<h4 class="text-xl font-medium">Вход</h4>
-							<div class="auth-card__form">
-								<form class="space-y-3">
+							<form class="auth-card__form">
+								<fieldset class="space-y-2">
 									{{{Input
+										variant="gradient"
+										ref="login"
 										name="login"
 										label="Логин"
-										classes="auth-form-field"
+										value="${values.login}"
+										error="${errors.login}"
 									}}}
 
 									{{{Input
+										variant="gradient"
+										ref="password"
 										name="password"
 										label="Пароль"
 										type="password"
-										classes="auth-form-field"
+										value="${values.password}"
+										error="${errors.password}"
 									}}}
-								</form>
-							</div>
-							<div class="space-y-2">
+								</fieldset>
 								{{{Button
 									text="Войти"
-									onClick=buttonClickHandler
+									onClick=onLogin
 								}}}
-								{{{Link
-									text="Нет аккаунта?"
-									href="/registry"
-									onClick=linkClickHandler
-								}}}
-							</div>
+							</form>
+							{{{Link
+								text="Нет аккаунта?"
+								href="/registry"
+								onClick=linkClickHandler
+							}}}
 						</div>
 					</div>
 				</main>

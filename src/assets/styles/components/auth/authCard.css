@@ -5,7 +5,14 @@
 }
 
 .auth-card__form {
-   margin: 2rem 0 2.5rem;
-   min-height: 200px;
+   margin: 1rem 0 0.5rem;
+   min-height: 250px;
    height: fit-content;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+
+   button {
+      margin-top: 2.5rem;
+   }
 }

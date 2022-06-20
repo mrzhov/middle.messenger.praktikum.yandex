@@ -8,7 +8,7 @@ class RegistryPage extends Block {
 
 	protected getStateFromProps() {
 		this.state = {
-			buttonClickHandler: () => {
+			onLogin: () => {
 				changeRoute('/');
 			},
 			linkClickHandler: (event: MouseEvent) => {
@@ -27,65 +27,63 @@ class RegistryPage extends Block {
 					<div class="card auth-card">
 						<div class="card-content text-center">
 							<h4 class="text-xl font-medium">Регистрация</h4>
-							<div class="auth-card__form">
-								<form class="space-y-3">
+							<form class="auth-card__form">
+								<fieldset class="space-y-2">
 									{{{Input
+										variant="gradient"
 										name="first_name"
 										label="Имя"
-										classes="auth-form-field"
 									}}}
-										
+
 									{{{Input
+										variant="gradient"
 										name="second_name"
 										label="Фамилия"
-										classes="auth-form-field"
 									}}}
-										
+
 									{{{Input
+										variant="gradient"
 										name="phone"
 										label="Телефон"
-										classes="auth-form-field"
 									}}}
-										
+
 									{{{Input
+										variant="gradient"
 										name="email"
 										label="Почта"
 										type="email"
-										classes="auth-form-field"
-									}}}
-										
-									{{{Input
-										name="login"
-										label="Логин"
-										classes="auth-form-field"
 									}}}
 
 									{{{Input
+										variant="gradient"
+										name="login"
+										label="Логин"
+									}}}
+
+									{{{Input
+										variant="gradient"
 										name="password"
 										label="Пароль"
 										type="password"
-										classes="auth-form-field"
 									}}}
 
 									{{{Input
+										variant="gradient"
 										name="password-repeat"
 										label="Повторите пароль"
 										type="password"
-										classes="auth-form-field"
 									}}}
-								</form>
-							</div>
-							<div class="space-y-2">
+								</fieldset>
 								{{{Button
 									text="Зарегистрироваться"
 									onClick=buttonClickHandler
 								}}}
-								{{{Link
-									text="Войти"
-									href="/login"
-									onClick=linkClickHandler
-								}}}
-							</div>
+							</form>
+							{{{Link
+								text="Войти"
+								href="/login"
+								onClick=linkClickHandler
+							}}}
 						</div>
 					</div>
 				</main>
