@@ -7,5 +7,5 @@ registerComponents();
 routingListener();
 
 document.addEventListener('DOMContentLoaded', () => {
-	changeRoute('/registry');
+	changeRoute('/login');
 });
