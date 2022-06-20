@@ -1,32 +1,35 @@
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
-import type { TitleAndPageId } from '@/shared/types';
+import { changeRoute, findParentElementByCondition } from '@/shared/utils';
 
-import profileContent from './profile.content';
+import content from './profile.content';
 
-class Profile extends Block<TitleAndPageId['pageId']> {
-	constructor(props: TitleAndPageId['pageId']) {
-		super(props);
+const click = (event: MouseEvent) => {
+	event.preventDefault();
+	const linkElement = findParentElementByCondition(event, (target: any) => target.href);
+	if (linkElement && !linkElement.parentElement?.classList.contains('active')) {
+		const path = (linkElement as HTMLAnchorElement).getAttribute('href')!;
+		changeRoute(path);
 	}
+};
 
-	protected getStateFromProps() {
-		this.state = {
-			profile: profileContent.mockProfile,
-		};
+class Profile extends Block {
+	constructor(props: any) {
+		super({ events: { click }, ...props });
 	}
 
 	render(): string {
 		// language=hbs
 		return `
 			<div class="sidebar-profile-container">
-				<div class="sidebar-profile {{#if (eq pageId "profile")}}selected{{/if}}">
-					<a href="{{#if (eq pageId "profile")}}javascript:;{{else}}./profile.hbs{{/if}}">
+				<div class="sidebar-profile {{#if (eq pageId "profile")}}active{{/if}}">
+					<a href="/settings/profile">
 						<div class="flex items-center">
 							<div class="mock-avatar"></div>
 							<div>
-								<p class="text">{{profile.first_name}}&nbsp;{{profile.second_name}}</p>
-								<p class="subtext">{{profile.phone}}</p>
-								<p class="subtext">{{profile.login}}</p>
+								<p class="text">${content.mockProfile.first_name}&nbsp;${content.mockProfile.second_name}</p>
+								<p class="subtext">${content.mockProfile.phone}</p>
+								<p class="subtext">${content.mockProfile.login}</p>
 							</div>
 						</div>
 						<div class="sidebar-settings-arrow">

@@ -1,6 +1,6 @@
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
-import { changeRoute } from '@/shared/utils';
+import { changeRoute, findParentElementByCondition } from '@/shared/utils';
 
 import type { CategoryItemProps } from './categoryItem.types';
 
@@ -12,8 +12,11 @@ const getBgColor = (iconName: CategoryItemProps['iconName']) => {
 
 const click = (event: MouseEvent) => {
 	event.preventDefault();
-	const path = (event.target as HTMLAnchorElement).getAttribute('href')!;
-	changeRoute(path);
+	const linkElement = findParentElementByCondition(event, (target: any) => target.href);
+	if (linkElement && !linkElement.parentElement?.classList.contains('active')) {
+		const path = (linkElement as HTMLAnchorElement).getAttribute('href')!;
+		changeRoute(path);
+	}
 };
 
 class CategoryItem extends Block<CategoryItemProps> {
