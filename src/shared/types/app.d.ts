@@ -7,6 +7,9 @@ declare global {
 	export interface BlockConstructable<Props = any> {
 		new (props: Props): Block;
 	}
+	export type BlockEvents = {
+		events: Record<string, (...args: any) => any>;
+	};
 }
 
 export {};

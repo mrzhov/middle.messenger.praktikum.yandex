@@ -5,7 +5,7 @@ import { Link } from '@/components/link';
 import { ChatList } from '@/components/sidebar/chat/chatList';
 import { Search } from '@/components/sidebar/chat/search';
 import { Navigation } from '@/components/sidebar/navigation';
-import { Categories } from '@/components/sidebar/settings/categories';
+import { CategoryItem } from '@/components/sidebar/settings/categoryItem';
 import { Profile } from '@/components/sidebar/settings/profile';
 import { SidebarChat } from '@/components/sidebar/sidebarChat';
 import { SidebarSettings } from '@/components/sidebar/sidebarSettings';
@@ -26,5 +26,5 @@ export const registerComponents = () => {
 	registerComponent(ChatList);
 	registerComponent(Navigation);
 	registerComponent(Profile);
-	registerComponent(Categories);
+	registerComponent(CategoryItem);
 };
