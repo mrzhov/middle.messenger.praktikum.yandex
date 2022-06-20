@@ -1,7 +1,7 @@
+import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
 import { changeRoute } from '@/shared/utils';
 
-import content from './categoryItem.content';
 import type { CategoryItemProps } from './categoryItem.types';
 
 const getBgColor = (iconName: CategoryItemProps['iconName']) => {
@@ -30,12 +30,12 @@ class CategoryItem extends Block<CategoryItemProps> {
 			<a href="{{href}}">
 				<div class="flex items-center">
 					<div class="flex-center sidebar-categories-item-icon ${bgColor}">
-						${content.icons[iconName]}
+						${icons[iconName]}
 					</div>
 					<p class="text">{{text}}</p>
 				</div>
 				<div class="sidebar-settings-arrow">
-					${content.icons.arrow}
+					${icons.arrowRight}
 				</div>
 			</a>
 		`;

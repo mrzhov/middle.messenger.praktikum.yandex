@@ -1,7 +1,6 @@
+import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
 import type { TitleAndPageId } from '@/shared/types';
-
-import content from './sidebarSettings.content';
 
 class SidebarSettings extends Block<TitleAndPageId['pageId']> {
 	constructor(props: TitleAndPageId['pageId']) {
@@ -15,7 +14,7 @@ class SidebarSettings extends Block<TitleAndPageId['pageId']> {
 				<div class="sidebar-top border-bottom">
 					<div class="w-full h-full flex-center">
 						<div class="app-logo">
-							${content.icons.logo}
+							${icons.logo}
 							<h2>Messenger</h2>
 						</div>
 					</div>

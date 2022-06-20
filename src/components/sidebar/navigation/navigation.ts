@@ -1,8 +1,7 @@
+import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
 import type { TitleAndPageId } from '@/shared/types';
 import { changeRoute, findParentElementByCondition } from '@/shared/utils';
-
-import content from './navigation.content';
 
 const click = (event: MouseEvent) => {
 	event.preventDefault();
@@ -23,10 +22,10 @@ class Navigation extends Block {
 		return `
 			<div class="navigation">
 				<div class="navigation-item {{#unless pageId}}active{{/unless}}">
-					<a href="/">${content.icons.chat}</a>
+					<a href="/">${icons.chat}</a>
 				</div>
 				<div class="navigation-item {{#if pageId}}active{{/if}}">
-					<a href="/settings/profile">${content.icons.settings}</a>
+					<a href="/settings/profile">${icons.settings}</a>
 				</div>
 			</div>
 		`;
