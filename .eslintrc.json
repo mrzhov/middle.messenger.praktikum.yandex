@@ -70,7 +70,8 @@
           }
         ],
         "@typescript-eslint/no-useless-constructor": "off",
-        "no-restricted-globals": "off"
+        "no-restricted-globals": "off",
+        "no-console": "off"
       }
     }
   ]

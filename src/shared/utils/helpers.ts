@@ -8,3 +8,6 @@ export const findParentElementByCondition = (event: any, condition: (target: any
 	}
 	return undefined;
 };
+
+export const getValueFromRefs = (refs: Record<string, HTMLElement>, field: string) =>
+	(refs[field].firstElementChild as HTMLInputElement).value.trim();

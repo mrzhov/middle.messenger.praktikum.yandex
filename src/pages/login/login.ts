@@ -1,6 +1,17 @@
 import { Block } from '@/shared/core';
-import { changeRoute } from '@/shared/utils';
-import { loginValidator } from '@/shared/validators';
+import { changeRoute, getValueFromRefs } from '@/shared/utils';
+import { loginValidator, passwordValidator } from '@/shared/validators';
+
+const initialState = {
+	values: {
+		login: '',
+		password: '',
+	},
+	errors: {
+		login: '',
+		password: '',
+	},
+};
 
 class LoginPage extends Block {
 	constructor() {
@@ -9,47 +20,29 @@ class LoginPage extends Block {
 
 	protected getStateFromProps() {
 		this.state = {
-			values: {
-				login: '',
-				password: '',
-			},
-			errors: {
-				login: '',
-				password: '',
-			},
-			onLogin: (event: MouseEvent) => {
+			...initialState,
+			onSubmit: (event: MouseEvent) => {
 				event.preventDefault();
 
 				const loginData = {
-					login: (this.refs.login.firstElementChild as HTMLInputElement).value.trim(),
-					password: (this.refs.password.firstElementChild as HTMLInputElement).value.trim(),
+					login: getValueFromRefs(this.refs, 'login'),
+					password: getValueFromRefs(this.refs, 'password'),
 				};
 
 				const nextState = {
 					values: { ...loginData },
-					errors: {
-						login: '',
-						password: '',
-					},
+					errors: initialState.errors,
 				};
 
 				nextState.errors.login = loginValidator(loginData.login);
-
-				// if (!loginData.login) {
-				// 	nextState.errors.login = 'Пожалуйста, введите логин';
-				// }
-				//
-				// if (loginData.login.length < 4) {
-				// 	nextState.errors.login = 'Login should contain more than 3 chars';
-				// }
-				//
-				// if (!loginData.password) {
-				// 	nextState.errors.password = 'Пожалуйста, введите пароль';
-				// }
+				nextState.errors.password = passwordValidator(loginData.password);
 
 				this.setState(nextState);
 
-				console.log('login:', loginData);
+				if (Object.values(nextState.errors).every(e => !e)) {
+					console.log('login:', loginData);
+					this.setState(initialState);
+				}
 			},
 			linkClickHandler: (event: MouseEvent) => {
 				event.preventDefault();
@@ -92,7 +85,7 @@ class LoginPage extends Block {
 								</fieldset>
 								{{{Button
 									text="Войти"
-									onClick=onLogin
+									onClick=onSubmit
 								}}}
 							</form>
 							{{{Link
