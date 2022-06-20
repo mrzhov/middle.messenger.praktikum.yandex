@@ -1,12 +1,73 @@
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
+import { changeRoute, getValueFromRefs } from '@/shared/utils';
+import { emailValidator, loginValidator, nameValidator, phoneValidator } from '@/shared/validators';
+
+const initialState = {
+	values: {
+		first_name: '',
+		second_name: '',
+		phone: '',
+		email: '',
+		login: '',
+	},
+	errors: {
+		first_name: '',
+		second_name: '',
+		phone: '',
+		email: '',
+		login: '',
+	},
+};
 
 class ProfilePage extends Block {
 	constructor() {
 		super();
 	}
 
+	protected getStateFromProps() {
+		this.state = {
+			...initialState,
+			onSubmit: (event: MouseEvent) => {
+				event.preventDefault();
+
+				const profileData = {
+					first_name: getValueFromRefs(this.refs, 'first_name'),
+					second_name: getValueFromRefs(this.refs, 'second_name'),
+					phone: getValueFromRefs(this.refs, 'phone'),
+					email: getValueFromRefs(this.refs, 'email'),
+					login: getValueFromRefs(this.refs, 'login'),
+				};
+
+				const nextState = {
+					values: { ...profileData },
+					errors: initialState.errors,
+				};
+
+				nextState.errors.first_name = nameValidator(profileData.first_name, 'имя');
+				nextState.errors.second_name = nameValidator(profileData.second_name, 'фамилию');
+				nextState.errors.phone = phoneValidator(profileData.phone);
+				nextState.errors.email = emailValidator(profileData.email);
+				nextState.errors.login = loginValidator(profileData.login);
+
+				this.setState(nextState);
+
+				if (Object.values(nextState.errors).every(e => !e)) {
+					console.log('registry:', profileData);
+					this.setState(initialState);
+				}
+			},
+			linkClickHandler: (event: MouseEvent) => {
+				event.preventDefault();
+				const path = (event.target as HTMLAnchorElement).getAttribute('href')!;
+				changeRoute(path);
+			},
+		};
+	}
+
 	render(): string {
+		const { errors, values } = this.state;
+
 		// language=hbs
 		return `
 			{{#BaseLayout title="Изменить профиль"}}
@@ -22,40 +83,55 @@ class ProfilePage extends Block {
 								</div>
 							</div>
 							<form class="space-y-3">
-								{{{Input
-									name="first_name"
-									label="Имя"
-									value="Ivan"
-								}}}
-									
-								{{{Input
-									name="second_name"
-									label="Фамилия"
-									value="Ivanov"
-								}}}
-									
-								{{{Input
-									name="phone"
-									label="Телефон"
-									value="+7 999 111 22 33"
-								}}}
-									
-								{{{Input
-									name="email"
-									label="Почта"
-									type="email"
-									value="test@yandex.ru"
-								}}}
-									
-								{{{Input
-									name="login"
-									label="Логин"
-									value="@ivan123"
-								}}}
+								<fieldset class="space-y-3">
+									{{{Input
+										ref="first_name"
+										name="first_name"
+										label="Имя"
+										value="${values.first_name}"
+										error="${errors.first_name}"
+									}}}
+
+									{{{Input
+										ref="second_name"
+										name="second_name"
+										label="Фамилия"
+										value="${values.second_name}"
+										error="${errors.second_name}"
+									}}}
+
+									{{{Input
+										ref="phone"
+										name="phone"
+										label="Телефон"
+										value="${values.phone}"
+										error="${errors.phone}"
+									}}}
+
+									{{{Input
+										ref="email"
+										name="email"
+										label="Почта"
+										type="email"
+										value="${values.email}"
+										error="${errors.email}"
+									}}}
+
+									{{{Input
+										ref="login"
+										name="login"
+										label="Логин"
+										value="${values.login}"
+										error="${errors.login}"
+									}}}
+								</fieldset>
+								<div class="submit-container">
+									{{{Button
+										text="Сохранить"
+										onClick=onSubmit
+									}}}
+								</div>
 							</form>
-							<div class="submit-container">
-								{{{Button text="Сохранить"}}}
-							</div>
 						</div>
 					</div>
 				</main>

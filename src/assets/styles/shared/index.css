@@ -20,7 +20,7 @@
    }
 
    &.with-form {
-      form, .submit-container {
+      form {
          width: 85%;
          max-width: 800px;
       }
@@ -34,10 +34,7 @@
       width: 100%;
       display: flex;
       justify-content: center;
-      a {
-         width: 100%;
-         max-width: 130px;
-      }
+
       .btn {
          max-width: 130px;
       }

@@ -15,6 +15,7 @@
       padding: 1rem;
       background-color: $blue-darken;
       border-radius: 0.75rem;
+      border: 1px solid transparent;
 
       &:required, &:invalid {
          box-shadow: none;
@@ -27,7 +28,13 @@
 }
 
 .input-standard-error {
+   input {
+      border-color: $red;
 
+      &::placeholder {
+         color: $red;
+      }
+   }
 }
 
 .input-gradient {

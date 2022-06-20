@@ -42,6 +42,7 @@ class LoginPage extends Block {
 				if (Object.values(nextState.errors).every(e => !e)) {
 					console.log('login:', loginData);
 					this.setState(initialState);
+					changeRoute('/');
 				}
 			},
 			linkClickHandler: (event: MouseEvent) => {
