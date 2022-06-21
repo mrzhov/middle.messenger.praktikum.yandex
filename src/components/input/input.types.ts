@@ -5,5 +5,5 @@ export type InputProps = {
 	value?: string;
 	error?: string;
 	onChange?: () => void;
-	variant?: 'standard' | 'gradient';
+	variant?: 'standard' | 'gradient' | 'chat-message';
 };

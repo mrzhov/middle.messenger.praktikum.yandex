@@ -9,6 +9,9 @@ const getClasses = (variant: InputProps['variant'], error: InputProps['error']) 
 	if (variant === 'gradient') {
 		return `input-gradient${error ? ' input-gradient-error' : ''}`;
 	}
+	if (variant === 'chat-message') {
+		return `input-chat-message${error ? ' input-chat-message-error' : ''}`;
+	}
 	return '';
 };
 

@@ -22,6 +22,7 @@ class LoginPage extends Block {
 		this.state = {
 			...initialState,
 			onSubmit: (event: MouseEvent) => {
+				console.log(event);
 				event.preventDefault();
 
 				const loginData = {

@@ -1,14 +1,22 @@
+import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
 
 import type { ButtonProps } from './button.types';
 
-class Button extends Block {
+class Button extends Block<Omit<ButtonProps, 'onClick'>> {
 	constructor({ onClick, ...props }: ButtonProps) {
-		super({ events: { click: onClick }, ...props });
+		super({ ...props, events: { click: onClick } });
 	}
 
 	render(): string {
-		const { text, classes } = this.props;
+		const { text, classes, icon } = this.props;
+
+		if (icon) {
+			// language=hbs
+			return `
+				<button class="btn-icon w-10 h-10">${icons[icon]}</button>
+			`;
+		}
 
 		// language=hbs
 		return `

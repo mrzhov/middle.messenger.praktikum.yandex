@@ -1,4 +1,4 @@
-type IconsKeys =
+export type IconsKeys =
 	| 'chat'
 	| 'settings'
 	| 'logo'
