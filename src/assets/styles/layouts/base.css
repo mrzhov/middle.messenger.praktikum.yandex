@@ -10,6 +10,7 @@
 .page {
    &-container {
       width: calc(100% - 500px);
+      height: 100vh;
    }
 
    &-header {

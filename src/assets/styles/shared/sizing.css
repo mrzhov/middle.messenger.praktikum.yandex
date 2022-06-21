@@ -21,3 +21,7 @@
 .h-10 {
    height: 40px;
 }
+
+.h-screen-with-header {
+   height: calc(100vh - 69px) !important;
+}

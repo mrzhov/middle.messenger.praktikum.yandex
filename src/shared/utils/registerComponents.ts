@@ -1,4 +1,6 @@
 import { Button } from '@/components/button';
+import { ChatActions } from '@/components/chat/chatActions';
+import { ChatMessages } from '@/components/chat/chatMessages';
 import { ErrorPageContent } from '@/components/errorPageContent';
 import { Input } from '@/components/input';
 import { Link } from '@/components/link';
@@ -27,4 +29,6 @@ export const registerComponents = () => {
 	registerComponent(Profile);
 	registerComponent(CategoryItem);
 	registerComponent(ChatListItem);
+	registerComponent(ChatActions);
+	registerComponent(ChatMessages);
 };

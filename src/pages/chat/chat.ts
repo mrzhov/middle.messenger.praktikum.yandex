@@ -24,7 +24,7 @@ class ChatPage extends Block {
 		// language=hbs
 		return `
 			{{#BaseLayout}}
-				<main>
+				<main class="flex flex-col h-full">
 					<header class="page-header flex items-center justify-between">
 						<div class="flex-center">
 							<div class="mock-avatar small"></div>
@@ -32,6 +32,8 @@ class ChatPage extends Block {
 						</div>
 						<button class="btn-icon w-10 h-10">${icons.dots}</button>
 					</header>
+					{{{ChatMessages}}}
+					{{{ChatActions}}}
 				</main>
 			{{/BaseLayout}}
     `;

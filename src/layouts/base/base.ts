@@ -27,7 +27,7 @@ class BaseLayout extends Block<BaseLayoutProps> {
 							<h3 class="text">{{title}}</h3>
 						</header>
 					{{/if}}
-					<div data-layout></div>
+					<div class="h-full${isSettingsArea ? ' h-screen-with-header' : ''}" data-layout></div>
 				</div>
 			</div>
     `;

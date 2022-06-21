@@ -1,5 +1,5 @@
 .chat-list {
-   height: calc(100% - 68px - 61px);
+   height: calc(100% - 69px - 61px);
    overflow-x: hidden;
    overflow-y: overlay;
    transition: color .3s ease;

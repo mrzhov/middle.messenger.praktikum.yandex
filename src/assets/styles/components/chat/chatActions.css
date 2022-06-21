@@ -1,0 +1,8 @@
+.chat-actions {
+   height: 61px;
+   border-top: 1px solid $blue-darken-2;
+
+   & > div {
+      padding: 0.5rem 1rem;
+   }
+}
