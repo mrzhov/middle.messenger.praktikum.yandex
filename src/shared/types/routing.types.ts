@@ -7,4 +7,5 @@ export enum PagesRoutes {
 	PROFILE = '/settings/profile',
 	CHANGEPASSWORD = '/settings/change-password',
 	EXITWARNING = '/settings/exit-warning',
+	CHAT = '/chat',
 }

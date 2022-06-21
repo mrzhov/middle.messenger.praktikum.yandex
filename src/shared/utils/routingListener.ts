@@ -1,5 +1,6 @@
 import { NotFoundPage } from '@/pages/404';
 import { ServerErrorPage } from '@/pages/500';
+import { ChatPage } from '@/pages/chat';
 import { HomePage } from '@/pages/home';
 import { LoginPage } from '@/pages/login';
 import { RegistryPage } from '@/pages/registry';
@@ -18,12 +19,15 @@ const pagesDictionary: Record<string, BlockConstructable> = {
 	[PagesRoutes.PROFILE]: ProfilePage,
 	[PagesRoutes.CHANGEPASSWORD]: ChangePasswordPage,
 	[PagesRoutes.EXITWARNING]: ExitWarningPage,
+	[PagesRoutes.CHAT]: ChatPage,
 };
 
 const locationObserverCallback = () => {
 	const { pathname } = window.location;
-	const Page = pagesDictionary[pathname];
-	const page = new Page({});
+	const key = pathname.includes('/chat') ? PagesRoutes.CHAT : pathname;
+	const props = pathname.includes('/chat') ? pathname.split('/').pop() : {};
+	const Page = pagesDictionary[key];
+	const page = new Page(props);
 	renderDOM(page);
 };
 

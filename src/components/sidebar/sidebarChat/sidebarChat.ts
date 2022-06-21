@@ -1,8 +1,16 @@
 import { Block } from '@/shared/core';
 
+import content from './sidebarChat.content';
+
 class SidebarChat extends Block {
 	constructor() {
 		super();
+	}
+
+	protected getStateFromProps() {
+		this.state = {
+			chatList: content.mockChatList,
+		};
 	}
 
 	render(): string {
@@ -12,7 +20,17 @@ class SidebarChat extends Block {
 				<div class="sidebar-top">
 					{{{Search}}}
 				</div>
-				{{{ChatList}}}
+				<div class="chat-list">
+					{{#each chatList}}
+						{{{ChatListItem
+							id=this.id
+							name=this.name
+							unreadCount=this.unreadCount
+							lastMessageText=this.lastMessage.text
+							lastMessageTime=this.lastMessage.time
+						}}}
+					{{/each}}
+				</div>
 				{{{Navigation}}}
 			</div>
 		`;

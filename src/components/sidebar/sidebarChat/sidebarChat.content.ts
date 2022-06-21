@@ -1,9 +1,9 @@
-import type { ChatListItem } from '@/shared/types';
+import type { ChatListItemType } from '@/shared/types';
 
-type Content = { mockChatList: Array<ChatListItem> } & Record<string, unknown>;
+type Content = { mockChatList: Array<ChatListItemType> } & Record<string, unknown>;
 
 const content: Content = {
-	mockProfile: [
+	mockChatList: [
 		{
 			id: '1',
 			name: 'Илья',

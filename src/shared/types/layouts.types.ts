@@ -1,13 +1,7 @@
-export type TitleAndPageId = {
-	pageId?: string;
-	title?: string;
-};
-
-export type ChatListItem = {
+export type ChatListItemType = {
 	id: string;
 	name: string;
 	unreadCount?: string;
-	selected?: boolean;
 	lastMessage: {
 		text: string;
 		time: string;
