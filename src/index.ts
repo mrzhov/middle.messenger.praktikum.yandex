@@ -7,5 +7,5 @@ registerComponents();
 routingListener();
 
 document.addEventListener('DOMContentLoaded', () => {
-	changeRoute('/chat/4');
+	changeRoute('/login');
 });
