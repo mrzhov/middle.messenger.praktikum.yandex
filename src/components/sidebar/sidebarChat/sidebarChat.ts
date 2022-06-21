@@ -1,6 +1,5 @@
+import { mockChatList } from '@/shared/content';
 import { Block } from '@/shared/core';
-
-import content from './sidebarChat.content';
 
 class SidebarChat extends Block {
 	constructor() {
@@ -9,7 +8,7 @@ class SidebarChat extends Block {
 
 	protected getStateFromProps() {
 		this.state = {
-			chatList: content.mockChatList,
+			chatList: mockChatList,
 		};
 	}
 
@@ -17,7 +16,7 @@ class SidebarChat extends Block {
 		// language=hbs
 		return `
 			<div class="w-full h-full">
-				<div class="sidebar-top">
+				<div class="sidebar-top pr-1">
 					{{{Search}}}
 				</div>
 				<div class="chat-list">

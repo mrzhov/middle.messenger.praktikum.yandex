@@ -9,7 +9,7 @@ class Search extends Block {
 	render(): string {
 		// language=hbs
 		return `
-			<div class="search">
+			<div class="flex items-center justify-between space-x-2">
 				<div class="search-form-field">
 					<input
 						id="search"
@@ -22,6 +22,7 @@ class Search extends Block {
 						<span>Поиск</span>
 					</label>
 				</div>
+				<button class="btn-icon w-10 h-10">${icons.pencil}</button>
 			</div>
 		`;
 	}

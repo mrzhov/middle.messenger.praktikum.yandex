@@ -6,10 +6,18 @@
    width: 100vw;
 }
 
+.w-10 {
+   width: 40px;
+}
+
 .h-full {
    height: 100%;
 }
 
 .h-screen {
    height: 100vh;
+}
+
+.h-10 {
+   height: 40px;
 }

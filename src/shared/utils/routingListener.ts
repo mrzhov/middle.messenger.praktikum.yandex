@@ -25,9 +25,8 @@ const pagesDictionary: Record<string, BlockConstructable> = {
 const locationObserverCallback = () => {
 	const { pathname } = window.location;
 	const key = pathname.includes('/chat') ? PagesRoutes.CHAT : pathname;
-	const props = pathname.includes('/chat') ? pathname.split('/').pop() : {};
 	const Page = pagesDictionary[key];
-	const page = new Page(props);
+	const page = new Page({});
 	renderDOM(page);
 };
 
