@@ -1,6 +1,6 @@
 import { Button } from '@/components/button';
 import { ChatActions } from '@/components/chat/chatActions';
-import { ChatMessages } from '@/components/chat/chatMessages';
+import { ChatMessagesItem } from '@/components/chat/chatMessagesItem';
 import { ErrorPageContent } from '@/components/errorPageContent';
 import { Input } from '@/components/input';
 import { Link } from '@/components/link';
@@ -30,5 +30,5 @@ export const registerComponents = () => {
 	registerComponent(CategoryItem);
 	registerComponent(ChatListItem);
 	registerComponent(ChatActions);
-	registerComponent(ChatMessages);
+	registerComponent(ChatMessagesItem);
 };

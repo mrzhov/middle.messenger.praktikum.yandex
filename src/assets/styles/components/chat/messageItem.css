@@ -1,0 +1,42 @@
+.message-item {
+   display: flex;
+
+   &-content {
+      width: calc(100% - 60px);
+
+      &-top {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         margin-bottom: 1px;
+      }
+
+      &-message {
+         width: calc(100% - 2rem);
+      }
+   }
+
+   &-author {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      color: $blue;
+   }
+
+   &-text {
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 18px;
+      color: $white;
+      white-space: pre-line;
+   }
+
+   &-time-container {
+      display: flex;
+      align-items: center;
+
+      svg {
+         margin: 0 0.25rem 2px 0;
+      }
+   }
+}

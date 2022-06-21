@@ -32,7 +32,27 @@ class ChatPage extends Block {
 						</div>
 						<button class="btn-icon w-10 h-10">${icons.dots}</button>
 					</header>
-					{{{ChatMessages}}}
+					<div class="chat-messages">
+						<div class="space-y-2">
+							{{#each chatInfo.sortedMessages}}
+								<div class="chat-messages-item space-y-2">
+									<div class="chat-messages-item-date">
+										<p class="subtext">{{this.date}}</p>
+									</div>
+									<div class="space-y-4">
+										{{#each this.messages}}
+											{{{ChatMessagesItem
+												author=this.author
+												time=this.time
+												text=this.text
+												read=this.read
+											}}}
+										{{/each}}
+									</div>
+								</div>
+							{{/each}}
+						</div>
+					</div>
 					{{{ChatActions}}}
 				</main>
 			{{/BaseLayout}}

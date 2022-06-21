@@ -72,7 +72,7 @@ class RegistryPage extends Block {
 					} else {
 						console.log('registry:', registryData);
 						this.setState(initialState);
-						changeRoute('/');
+						changeRoute('/chat/4');
 					}
 				}
 			},
