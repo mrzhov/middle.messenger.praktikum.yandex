@@ -7,5 +7,5 @@ registerComponents();
 routingListener();
 
 document.addEventListener('DOMContentLoaded', () => {
-	changeRoute('/settings/change-password');
+	changeRoute('/login');
 });
