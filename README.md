@@ -6,6 +6,12 @@
 
 <hr>
 
+### Pull Request Sprint 2 link
+
+```
+https://github.com/mrzhov/middle.messenger.praktikum.yandex/pull/2
+```
+
 ### Install dependencies
 
 ```
