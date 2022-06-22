@@ -15,9 +15,13 @@ const getClasses = (variant: InputProps['variant'], error: InputProps['error']) 
 	return '';
 };
 
-class Input extends Block<InputProps> {
-	constructor({ variant = 'standard', ...other }: InputProps) {
-		super({ variant, ...other });
+class Input extends Block<Omit<InputProps, 'onFocus' | 'onBlur'>> {
+	constructor({ variant = 'standard', onFocus, onBlur, ...other }: Omit<InputProps, 'events'>) {
+		super({
+			...other,
+			variant,
+			events: { focus: onFocus, blur: onBlur, targetChildElementId: other.name },
+		});
 	}
 
 	render(): string {

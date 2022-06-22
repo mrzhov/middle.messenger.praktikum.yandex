@@ -21,8 +21,15 @@ class LoginPage extends Block {
 	protected getStateFromProps() {
 		this.state = {
 			...initialState,
-			onSubmit: (event: MouseEvent) => {
+			onFocusHandler: (event: FocusEvent) => {
+				console.log('focus');
 				console.log(event);
+			},
+			onBlurHandler: (event: FocusEvent) => {
+				console.log('blur');
+				console.log(event);
+			},
+			onSubmit: (event: MouseEvent) => {
 				event.preventDefault();
 
 				const loginData = {
@@ -73,6 +80,8 @@ class LoginPage extends Block {
 										label="Логин"
 										value="${values.login}"
 										error="${errors.login}"
+										onFocus=onFocusHandler
+										onBlur=onBlurHandler
 									}}}
 
 									{{{Input
@@ -83,6 +92,8 @@ class LoginPage extends Block {
 										type="password"
 										value="${values.password}"
 										error="${errors.password}"
+										onFocus=onFocusHandler
+										onBlur=onBlurHandler
 									}}}
 								</fieldset>
 								{{{Button

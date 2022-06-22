@@ -8,7 +8,7 @@ declare global {
 		new (props: Props): Block;
 	}
 	export type BlockEvents = {
-		events: Record<string, (...args: any) => any>;
+		events: Record<string, ((...args: any) => any) | string>;
 	};
 }
 

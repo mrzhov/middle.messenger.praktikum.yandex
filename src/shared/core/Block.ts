@@ -1,6 +1,8 @@
 import Handlebars from 'handlebars';
 import { nanoid } from 'nanoid';
 
+import { transformElementAndEvents } from '@/shared/utils';
+
 import EventBus from './EventBus';
 
 type Events = Values<typeof Block.EVENTS>;
@@ -29,7 +31,7 @@ abstract class Block<P = any> {
 		const eventBus = new EventBus<Events>();
 		this.eventBus = () => eventBus;
 
-		this.getStateFromProps(props);
+		this.getStateFromProps();
 
 		this.props = this.makeProxy(props || ({} as P));
 		this.state = this.makeProxy(this.state);
@@ -69,10 +71,10 @@ abstract class Block<P = any> {
 		this.eventBus().emit(Block.EVENTS.FLOW_RENDER, this.props);
 	}
 
-	private componentDidMount(props: P) {}
+	private componentDidMount() {}
 
-	private componentDidUpdate(oldProps: P, newProps: P) {
-		if (!this.propsComparison(oldProps, newProps)) {
+	private componentDidUpdate() {
+		if (!Block.propsComparison()) {
 			return;
 		}
 		this.flowRender();
@@ -94,7 +96,7 @@ abstract class Block<P = any> {
 		this.element = Block.createDocumentElement('div');
 	}
 
-	private propsComparison(oldProps: P, newProps: P) {
+	private static propsComparison() {
 		return true;
 	}
 
@@ -138,9 +140,13 @@ abstract class Block<P = any> {
 			return;
 		}
 
-		Object.entries(events).forEach(([event, listener]) => {
-			this.element!.addEventListener(event, listener as () => any);
-		});
+		const { onlyEvents, element } = transformElementAndEvents(events, this.element);
+
+		if (element) {
+			Object.entries(onlyEvents).forEach(([event, listener]) => {
+				element.addEventListener(event, listener as () => any);
+			});
+		}
 	}
 
 	private removeEvents() {
@@ -150,9 +156,13 @@ abstract class Block<P = any> {
 			return;
 		}
 
-		Object.entries(events).forEach(([event, listener]) => {
-			this.element!.removeEventListener(event, listener as () => any);
-		});
+		const { onlyEvents, element } = transformElementAndEvents(events, this.element);
+
+		if (element) {
+			Object.entries(onlyEvents).forEach(([event, listener]) => {
+				element.removeEventListener(event, listener as () => any);
+			});
+		}
 	}
 
 	getContent(): HTMLElement {
@@ -183,7 +193,7 @@ abstract class Block<P = any> {
 		Object.assign(this.state, nextState);
 	};
 
-	protected getStateFromProps(props?: any): void {
+	protected getStateFromProps(): void {
 		this.state = {};
 	}
 
