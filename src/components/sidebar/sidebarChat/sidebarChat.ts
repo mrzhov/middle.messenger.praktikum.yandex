@@ -2,6 +2,8 @@ import { mockChatList } from '@/shared/content';
 import { Block } from '@/shared/core';
 
 class SidebarChat extends Block {
+	static componentName = 'SidebarChat';
+
 	constructor() {
 		super();
 	}

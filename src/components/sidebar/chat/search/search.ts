@@ -2,6 +2,8 @@ import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
 
 class Search extends Block {
+	static componentName = 'Search';
+
 	constructor() {
 		super();
 	}

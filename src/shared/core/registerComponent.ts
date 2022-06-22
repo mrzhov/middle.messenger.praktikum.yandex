@@ -3,7 +3,7 @@ import Handlebars from 'handlebars';
 
 function registerComponent<Props extends any>(Component: BlockConstructable<Props>) {
 	Handlebars.registerHelper(
-		Component.name,
+		Component.componentName,
 		function (this: Props, { hash: { ref, ...hash }, data, fn }: HelperOptions) {
 			if (!data.root.children) {
 				data.root.children = {};

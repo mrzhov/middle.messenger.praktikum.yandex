@@ -4,6 +4,8 @@ import { Block } from '@/shared/core';
 import type { ButtonProps } from './button.types';
 
 class Button extends Block<Omit<ButtonProps, 'onClick'>> {
+	static componentName = 'Button';
+
 	constructor({ onClick, ...props }: ButtonProps) {
 		super({ ...props, events: { click: onClick } });
 	}

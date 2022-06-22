@@ -20,6 +20,8 @@ const click = (event: MouseEvent) => {
 };
 
 class CategoryItem extends Block<CategoryItemProps> {
+	static componentName = 'CategoryItem';
+
 	constructor(props: CategoryItemProps) {
 		super({ ...props, events: { click } });
 	}

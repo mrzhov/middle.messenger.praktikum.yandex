@@ -13,6 +13,8 @@ const click = (event: MouseEvent) => {
 };
 
 class ChatListItem extends Block<Omit<ChatListItemProps, 'id'> & { itemId: string } & BlockEvents> {
+	static componentName = 'ChatListItem';
+
 	constructor(props: ChatListItemProps) {
 		super({ ...props, itemId: props.id, events: { click } });
 	}

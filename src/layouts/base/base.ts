@@ -3,6 +3,8 @@ import { Block } from '@/shared/core';
 import type { BaseLayoutProps } from './base.types';
 
 class BaseLayout extends Block<BaseLayoutProps> {
+	static componentName = 'BaseLayout';
+
 	constructor(props: BaseLayoutProps) {
 		super(props);
 	}

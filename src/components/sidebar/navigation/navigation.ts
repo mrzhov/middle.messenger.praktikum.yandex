@@ -12,6 +12,8 @@ const click = (event: MouseEvent) => {
 };
 
 class Navigation extends Block {
+	static componentName = 'Navigation';
+
 	constructor() {
 		super({ events: { click } });
 	}

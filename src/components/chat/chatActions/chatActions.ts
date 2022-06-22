@@ -13,6 +13,8 @@ const initialState = {
 };
 
 class ChatActions extends Block {
+	static componentName = 'ChatActions';
+
 	constructor() {
 		super();
 	}

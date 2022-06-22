@@ -16,6 +16,8 @@ const getClasses = (variant: InputProps['variant'], error: InputProps['error']) 
 };
 
 class Input extends Block<Omit<InputProps, 'onFocus' | 'onBlur'>> {
+	static componentName = 'Input';
+
 	constructor({ variant = 'standard', onFocus, onBlur, ...other }: Omit<InputProps, 'events'>) {
 		super({
 			...other,

@@ -3,6 +3,8 @@ import { Block } from '@/shared/core';
 import type { Message } from '@/shared/types';
 
 class ChatMessagesItem extends Block<Message> {
+	static componentName = 'ChatMessagesItem';
+
 	constructor(props: Message) {
 		super(props);
 	}

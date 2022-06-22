@@ -3,6 +3,8 @@ import { Block } from '@/shared/core';
 import { PagesRoutes } from '@/shared/types';
 
 class SidebarSettings extends Block {
+	static componentName = 'SidebarSettings';
+
 	constructor() {
 		super();
 	}

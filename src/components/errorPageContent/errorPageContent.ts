@@ -2,6 +2,8 @@ import { Block } from '@/shared/core';
 import type { ErrorPageContentProps } from '@/shared/types';
 
 class ErrorPageContent extends Block<ErrorPageContentProps> {
+	static componentName = 'ErrorPageContent';
+
 	constructor(props: ErrorPageContentProps) {
 		super(props);
 	}

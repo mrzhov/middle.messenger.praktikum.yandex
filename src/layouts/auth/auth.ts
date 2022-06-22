@@ -1,6 +1,8 @@
 import { Block } from '@/shared/core';
 
 class AuthLayout extends Block {
+	static componentName = 'AuthLayout';
+
 	constructor() {
 		super();
 	}

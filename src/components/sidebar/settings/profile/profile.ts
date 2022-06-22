@@ -15,6 +15,8 @@ const click = (event: MouseEvent) => {
 };
 
 class Profile extends Block {
+	static componentName = 'Profile';
+
 	constructor() {
 		super({ events: { click } });
 	}
