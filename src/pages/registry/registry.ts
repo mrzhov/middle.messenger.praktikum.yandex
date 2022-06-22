@@ -1,5 +1,5 @@
 import { Block } from '@/shared/core';
-import { changeRoute, getValueFromRefs } from '@/shared/utils';
+import { blurHandler, changeRoute, focusHandler, getValueFromRefs } from '@/shared/utils';
 import {
 	emailValidator,
 	loginValidator,
@@ -37,6 +37,12 @@ class RegistryPage extends Block {
 	protected getStateFromProps() {
 		this.state = {
 			...initialState,
+			onFocusHandler: (event: FocusEvent) => {
+				focusHandler.call(this, event);
+			},
+			onBlurHandler: (event: FocusEvent) => {
+				blurHandler.call(this, event);
+			},
 			onSubmit: (event: MouseEvent) => {
 				event.preventDefault();
 
@@ -55,8 +61,8 @@ class RegistryPage extends Block {
 					errors: initialState.errors,
 				};
 
-				nextState.errors.first_name = nameValidator(registryData.first_name, 'имя');
-				nextState.errors.second_name = nameValidator(registryData.second_name, 'фамилию');
+				nextState.errors.first_name = nameValidator(registryData.first_name);
+				nextState.errors.second_name = nameValidator(registryData.second_name);
 				nextState.errors.phone = phoneValidator(registryData.phone);
 				nextState.errors.email = emailValidator(registryData.email);
 				nextState.errors.login = loginValidator(registryData.login);
@@ -103,6 +109,8 @@ class RegistryPage extends Block {
 										label="Имя"
 										value="${values.first_name}"
 										error="${errors.first_name}"
+										onFocus=onFocusHandler
+										onBlur=onBlurHandler
 									}}}
 
 									{{{Input
@@ -112,6 +120,8 @@ class RegistryPage extends Block {
 										label="Фамилия"
 										value="${values.second_name}"
 										error="${errors.second_name}"
+										onFocus=onFocusHandler
+										onBlur=onBlurHandler
 									}}}
 
 									{{{Input
@@ -121,6 +131,8 @@ class RegistryPage extends Block {
 										label="Телефон"
 										value="${values.phone}"
 										error="${errors.phone}"
+										onFocus=onFocusHandler
+										onBlur=onBlurHandler
 									}}}
 
 									{{{Input
@@ -131,6 +143,8 @@ class RegistryPage extends Block {
 										type="email"
 										value="${values.email}"
 										error="${errors.email}"
+										onFocus=onFocusHandler
+										onBlur=onBlurHandler
 									}}}
 
 									{{{Input
@@ -140,6 +154,8 @@ class RegistryPage extends Block {
 										label="Логин"
 										value="${values.login}"
 										error="${errors.login}"
+										onFocus=onFocusHandler
+										onBlur=onBlurHandler
 									}}}
 
 									{{{Input
@@ -150,6 +166,8 @@ class RegistryPage extends Block {
 										type="password"
 										value="${values.password}"
 										error="${errors.password}"
+										onFocus=onFocusHandler
+										onBlur=onBlurHandler
 									}}}
 
 									{{{Input
@@ -160,6 +178,8 @@ class RegistryPage extends Block {
 										type="password"
 										value="${values.password_repeat}"
 										error="${errors.password_repeat}"
+										onFocus=onFocusHandler
+										onBlur=onBlurHandler
 									}}}
 								</fieldset>
 								{{{Button

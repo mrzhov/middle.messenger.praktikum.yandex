@@ -1,6 +1,7 @@
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
-import { getValueFromRefs } from '@/shared/utils';
+import { blurHandler, focusHandler, getValueFromRefs } from '@/shared/utils';
+import { messageValidator } from '@/shared/validators';
 
 const initialState = {
 	values: {
@@ -19,6 +20,12 @@ class ChatActions extends Block {
 	protected getStateFromProps() {
 		this.state = {
 			...initialState,
+			onFocusHandler: (event: FocusEvent) => {
+				focusHandler.call(this, event);
+			},
+			onBlurHandler: (event: FocusEvent) => {
+				blurHandler.call(this, event);
+			},
 			onSubmit: (event: MouseEvent) => {
 				event.preventDefault();
 
@@ -31,7 +38,7 @@ class ChatActions extends Block {
 					errors: initialState.errors,
 				};
 
-				nextState.errors.message = !chatData.message ? 'Пожалуйста, введите сообщение' : '';
+				nextState.errors.message = messageValidator(chatData.message);
 
 				this.setState(nextState);
 
@@ -60,6 +67,8 @@ class ChatActions extends Block {
 								label="Сообщение..."
 								value="${values.message}"
 								error="${errors.message}"
+								onFocus=onFocusHandler
+								onBlur=onBlurHandler
 							}}}
 							{{{Button
 								icon="send"

@@ -1,6 +1,6 @@
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
-import { changeRoute, getValueFromRefs } from '@/shared/utils';
+import { blurHandler, changeRoute, focusHandler, getValueFromRefs } from '@/shared/utils';
 import { emailValidator, loginValidator, nameValidator, phoneValidator } from '@/shared/validators';
 
 const initialState = {
@@ -28,6 +28,12 @@ class ProfilePage extends Block {
 	protected getStateFromProps() {
 		this.state = {
 			...initialState,
+			onFocusHandler: (event: FocusEvent) => {
+				focusHandler.call(this, event);
+			},
+			onBlurHandler: (event: FocusEvent) => {
+				blurHandler.call(this, event);
+			},
 			onSubmit: (event: MouseEvent) => {
 				event.preventDefault();
 
@@ -44,8 +50,8 @@ class ProfilePage extends Block {
 					errors: initialState.errors,
 				};
 
-				nextState.errors.first_name = nameValidator(profileData.first_name, 'имя');
-				nextState.errors.second_name = nameValidator(profileData.second_name, 'фамилию');
+				nextState.errors.first_name = nameValidator(profileData.first_name);
+				nextState.errors.second_name = nameValidator(profileData.second_name);
 				nextState.errors.phone = phoneValidator(profileData.phone);
 				nextState.errors.email = emailValidator(profileData.email);
 				nextState.errors.login = loginValidator(profileData.login);
@@ -90,6 +96,8 @@ class ProfilePage extends Block {
 										label="Имя"
 										value="${values.first_name}"
 										error="${errors.first_name}"
+										onFocus=onFocusHandler
+										onBlur=onBlurHandler
 									}}}
 
 									{{{Input
@@ -98,6 +106,8 @@ class ProfilePage extends Block {
 										label="Фамилия"
 										value="${values.second_name}"
 										error="${errors.second_name}"
+										onFocus=onFocusHandler
+										onBlur=onBlurHandler
 									}}}
 
 									{{{Input
@@ -106,6 +116,8 @@ class ProfilePage extends Block {
 										label="Телефон"
 										value="${values.phone}"
 										error="${errors.phone}"
+										onFocus=onFocusHandler
+										onBlur=onBlurHandler
 									}}}
 
 									{{{Input
@@ -115,6 +127,8 @@ class ProfilePage extends Block {
 										type="email"
 										value="${values.email}"
 										error="${errors.email}"
+										onFocus=onFocusHandler
+										onBlur=onBlurHandler
 									}}}
 
 									{{{Input
@@ -123,6 +137,8 @@ class ProfilePage extends Block {
 										label="Логин"
 										value="${values.login}"
 										error="${errors.login}"
+										onFocus=onFocusHandler
+										onBlur=onBlurHandler
 									}}}
 								</fieldset>
 								<div class="submit-container">

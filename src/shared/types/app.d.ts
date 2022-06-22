@@ -10,6 +10,10 @@ declare global {
 	export type BlockEvents = {
 		events: Record<string, ((...args: any) => any) | string>;
 	};
+	export type State<T extends string> = {
+		values: Record<T, string>;
+		errors: Record<T, string>;
+	};
 }
 
 export {};

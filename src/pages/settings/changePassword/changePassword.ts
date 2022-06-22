@@ -1,5 +1,5 @@
 import { Block } from '@/shared/core';
-import { getValueFromRefs } from '@/shared/utils';
+import { blurHandler, focusHandler, getValueFromRefs } from '@/shared/utils';
 import { passwordValidator } from '@/shared/validators';
 
 const initialState = {
@@ -23,6 +23,12 @@ class ChangePasswordPage extends Block {
 	protected getStateFromProps() {
 		this.state = {
 			...initialState,
+			onFocusHandler: (event: FocusEvent) => {
+				focusHandler.call(this, event);
+			},
+			onBlurHandler: (event: FocusEvent) => {
+				blurHandler.call(this, event);
+			},
 			onSubmit: (event: MouseEvent) => {
 				event.preventDefault();
 
@@ -76,6 +82,8 @@ class ChangePasswordPage extends Block {
 										type="password"
 										value="${values.old_password}"
 										error="${errors.old_password}"
+										onFocus=onFocusHandler
+										onBlur=onBlurHandler
 									}}}
 
 									{{{Input
@@ -85,6 +93,8 @@ class ChangePasswordPage extends Block {
 										type="password"
 										value="${values.new_password}"
 										error="${errors.new_password}"
+										onFocus=onFocusHandler
+										onBlur=onBlurHandler
 									}}}
 	
 									{{{Input
@@ -94,6 +104,8 @@ class ChangePasswordPage extends Block {
 										type="password"
 										value="${values.new_password_repeat}"
 										error="${errors.new_password_repeat}"
+										onFocus=onFocusHandler
+										onBlur=onBlurHandler
 									}}}
 								</fieldset>
 								<div class="submit-container">

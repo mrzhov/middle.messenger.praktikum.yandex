@@ -1,8 +1,11 @@
 import { Block } from '@/shared/core';
-import { changeRoute, getValueFromRefs } from '@/shared/utils';
+import { blurHandler, changeRoute, getValueFromRefs } from '@/shared/utils';
+import { focusHandler } from '@/shared/utils/helpers';
 import { loginValidator, passwordValidator } from '@/shared/validators';
 
-const initialState = {
+type StateKeys = 'login' | 'password';
+
+const initialState: State<StateKeys> = {
 	values: {
 		login: '',
 		password: '',
@@ -22,12 +25,10 @@ class LoginPage extends Block {
 		this.state = {
 			...initialState,
 			onFocusHandler: (event: FocusEvent) => {
-				console.log('focus');
-				console.log(event);
+				focusHandler.call(this, event);
 			},
 			onBlurHandler: (event: FocusEvent) => {
-				console.log('blur');
-				console.log(event);
+				blurHandler.call(this, event);
 			},
 			onSubmit: (event: MouseEvent) => {
 				event.preventDefault();
