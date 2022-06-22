@@ -2,14 +2,19 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
-    "typeRoots": ["node_modules/@types", "src/shared/types/app.d.ts"],
+    "typeRoots": [
+      "node_modules/@types",
+      "src/shared/types/app.d.ts"
+    ],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
+      "@/*": [
+        "./src/*"
+      ]
     }
-  },
+  }
 }
