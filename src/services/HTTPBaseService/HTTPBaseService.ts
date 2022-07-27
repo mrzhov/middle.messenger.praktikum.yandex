@@ -1,16 +1,5 @@
-enum METHODS {
-	GET = 'GET',
-	POST = 'POST',
-	PUT = 'PUT',
-	DELETE = 'DELETE',
-}
-
-type Options = {
-	timeout: number;
-	headers: Record<string, string>;
-	data: any;
-	method: METHODS;
-};
+import type { Options } from './HTTPBaseService.types';
+import { Methods } from './HTTPBaseService.types';
 
 function queryStringify(data: Options['data']) {
 	return `?${Object.entries(data)
@@ -21,19 +10,19 @@ function queryStringify(data: Options['data']) {
 class HTTPBaseService {
 	get = (url: string, options: Omit<Options, 'method'>) => {
 		const query = queryStringify(options.data);
-		return this.request(`${url}${query}`, { ...options, method: METHODS.GET });
+		return this.request(`${url}${query}`, { ...options, method: Methods.GET });
 	};
 
 	post = (url: string, options: Omit<Options, 'method'>) => {
-		return this.request(url, { ...options, method: METHODS.POST });
+		return this.request(url, { ...options, method: Methods.POST });
 	};
 
 	put = (url: string, options: Omit<Options, 'method'>) => {
-		return this.request(url, { ...options, method: METHODS.PUT });
+		return this.request(url, { ...options, method: Methods.PUT });
 	};
 
 	delete = (url: string, options: Omit<Options, 'method'>) => {
-		return this.request(url, { ...options, method: METHODS.DELETE });
+		return this.request(url, { ...options, method: Methods.DELETE });
 	};
 
 	request = (url: string, options: Options) => {
@@ -59,7 +48,7 @@ class HTTPBaseService {
 				});
 			}
 
-			if (method === METHODS.GET || !data) {
+			if (method === Methods.GET || !data) {
 				xhr.send();
 			} else {
 				xhr.send(data);

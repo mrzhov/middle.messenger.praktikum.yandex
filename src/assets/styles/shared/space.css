@@ -2,6 +2,11 @@
    padding-right: 0.25rem !important;
 }
 
+.px-4 {
+   padding-left: 1rem;
+   padding-right: 1rem;
+}
+
 .space-x-1 {
    & > *:not(:first-child) {
       margin-left: 0.25rem;

@@ -1,8 +1,8 @@
 import { Block } from '@/shared/core';
 
-import type { InputProps } from './input.types';
+import type { InputProps, InputVariant } from './input.types';
 
-const getClasses = (variant: InputProps['variant'], error: InputProps['error']) => {
+const getClasses = (error: InputProps['error'], variant?: InputVariant) => {
 	if (variant === 'standard') {
 		return `input-standard${error ? ' input-standard-error' : ''}`;
 	}
@@ -28,7 +28,7 @@ class Input extends Block<Omit<InputProps, 'onFocus' | 'onBlur'>> {
 
 	render(): string {
 		const { type, variant, error } = this.props;
-		const classes = getClasses(variant, error);
+		const classes = getClasses(error, variant);
 
 		// language=hbs
 		return `

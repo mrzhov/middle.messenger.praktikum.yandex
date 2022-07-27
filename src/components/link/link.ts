@@ -2,11 +2,11 @@ import { Block } from '@/shared/core';
 
 import type { LinkProps } from './link.types';
 
-class Link extends Block {
+class Link extends Block<LinkProps> {
 	static componentName = 'Link';
 
-	constructor({ onClick, ...props }: LinkProps) {
-		super({ events: { click: onClick }, ...props });
+	constructor({ onClick, ...props }: LinkProps & { onClick: () => void }) {
+		super({ ...props, events: { click: onClick } });
 	}
 
 	render(): string {

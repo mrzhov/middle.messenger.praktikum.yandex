@@ -3,10 +3,10 @@ import { Block } from '@/shared/core';
 
 import type { ButtonProps } from './button.types';
 
-class Button extends Block<Omit<ButtonProps, 'onClick'>> {
+class Button extends Block<ButtonProps> {
 	static componentName = 'Button';
 
-	constructor({ onClick, ...props }: ButtonProps) {
+	constructor({ onClick, ...props }: ButtonProps & { onClick: () => void }) {
 		super({ ...props, events: { click: onClick } });
 	}
 
@@ -16,14 +16,14 @@ class Button extends Block<Omit<ButtonProps, 'onClick'>> {
 		if (icon) {
 			// language=hbs
 			return `
-				<button class="btn-icon w-10 h-10">${icons[icon]}</button>
-			`;
+          <button class="btn-icon w-10 h-10">${icons[icon]}</button>
+      `;
 		}
 
 		// language=hbs
 		return `
-			<button class="btn ${classes || ''}">${text}</button>
-		`;
+        <button class="btn ${classes || ''}">${text}</button>
+    `;
 	}
 }
 

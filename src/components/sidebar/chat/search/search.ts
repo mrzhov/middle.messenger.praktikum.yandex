@@ -24,7 +24,10 @@ class Search extends Block {
 						<span>Поиск</span>
 					</label>
 				</div>
-				<button class="btn-icon w-10 h-10">${icons.pencil}</button>
+				{{{Button
+					icon="pencil"
+					onClick=onSubmit
+				}}}
 			</div>
 		`;
 	}

@@ -4,7 +4,7 @@
     "module": "commonjs",
     "typeRoots": [
       "node_modules/@types",
-      "src/shared/types/app.d.ts"
+      "@types/app.d.ts"
     ],
     "noImplicitAny": true,
     "noUnusedLocals": true,

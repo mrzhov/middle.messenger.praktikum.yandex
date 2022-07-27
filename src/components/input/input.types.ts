@@ -1,5 +1,7 @@
+export type InputVariant = 'standard' | 'gradient' | 'chat-message';
+
 export type InputProps = {
-	variant?: 'standard' | 'gradient' | 'chat-message';
+	variant?: InputVariant;
 	name: string;
 	label: string;
 	type?: 'text' | 'password' | 'email';

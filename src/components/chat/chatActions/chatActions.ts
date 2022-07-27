@@ -58,7 +58,7 @@ class ChatActions extends Block {
 		// language=hbs
 		return `
       <div class="chat-actions">
-				<div class="flex items-center h-full">
+				<div class="flex items-center h-full px-4">
 					<button class="btn-icon">${icons.staple}</button>
 					<div class="grow h-full">
 						<form>
