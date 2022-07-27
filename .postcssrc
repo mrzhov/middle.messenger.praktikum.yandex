@@ -1,9 +1,9 @@
 {
-  "plugins": {
-    "postcss-import": true,
-    "postcss-mixins": true,
-    "postcss-simple-vars": true,
-    "postcss-extend": true,
-    "postcss-nested": true,
-  }
+  "plugins": [
+    "postcss-import",
+    "postcss-mixins",
+    "postcss-simple-vars",
+    "postcss-extend",
+    "postcss-nested"
+  ]
 }

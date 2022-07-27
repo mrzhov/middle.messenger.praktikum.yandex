@@ -4,6 +4,12 @@
   <img src="src/assets/images/logo.svg" alt="angular-logo" width="120px" height="120px"/>
 </p>
 
+<p align="center">
+  <i>Messanger is a platform for communication
+    <br>using Typescript and component approach.</i>
+  <br>
+</p>
+
 <hr>
 
 ### Pull Request Sprint 2 link

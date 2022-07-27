@@ -1,0 +1,79 @@
+{
+  "extends": [
+    "airbnb-base",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "prettier/prettier": "error"
+  },
+  "overrides": [
+    // Configuration for TypeScript files
+    {
+      "files": [
+        "**/*.ts"
+      ],
+      "plugins": [
+        "@typescript-eslint",
+        "unused-imports",
+        "simple-import-sort"
+      ],
+      "extends": [
+        "airbnb-typescript",
+        "plugin:prettier/recommended"
+      ],
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
+      "rules": {
+        "prettier/prettier": "error",
+        "@typescript-eslint/comma-dangle": "off",
+        "@typescript-eslint/consistent-type-imports": "error",
+        "import/prefer-default-export": "off",
+        "simple-import-sort/imports": "error",
+        "simple-import-sort/exports": "error",
+        "@typescript-eslint/no-unused-vars": "off",
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+          "error",
+          {
+            "argsIgnorePattern": "^_"
+          }
+        ],
+        "@typescript-eslint/lines-between-class-members": [
+          "error",
+          "always",
+          {
+            "exceptAfterSingleLine": true
+          }
+        ],
+        "no-underscore-dangle": [
+          "error",
+          {
+            "allowAfterThis": true
+          }
+        ],
+        "react/jsx-filename-extension": [
+          0
+        ],
+        "import/extensions": [
+          "error",
+          "never",
+          {
+            "css": "always"
+          }
+        ],
+        "class-methods-use-this": "off",
+        "no-param-reassign": [
+          "error",
+          {
+            "props": false
+          }
+        ],
+        "@typescript-eslint/no-useless-constructor": "off",
+        "no-restricted-globals": "off",
+        "no-console": "off",
+        "no-useless-concat": "off"
+      }
+    }
+  ]
+}

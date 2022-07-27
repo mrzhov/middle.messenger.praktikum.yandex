@@ -1,0 +1,50 @@
+.pr-1 {
+   padding-right: 0.25rem !important;
+}
+
+.px-4 {
+   padding-left: 1rem;
+   padding-right: 1rem;
+}
+
+.space-x-1 {
+   & > *:not(:first-child) {
+      margin-left: 0.25rem;
+   }
+}
+
+.space-x-2 {
+   & > *:not(:first-child) {
+      margin-left: 0.5rem;
+   }
+}
+
+.space-y-1 {
+   & > *:not(:first-child) {
+      margin-top: 0.25rem;
+   }
+}
+
+.space-y-2 {
+   & > *:not(:first-child) {
+      margin-top: 0.5rem;
+   }
+}
+
+.space-y-3 {
+   & > *:not(:first-child) {
+      margin-top: 0.75rem;
+   }
+}
+
+.space-y-4 {
+   & > *:not(:first-child) {
+      margin-top: 1rem;
+   }
+}
+
+.space-y-6 {
+   & > *:not(:first-child) {
+      margin-top: 1.5rem;
+   }
+}

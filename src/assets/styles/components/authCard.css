@@ -1,0 +1,18 @@
+.auth-card {
+   @extend .text-center;
+   width: 100%;
+   max-width: 340px;
+}
+
+.auth-card__form {
+   margin: 1rem 0 0.5rem;
+   min-height: 250px;
+   height: fit-content;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+
+   button {
+      margin-top: 2.5rem;
+   }
+}

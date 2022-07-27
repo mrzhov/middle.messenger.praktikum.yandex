@@ -1,0 +1,10 @@
+.chat-actions {
+   height: 61px;
+   border-top: 1px solid $blue-darken-2;
+
+   form {
+      height: 100%;
+      display: flex;
+      align-items: center;
+   }
+}
