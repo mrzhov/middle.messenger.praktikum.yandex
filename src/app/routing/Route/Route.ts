@@ -67,10 +67,7 @@ export class Route {
 	}
 
 	render() {
-		if (!this.#block) {
-			this.#block = new this.#view({});
-		}
-
+		this.#block = new this.#view({});
 		(this.#block as Block).show();
 		renderComponent(this.#root, this.#block as Block);
 	}
