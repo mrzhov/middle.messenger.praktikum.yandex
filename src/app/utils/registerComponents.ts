@@ -11,6 +11,7 @@ import { CategoryItem } from '@/components/sidebar/settings/categoryItem';
 import { Profile } from '@/components/sidebar/settings/profile';
 import { SidebarChat } from '@/components/sidebar/sidebarChat';
 import { SidebarSettings } from '@/components/sidebar/sidebarSettings';
+import { Toast } from '@/components/toast';
 import { AuthLayout } from '@/layouts/auth';
 import { BaseLayout } from '@/layouts/base';
 import { registerComponent } from '@/shared/core';
@@ -31,4 +32,5 @@ export const registerComponents = () => {
 	registerComponent(ChatListItem);
 	registerComponent(ChatActions);
 	registerComponent(ChatMessagesItem);
+	registerComponent(Toast);
 };

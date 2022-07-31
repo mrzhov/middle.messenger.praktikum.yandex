@@ -1,6 +1,7 @@
 import { Block } from '@/shared/core';
-import type { ErrorPageContentProps } from '@/shared/types';
 import { changeRoute } from '@/shared/utils';
+
+import type { ErrorPageContentProps } from './errorPageContent.types';
 
 class ErrorPageContent extends Block<ErrorPageContentProps> {
 	static componentName = 'ErrorPageContent';

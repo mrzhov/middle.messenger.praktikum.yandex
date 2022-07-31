@@ -1,4 +1,4 @@
-import type { ErrorPageContentProps } from '@/shared/types';
+import type { ErrorPageContentProps } from '@/components/errorPageContent';
 
 const content: ErrorPageContentProps = {
 	title: '500',

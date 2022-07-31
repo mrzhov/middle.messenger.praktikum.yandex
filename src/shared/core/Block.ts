@@ -226,6 +226,15 @@ abstract class Block<P = any> {
 		this.element.style.display = 'none';
 	}
 
+	public destroy() {
+		if (this.element) {
+			this.element.remove();
+			this.onDestroy();
+		}
+	}
+
+	protected onDestroy() {}
+
 	protected getStateFromProps(): void {
 		this.state = {};
 	}

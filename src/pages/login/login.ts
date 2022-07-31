@@ -1,3 +1,4 @@
+import { AuthService } from '@/services';
 import { Block } from '@/shared/core';
 import { blurHandler, changeRoute, focusHandler, getValueFromRefs } from '@/shared/utils';
 import { loginValidator, passwordValidator } from '@/shared/validators';
@@ -6,8 +7,8 @@ type StateKeys = 'login' | 'password';
 
 const initialState: State<StateKeys> = {
 	values: {
-		login: '',
-		password: '',
+		login: 'qwerty',
+		password: 'qwerty123A',
 	},
 	errors: {
 		login: '',
@@ -29,7 +30,7 @@ class LoginPage extends Block {
 			onBlurHandler: (event: FocusEvent) => {
 				blurHandler.call(this, event);
 			},
-			onSubmit: (event: MouseEvent) => {
+			onSubmit: async (event: MouseEvent) => {
 				event.preventDefault();
 
 				const loginData = {
@@ -48,9 +49,11 @@ class LoginPage extends Block {
 				this.setState(nextState);
 
 				if (Object.values(nextState.errors).every(e => !e)) {
-					console.log('login:', loginData);
-					this.setState(initialState);
-					changeRoute('/');
+					const authService = new AuthService();
+					await authService.login(loginData);
+					// console.log('login:', loginData);
+					// this.setState(initialState);
+					// changeRoute('/');
 				}
 			},
 			linkClickHandler: (event: MouseEvent) => {
