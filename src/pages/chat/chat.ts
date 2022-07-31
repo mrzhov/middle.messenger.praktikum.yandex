@@ -1,20 +1,21 @@
 import { icons, mockChatList } from '@/shared/content';
 import { Block } from '@/shared/core';
+import { useParams } from '@/shared/utils';
 
-const getChatInfo = () => {
-	const { pathname } = window.location;
-	const id = pathname.split('/').pop();
-	return mockChatList.find(item => item.id === id);
-};
+import type { ChatProps } from './chat.types';
+
+const getChatInfo = (id: string) => mockChatList.find(item => item.id === id);
 
 class ChatPage extends Block {
-	constructor() {
-		super();
+	constructor(props: ChatProps) {
+		super(props);
 	}
 
 	protected getStateFromProps() {
+		const { id } = useParams();
+		console.log(id);
 		this.state = {
-			chatInfo: getChatInfo(),
+			chatInfo: getChatInfo(id),
 		};
 	}
 

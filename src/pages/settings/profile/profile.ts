@@ -3,21 +3,17 @@ import { Block } from '@/shared/core';
 import { blurHandler, changeRoute, focusHandler, getValueFromRefs } from '@/shared/utils';
 import { emailValidator, loginValidator, nameValidator, phoneValidator } from '@/shared/validators';
 
+const initialFieldsState = {
+	first_name: '',
+	second_name: '',
+	phone: '',
+	email: '',
+	login: '',
+};
+
 const initialState = {
-	values: {
-		first_name: '',
-		second_name: '',
-		phone: '',
-		email: '',
-		login: '',
-	},
-	errors: {
-		first_name: '',
-		second_name: '',
-		phone: '',
-		email: '',
-		login: '',
-	},
+	values: initialFieldsState,
+	errors: initialFieldsState,
 };
 
 class ProfilePage extends Block {

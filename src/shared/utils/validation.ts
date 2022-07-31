@@ -1,4 +1,4 @@
-import { getValueFromRefs } from '@/shared/utils/helpers/shared';
+import { getValueFromRefs } from '@/shared/utils/shared';
 import {
 	emailValidator,
 	loginValidator,

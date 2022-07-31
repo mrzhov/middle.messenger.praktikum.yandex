@@ -1,6 +1,5 @@
 import { Block } from '@/shared/core';
-import { blurHandler, changeRoute, getValueFromRefs } from '@/shared/utils';
-import { focusHandler } from '@/shared/utils/helpers';
+import { blurHandler, changeRoute, focusHandler, getValueFromRefs } from '@/shared/utils';
 import { loginValidator, passwordValidator } from '@/shared/validators';
 
 type StateKeys = 'login' | 'password';
@@ -51,7 +50,7 @@ class LoginPage extends Block {
 				if (Object.values(nextState.errors).every(e => !e)) {
 					console.log('login:', loginData);
 					this.setState(initialState);
-					changeRoute('/chat/4');
+					changeRoute('/');
 				}
 			},
 			linkClickHandler: (event: MouseEvent) => {

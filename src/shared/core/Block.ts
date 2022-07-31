@@ -20,20 +20,29 @@ abstract class Block<P = any> {
 	}
 
 	id: string = nanoid(6);
-	private element: Nullable<HTMLElement> = null;
+	element: Nullable<HTMLElement> = null;
 	private readonly eventBus: () => EventBus<Events>;
 	protected props: P;
 	protected state: any = {};
 	protected children: Record<string, Block> = {};
 	protected refs: Record<string, HTMLElement> = {};
 
+	private meta: {
+		lastCssDisplayProperty: Nullable<string>;
+	};
+
 	protected constructor(props?: P) {
+		this.meta = {
+			lastCssDisplayProperty: null,
+		};
+
 		const eventBus = new EventBus<Events>();
 		this.eventBus = () => eventBus;
 
+		this.props = this.makeProxy(props || ({} as P));
+
 		this.getStateFromProps();
 
-		this.props = this.makeProxy(props || ({} as P));
 		this.state = this.makeProxy(this.state);
 
 		this.registerEvents(eventBus);
@@ -192,6 +201,30 @@ abstract class Block<P = any> {
 
 		Object.assign(this.state, nextState);
 	};
+
+	show() {
+		let cssDisplayProperty: string;
+		if (this.element?.style.display !== 'none') {
+			cssDisplayProperty = this.meta.lastCssDisplayProperty ?? '';
+		} else {
+			cssDisplayProperty = '';
+		}
+
+		if (this.element) {
+			this.element.style.display = cssDisplayProperty;
+		}
+	}
+
+	hide() {
+		if (!this.element) {
+			return;
+		}
+
+		if (this.element.style.display !== 'none') {
+			this.meta.lastCssDisplayProperty = this.element.style.display;
+		}
+		this.element.style.display = 'none';
+	}
 
 	protected getStateFromProps(): void {
 		this.state = {};

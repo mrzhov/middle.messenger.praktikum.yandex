@@ -1,3 +1,5 @@
+import { Router } from '@/app/routing';
+
 export const findParentElementByCondition = (event: any, condition: (target: any) => boolean) => {
 	let { target } = event;
 	while (target) {
@@ -21,4 +23,12 @@ export const transformElementAndEvents = (events: any, element: Nullable<HTMLEle
 		onlyEvents: targetChildElementId ? omit(['targetChildElementId'], events) : events,
 		element: targetChildElementId ? element!.querySelector(`#${targetChildElementId}`) : element,
 	};
+};
+
+export const useParams = () => {
+	const router = Router.getInstance();
+	if (router.currentRoute) {
+		return router.currentRoute.getDynamicParamsObj(window.location.pathname);
+	}
+	return {};
 };

@@ -4,7 +4,7 @@ const content: ErrorPageContentProps = {
 	title: '500',
 	subtitle: 'Мы уже фиксим',
 	linkText: 'Назад к чатам',
-	linkHref: '#',
+	linkHref: '/',
 };
 
 export default content;

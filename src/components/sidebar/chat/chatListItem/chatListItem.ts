@@ -1,5 +1,5 @@
 import { Block } from '@/shared/core';
-import { changeRoute, findParentElementByCondition } from '@/shared/utils';
+import { changeRoute, findParentElementByCondition, useParams } from '@/shared/utils';
 
 import type { ChatListItemProps } from './chatListItem.types';
 
@@ -20,14 +20,12 @@ class ChatListItem extends Block<Omit<ChatListItemProps, 'id'> & { itemId: strin
 	}
 
 	render(): string {
-		const { pathname } = window.location;
-		const currentId = pathname.split('/').pop();
-
+		const { id } = useParams();
 		const { itemId } = this.props;
 
 		// language=hbs
 		return `
-			<div class="chat-list-item${itemId === currentId ? ' active' : ''}">
+			<div class="chat-list-item${itemId === id ? ' active' : ''}">
 				<a href="/chat/{{itemId}}">
 					<div class="mock-avatar"></div>
 					<div class="chat-list-item-content">

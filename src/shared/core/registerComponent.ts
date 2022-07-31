@@ -1,7 +1,9 @@
 import type { HelperOptions } from 'handlebars';
 import Handlebars from 'handlebars';
 
-function registerComponent<Props extends any>(Component: BlockConstructable<Props>) {
+function registerComponent<Props extends any>(
+	Component: BlockConstructableWithComponentName<Props>
+) {
 	Handlebars.registerHelper(
 		Component.componentName,
 		function (this: Props, { hash: { ref, ...hash }, data, fn }: HelperOptions) {
