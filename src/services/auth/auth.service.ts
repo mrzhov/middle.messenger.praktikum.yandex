@@ -1,5 +1,7 @@
 import { errorHandler } from '@/shared/services';
-import type { LoginBody } from '@/shared/types';
+import type { LoginBody, RegistryBody, UserInfo } from '@/shared/types';
+import { LocalStorageKeys } from '@/shared/types';
+import { changeRoute } from '@/shared/utils';
 
 import { AuthApi } from './auth.api';
 
@@ -9,23 +11,30 @@ export class AuthService {
 	constructor() {
 		this.authApi = new AuthApi();
 		this.login = errorHandler(this.login.bind(this));
-		// this.logout = errorHandler(this.logout.bind(this), uiStore);
+		this.registry = errorHandler(this.registry.bind(this));
+		// this.getUserInfo = errorHandler(this.getUserInfo.bind(this));
+		this.logout = errorHandler(this.logout.bind(this));
+	}
+
+	async getUserInfo(): Promise<UserInfo> {
+		const response = await this.authApi.getUserInfo<UserInfo>();
+		localStorage.setItem(LocalStorageKeys.AUTH_USER_ID, String(response.id));
+		return response;
 	}
 
 	async login(data: LoginBody): Promise<void> {
-		const response = await this.authApi.login(data);
-		console.log(response);
-		// setCookie(null, CookiesEnum.TOKEN, response.data.token);
-		// setCookie(null, CookiesEnum.REFRESH_TOKEN, response.data.refreshToken);
-		// await Router.push('/');
+		await this.authApi.login(data);
+		changeRoute('/');
 	}
 
-	// async logout(): Promise<void> {
-	// 	const response = await this.authApi.logout();
-	// 	if (response.status === 200) {
-	// 		destroyCookie(null, CookiesEnum.TOKEN);
-	// 		destroyCookie(null, CookiesEnum.REFRESH_TOKEN);
-	// 	}
-	// 	await Router.push('/login');
-	// }
+	async registry(data: RegistryBody): Promise<void> {
+		await this.authApi.registry(data);
+		changeRoute('/');
+	}
+
+	async logout(): Promise<void> {
+		await this.authApi.logout();
+		localStorage.removeItem(LocalStorageKeys.AUTH_USER_ID);
+		changeRoute('/login');
+	}
 }

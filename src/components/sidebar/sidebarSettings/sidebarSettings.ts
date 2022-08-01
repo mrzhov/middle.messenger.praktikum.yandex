@@ -11,8 +11,8 @@ class SidebarSettings extends Block {
 
 	render(): string {
 		const { pathname } = window.location;
-		const isChangePasswordPage = pathname === PagesRoutes.CHANGEPASSWORD;
-		const isExitWarningPage = pathname === PagesRoutes.EXITWARNING;
+		const isChangePasswordPage = pathname === PagesRoutes.CHANGE_PASSWORD;
+		const isExitWarningPage = pathname === PagesRoutes.EXIT_WARNING;
 
 		// language=hbs
 		return `

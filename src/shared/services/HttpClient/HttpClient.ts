@@ -1,3 +1,5 @@
+import { queryStringify } from '@/shared/utils';
+
 import type { Options, RequestConfig } from './HttpClient.types';
 import { Methods } from './HttpClient.types';
 
@@ -12,12 +14,12 @@ export class HttpClient {
 		this.baseURL = process.env.API_URL!;
 	}
 
-	// get = (url: string, options: MethodOptions) => {
-	// 	const query = queryStringify(options.data);
-	// 	return this.request(`${url}${query}`, { ...options, method: Methods.GET });
-	// };
+	get = <T>(url: string, config?: RequestConfig) => {
+		const query = config && config.params ? queryStringify(config.params) : '';
+		return this.request<T>(`${url}${query}`, Methods.GET, { ...config });
+	};
 
-	post = (url: string, data: any, config?: RequestConfig) => {
+	post = (url: string, data?: any, config?: RequestConfig) => {
 		return this.request(url, Methods.POST, { data, ...config });
 	};
 
@@ -29,15 +31,19 @@ export class HttpClient {
 	// 	return this.request(url, { ...options, method: Methods.DELETE });
 	// };
 
-	request = (url: string, method: Methods, options: Options) => {
+	request = <T>(url: string, method: Methods, options: Options) => {
 		const { data, headers } = options;
 
-		return new Promise((resolve, reject) => {
+		return new Promise<T>((resolve, reject) => {
 			const xhr = new XMLHttpRequest();
+
 			xhr.open(method, this.baseURL + url);
 
+			xhr.withCredentials = true;
+
 			xhr.onload = () => {
-				const response: any = JSON.parse(xhr.response);
+				const response: any =
+					xhr.response === 'OK' ? { status: 'OK' } : JSON.parse(xhr.response);
 
 				if (xhr.status >= 200 && xhr.status < 300) {
 					resolve(response);
@@ -45,7 +51,7 @@ export class HttpClient {
 					reject(response);
 				}
 
-				resolve(xhr);
+				// resolve(xhr);
 			};
 
 			xhr.onabort = reject;

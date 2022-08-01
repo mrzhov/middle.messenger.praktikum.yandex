@@ -7,8 +7,8 @@ type StateKeys = 'login' | 'password';
 
 const initialState: State<StateKeys> = {
 	values: {
-		login: 'qwerty',
-		password: 'qwerty123A',
+		login: 'mrzhov',
+		password: 'Qwerty123',
 	},
 	errors: {
 		login: '',

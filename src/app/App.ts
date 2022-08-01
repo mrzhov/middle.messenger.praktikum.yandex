@@ -1,4 +1,6 @@
 import { registerData } from '@/app/utils';
+import { AuthService } from '@/services';
+import { LocalStorageKeys } from '@/shared/types';
 
 import { routes } from './configs';
 import { Router } from './routing';
@@ -43,8 +45,23 @@ export class App {
 	}
 
 	#addAuthGuard() {
-		this.#router.addGuard(() => {
-			return true;
+		this.#router.addAuthGuard(async ({ pathname }) => {
+			const privateRoutes = routes.filter(r => r.private).map(r => r.url);
+			if (privateRoutes.includes(pathname)) {
+				if (localStorage.getItem(LocalStorageKeys.AUTH_USER_ID)) {
+					return {};
+				}
+				const authService = new AuthService();
+				try {
+					await authService.getUserInfo();
+					return {};
+				} catch (e) {
+					return {
+						redirect: '/login',
+					};
+				}
+			}
+			return {};
 		});
 	}
 }

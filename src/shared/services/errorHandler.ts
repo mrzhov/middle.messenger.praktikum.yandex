@@ -1,6 +1,6 @@
 import { Toast } from '@/components/toast';
 
-export const errorHandler = (original: (...args: any) => Promise<void>) => {
+export const errorHandler = (original: (...args: any) => Promise<any>) => {
 	return async (...args: any) => {
 		try {
 			return await original(...args);

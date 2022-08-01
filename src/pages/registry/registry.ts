@@ -1,3 +1,4 @@
+import { AuthService } from '@/services';
 import { Block } from '@/shared/core';
 import { blurHandler, changeRoute, focusHandler, getValueFromRefs } from '@/shared/utils';
 import {
@@ -10,13 +11,13 @@ import {
 
 const initialState = {
 	values: {
-		first_name: '',
-		second_name: '',
-		phone: '',
-		email: '',
-		login: '',
-		password: '',
-		password_repeat: '',
+		first_name: 'Danil',
+		second_name: 'Ryzhov',
+		phone: '+79857358996',
+		email: 'danil.ryzhov20@yandex.ru',
+		login: 'mrzhov',
+		password: 'Qwerty123',
+		password_repeat: 'Qwerty123',
 	},
 	errors: {
 		first_name: '',
@@ -43,7 +44,7 @@ class RegistryPage extends Block {
 			onBlurHandler: (event: FocusEvent) => {
 				blurHandler.call(this, event);
 			},
-			onSubmit: (event: MouseEvent) => {
+			onSubmit: async (event: MouseEvent) => {
 				event.preventDefault();
 
 				const registryData = {
@@ -76,9 +77,11 @@ class RegistryPage extends Block {
 						nextState.errors.password_repeat = 'Пароли не совпадают';
 						this.setState(nextState);
 					} else {
-						console.log('registry:', registryData);
-						this.setState(initialState);
-						changeRoute('/chat/4');
+						const authService = new AuthService();
+						await authService.registry(registryData);
+						// console.log('registry:', registryData);
+						// this.setState(initialState);
+						// changeRoute('/chat/4');
 					}
 				}
 			},

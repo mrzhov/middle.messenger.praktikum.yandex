@@ -9,8 +9,8 @@ export class Router {
 	readonly #history: History;
 	readonly #routes: Array<Route>;
 	#defaultRoute: Nullable<Route> = null;
-	#guards: Array<RouterGuard> = [];
 	currentRoute: Nullable<Route> = null;
+	#authGuard: Nullable<RouterGuard> = null;
 
 	constructor(root: HTMLElement) {
 		this.#root = root;
@@ -35,10 +35,16 @@ export class Router {
 
 	#onRoute(pathname: string) {
 		const route = this.#getRoute(pathname);
-		const checkGuards = this.#guards.every(guard => guard({ pathname, router: this }));
-
-		if (!route || !checkGuards) {
+		if (!route) {
 			return;
+		}
+
+		if (this.#authGuard) {
+			this.#authGuard({ pathname, router: this }).then(result => {
+				if (typeof result.redirect === 'string') {
+					this.go(result.redirect);
+				}
+			});
 		}
 
 		if (this.currentRoute) {
@@ -76,8 +82,8 @@ export class Router {
 		this.#onRoute(window.location.pathname);
 	}
 
-	addGuard(middleware: RouterGuard) {
-		this.#guards.push(middleware);
+	addAuthGuard(authGuard: RouterGuard) {
+		this.#authGuard = authGuard;
 	}
 
 	go(pathname: string) {

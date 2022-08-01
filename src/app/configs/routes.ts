@@ -22,43 +22,43 @@ export const routes: Array<RouteConfigItem> = [
 		component: RegistryPage,
 	},
 	{
-		title: '...',
-		url: PagesRoutes.HOME,
-		component: HomePage,
-	},
-	{
 		title: '404',
-		url: PagesRoutes.NOTFOUND,
+		url: PagesRoutes.NOT_FOUND,
 		component: NotFoundPage,
 	},
 	{
 		title: '500',
-		url: PagesRoutes.SERVERERROR,
+		url: PagesRoutes.SERVER_ERROR,
 		component: ServerErrorPage,
+	},
+	{
+		title: 'Выберите чат',
+		url: PagesRoutes.HOME,
+		component: HomePage,
+		private: true,
 	},
 	{
 		title: 'Профиль',
 		url: PagesRoutes.PROFILE,
 		component: ProfilePage,
+		private: true,
 	},
 	{
 		title: 'Изменить пароль',
-		url: PagesRoutes.CHANGEPASSWORD,
+		url: PagesRoutes.CHANGE_PASSWORD,
 		component: ChangePasswordPage,
+		private: true,
 	},
 	{
 		title: 'Выйти',
-		url: PagesRoutes.EXITWARNING,
+		url: PagesRoutes.EXIT_WARNING,
 		component: ExitWarningPage,
+		private: true,
 	},
 	{
 		title: 'Чат',
 		url: PagesRoutes.CHAT,
 		component: ChatPage,
-	},
-	{
-		title: 'Чат welcome',
-		url: PagesRoutes.CHATWELCOME,
-		component: ChatPage,
+		private: true,
 	},
 ];

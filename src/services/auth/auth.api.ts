@@ -1,5 +1,5 @@
 import { HttpClient } from '@/shared/services';
-import type { LoginBody } from '@/shared/types';
+import type { LoginBody, RegistryBody } from '@/shared/types';
 
 export class AuthApi {
 	private http: HttpClient;
@@ -8,11 +8,19 @@ export class AuthApi {
 		this.http = new HttpClient();
 	}
 
-	login(data: LoginBody): Promise<unknown> {
-		return this.http.post('/auth/login', data);
+	getUserInfo<T>(): Promise<T> {
+		return this.http.get<T>('/auth/user');
 	}
 
-	// logout(): Promise<AxiosResponse<string>> {
-	// 	return this.http.post<string>('/auth/logout');
-	// }
+	login(data: LoginBody): Promise<unknown> {
+		return this.http.post('/auth/signin', data);
+	}
+
+	registry(data: RegistryBody): Promise<unknown> {
+		return this.http.post('/auth/signup', data);
+	}
+
+	logout(): Promise<unknown> {
+		return this.http.post('/auth/logout');
+	}
 }

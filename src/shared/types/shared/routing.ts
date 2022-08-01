@@ -5,18 +5,18 @@ export enum PagesRoutes {
 	REGISTRY = '/registry',
 	HOME = '/',
 	PROFILE = '/settings/profile',
-	CHANGEPASSWORD = '/settings/change-password',
-	EXITWARNING = '/settings/exit-warning',
+	CHANGE_PASSWORD = '/settings/change-password',
+	EXIT_WARNING = '/settings/exit-warning',
 	CHAT = '/chat/:id',
-	CHATWELCOME = '/chat/:id/welcome',
-	SERVERERROR = '/500',
-	NOTFOUND = '*',
+	SERVER_ERROR = '/500',
+	NOT_FOUND = '*',
 }
 
 export type RouteConfigItem = {
 	title: string;
 	url: string;
 	component: BlockConstructable;
+	private?: true;
 };
 
 type RouterGuardArgs = {
@@ -24,5 +24,7 @@ type RouterGuardArgs = {
 	router: Router;
 };
 
-export type RouterGuard = (data: RouterGuardArgs) => boolean;
+type RouterGuardResult = { redirect?: string };
+
+export type RouterGuard = (data: RouterGuardArgs) => Promise<RouterGuardResult>;
 export type DynamicParams = Record<string, string>;

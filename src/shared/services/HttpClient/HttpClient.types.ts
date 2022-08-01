@@ -5,12 +5,11 @@ export enum Methods {
 	DELETE = 'DELETE',
 }
 
-export type RequestHeaders = Record<string, string>;
-
 export type RequestConfig = {
-	headers?: RequestHeaders;
+	headers?: Record<string, string>;
+	params?: Record<string, unknown>;
 };
 
 export type Options = {
-	data: any;
+	data?: any;
 } & RequestConfig;
