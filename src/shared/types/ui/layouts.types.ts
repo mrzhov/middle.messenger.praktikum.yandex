@@ -20,11 +20,3 @@ export type ChatListItemType = {
 	};
 	sortedMessages: Array<SortedMessage>;
 };
-
-export type Profile = {
-	first_name: string;
-	second_name: string;
-	phone: string;
-	email: string;
-	login: string;
-};

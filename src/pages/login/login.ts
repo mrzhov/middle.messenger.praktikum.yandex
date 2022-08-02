@@ -51,9 +51,6 @@ class LoginPage extends Block {
 				if (Object.values(nextState.errors).every(e => !e)) {
 					const authService = new AuthService();
 					await authService.login(loginData);
-					// console.log('login:', loginData);
-					// this.setState(initialState);
-					// changeRoute('/');
 				}
 			},
 			linkClickHandler: (event: MouseEvent) => {

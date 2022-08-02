@@ -23,10 +23,10 @@ export class HttpClient {
 		return this.request<T>(url, Methods.POST, { data, ...config });
 	};
 
-	// put = (url: string, options: MethodOptions) => {
-	// 	return this.request(url, { ...options, method: Methods.PUT });
-	// };
-	//
+	put = <T>(url: string, data?: any, config?: RequestConfig) => {
+		return this.request<T>(url, Methods.PUT, { data, ...config });
+	};
+
 	// delete = (url: string, options: MethodOptions) => {
 	// 	return this.request(url, { ...options, method: Methods.DELETE });
 	// };

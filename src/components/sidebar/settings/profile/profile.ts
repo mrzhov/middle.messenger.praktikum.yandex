@@ -4,7 +4,7 @@ import { Block } from '@/shared/core';
 import { PagesRoutes } from '@/shared/types';
 import { changeRoute, findParentElementByCondition } from '@/shared/utils';
 
-import content from './profile.content';
+import type { ProfileState } from './profile.types';
 
 const click = (event: MouseEvent) => {
 	event.preventDefault();
@@ -24,13 +24,16 @@ class Profile extends Block {
 
 	componentDidMount() {
 		store.subscribe(state => {
-			console.log(state.authUser);
+			this.setState({
+				authUser: state.authUser,
+			});
 		}, 'authUser');
 	}
 
 	render(): string {
 		const { pathname } = window.location;
 		const isProfilePage = pathname === PagesRoutes.PROFILE;
+		const { authUser } = this.state as ProfileState;
 
 		// language=hbs
 		return `
@@ -40,9 +43,9 @@ class Profile extends Block {
 						<div class="flex items-center">
 							<div class="mock-avatar"></div>
 							<div>
-								<p class="text">${content.mockProfile.first_name}&nbsp;${content.mockProfile.second_name}</p>
-								<p class="subtext">${content.mockProfile.phone}</p>
-								<p class="subtext">${content.mockProfile.login}</p>
+								<p class="text">${authUser?.first_name || ''}&nbsp;${authUser?.second_name || ''}</p>
+								<p class="subtext">${authUser?.phone || ''}</p>
+								<p class="subtext">${authUser?.login || ''}</p>
 							</div>
 						</div>
 						<div class="sidebar-settings-arrow">

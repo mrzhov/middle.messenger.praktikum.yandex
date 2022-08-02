@@ -70,9 +70,9 @@ export function merge(lhs: IObject, rhs: IObject): IObject {
 				if (!lhs[key]) {
 					result = { ...lhs, [key]: {} };
 				}
-				result = { ...lhs, [key]: merge(lhs[key] as IObject, rhs[key] as IObject) };
+				result = Object.assign(lhs, { [key]: merge(lhs[key] as IObject, rhs[key] as IObject) });
 			} else {
-				result = { ...lhs, [key]: rhs[key] };
+				result = Object.assign(lhs, { [key]: rhs[key] });
 			}
 		}
 	}

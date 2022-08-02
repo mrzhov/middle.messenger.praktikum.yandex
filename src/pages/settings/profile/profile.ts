@@ -1,3 +1,5 @@
+import { store } from '@/app';
+import { AccountService } from '@/services';
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
 import { blurHandler, changeRoute, focusHandler, getValueFromRefs } from '@/shared/utils';
@@ -21,6 +23,14 @@ class ProfilePage extends Block {
 		super();
 	}
 
+	componentDidMount() {
+		store.subscribe(state => {
+			this.setState({
+				values: state.authUser,
+			});
+		}, 'authUser');
+	}
+
 	protected getStateFromProps() {
 		this.state = {
 			...initialState,
@@ -30,7 +40,7 @@ class ProfilePage extends Block {
 			onBlurHandler: (event: FocusEvent) => {
 				blurHandler.call(this, event);
 			},
-			onSubmit: (event: MouseEvent) => {
+			onSubmit: async (event: MouseEvent) => {
 				event.preventDefault();
 
 				const profileData = {
@@ -55,8 +65,10 @@ class ProfilePage extends Block {
 				this.setState(nextState);
 
 				if (Object.values(nextState.errors).every(e => !e)) {
-					console.log('registry:', profileData);
-					this.setState(initialState);
+					const accountService = new AccountService();
+					// eslint-disable-next-line @typescript-eslint/naming-convention
+					const display_name = `${profileData.first_name} ${profileData.second_name}`;
+					await accountService.changeProfile({ ...profileData, display_name });
 				}
 			},
 			linkClickHandler: (event: MouseEvent) => {
