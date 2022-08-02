@@ -1,7 +1,7 @@
 import type { HelperOptions } from 'handlebars';
 import Handlebars from 'handlebars';
 
-function registerComponent<Props extends any>(
+export function registerComponent<Props extends any>(
 	Component: BlockConstructableWithComponentName<Props>
 ) {
 	Handlebars.registerHelper(
@@ -37,5 +37,3 @@ function registerComponent<Props extends any>(
 		}
 	);
 }
-
-export default registerComponent;

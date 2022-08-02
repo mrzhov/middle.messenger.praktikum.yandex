@@ -1,5 +1,5 @@
 import type { Block } from '@/shared/core';
-import { renderComponent } from '@/shared/core';
+import { renderComponent } from '@/shared/core/utils';
 import type { DynamicParams } from '@/shared/types';
 
 import type { RouteParams } from './Route.types';

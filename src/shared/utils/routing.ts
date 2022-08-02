@@ -1,4 +1,4 @@
-import { Router } from '@/app/routing';
+import { Router } from '@/shared/core';
 
 export const changeRoute = (path: string) => {
 	const router = Router.getInstance();

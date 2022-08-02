@@ -1,4 +1,4 @@
-import { Router } from '@/app/routing';
+import { Router } from '@/shared/core';
 
 export const findParentElementByCondition = (event: any, condition: (target: any) => boolean) => {
 	let { target } = event;

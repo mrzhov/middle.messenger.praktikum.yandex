@@ -1,4 +1,4 @@
-import type { Router } from '@/app/routing';
+import type { Router } from '@/shared/core';
 
 export enum PagesRoutes {
 	LOGIN = '/login',

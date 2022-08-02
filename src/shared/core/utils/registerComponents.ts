@@ -14,7 +14,7 @@ import { SidebarSettings } from '@/components/sidebar/sidebarSettings';
 import { Toast } from '@/components/toast';
 import { AuthLayout } from '@/layouts/auth';
 import { BaseLayout } from '@/layouts/base';
-import { registerComponent } from '@/shared/core';
+import { registerComponent } from '@/shared/core/utils';
 
 export const registerComponents = () => {
 	registerComponent(AuthLayout);

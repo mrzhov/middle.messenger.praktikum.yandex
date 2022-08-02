@@ -1,7 +1,6 @@
-import { errorHandler } from '@/shared/services';
 import type { LoginBody, RegistryBody, UserInfo } from '@/shared/types';
 import { LocalStorageKeys } from '@/shared/types';
-import { changeRoute } from '@/shared/utils';
+import { changeRoute, errorHandler } from '@/shared/utils';
 
 import { AuthApi } from './auth.api';
 

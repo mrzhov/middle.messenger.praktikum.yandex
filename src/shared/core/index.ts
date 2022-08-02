@@ -1,3 +1,3 @@
+export { HttpClient } from './api';
 export { default as Block } from './Block';
-export { default as registerComponent } from './registerComponent';
-export { default as renderComponent } from './renderComponent';
+export { Router } from './routing';

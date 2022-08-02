@@ -1,4 +1,4 @@
-import { HttpClient } from '@/shared/services';
+import { HttpClient } from '@/shared/core';
 import type { LoginBody, RegistryBody } from '@/shared/types';
 
 export class AuthApi {

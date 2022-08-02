@@ -1,9 +1,9 @@
-import { registerData } from '@/app/utils';
 import { AuthService } from '@/services';
+import { Router } from '@/shared/core';
+import { registerData } from '@/shared/core/utils';
 import { LocalStorageKeys } from '@/shared/types';
 
 import { routes } from './configs';
-import { Router } from './routing';
 
 export class App {
 	static #instance: App;
