@@ -71,9 +71,11 @@
         ],
         "@typescript-eslint/no-useless-constructor": "off",
         "no-restricted-globals": "off",
+        "no-restricted-syntax": "off",
         "no-console": "off",
         "no-useless-concat": "off",
-        "no-plusplus": "off"
+        "no-plusplus": "off",
+        "no-continue": "off"
       }
     }
   ]

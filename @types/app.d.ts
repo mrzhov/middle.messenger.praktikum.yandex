@@ -1,9 +1,10 @@
 import type Block from '@/shared/core';
 
 declare global {
+	export type IObject<T = unknown> = Record<string, T>;
 	export type Nullable<T> = T | null;
-	export type Keys<T extends Record<string, unknown>> = keyof T;
-	export type Values<T extends Record<string, unknown>> = T[Keys<T>];
+	export type Keys<T extends IObject> = keyof T;
+	export type Values<T extends IObject> = T[Keys<T>];
 	export interface BlockConstructable<Props = any> {
 		new (props: Props): Block;
 	}
