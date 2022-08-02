@@ -1,3 +1,4 @@
+import { AccountService } from '@/services';
 import { Block } from '@/shared/core';
 import { blurHandler, focusHandler, getValueFromRefs } from '@/shared/utils';
 import { passwordValidator } from '@/shared/validators';
@@ -29,7 +30,7 @@ class ChangePasswordPage extends Block {
 			onBlurHandler: (event: FocusEvent) => {
 				blurHandler.call(this, event);
 			},
-			onSubmit: (event: MouseEvent) => {
+			onSubmit: async (event: MouseEvent) => {
 				event.preventDefault();
 
 				const changePasswordData = {
@@ -56,7 +57,11 @@ class ChangePasswordPage extends Block {
 						nextState.errors.new_password_repeat = 'Пароли не совпадают';
 						this.setState(nextState);
 					} else {
-						console.log('changePassword:', changePasswordData);
+						const accountService = new AccountService();
+						await accountService.changePassword({
+							oldPassword: changePasswordData.old_password,
+							newPassword: changePasswordData.new_password,
+						});
 						this.setState(initialState);
 					}
 				}

@@ -1,5 +1,5 @@
 import { HttpClient } from '@/shared/core';
-import type { ProfileData } from '@/shared/types';
+import type { ChangePasswordData, ProfileData } from '@/shared/types';
 
 export class AccountApi {
 	private http: HttpClient;
@@ -10,5 +10,9 @@ export class AccountApi {
 
 	changeProfile<T>(data: ProfileData): Promise<T> {
 		return this.http.put<T>('/user/profile', data);
+	}
+
+	changePassword<T>(data: ChangePasswordData): Promise<T> {
+		return this.http.put<T>('/user/password', data);
 	}
 }

@@ -1,5 +1,5 @@
 import { store } from '@/app';
-import type { ProfileData, UserInfo } from '@/shared/types';
+import type { ChangePasswordData, ProfileData, UserInfo } from '@/shared/types';
 import { errorHandler } from '@/shared/utils';
 
 import { AccountApi } from './account.api';
@@ -10,6 +10,7 @@ export class AccountService {
 	constructor() {
 		this.accountApi = new AccountApi();
 		this.changeProfile = errorHandler(this.changeProfile.bind(this));
+		this.changePassword = errorHandler(this.changePassword.bind(this));
 	}
 
 	async changeProfile(data: ProfileData): Promise<UserInfo> {
@@ -18,5 +19,9 @@ export class AccountService {
 			authUser,
 		});
 		return authUser;
+	}
+
+	async changePassword(data: ChangePasswordData): Promise<void> {
+		await this.accountApi.changePassword(data);
 	}
 }
