@@ -1,3 +1,4 @@
+import { store } from '@/app/store';
 import { AuthService } from '@/services';
 import { Router } from '@/shared/core';
 import { registerData } from '@/shared/core/utils';
@@ -49,13 +50,18 @@ export class App {
 			const authUserId = localStorage.getItem(LocalStorageKeys.AUTH_USER_ID);
 			const privateRoutes = routes.filter(r => r.private).map(r => r.url);
 			const authRoutes = routes.filter(r => r.auth).map(r => r.url);
+			const authService = new AuthService();
+			const { authUser } = store.getState();
+			if (authUserId && !authUser) {
+				await authService.getUserInfo();
+			}
 			if (privateRoutes.includes(pathname)) {
 				if (authUserId) {
 					return {};
 				}
-				const authService = new AuthService();
 				try {
-					await authService.getUserInfo();
+					const response = await authService.getUserInfo();
+					localStorage.setItem(LocalStorageKeys.AUTH_USER_ID, String(response.id));
 					return {};
 				} catch (e) {
 					return {

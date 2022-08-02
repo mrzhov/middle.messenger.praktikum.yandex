@@ -1,3 +1,4 @@
+import { store } from '@/app';
 import type { LoginBody, RegistryBody, UserInfo } from '@/shared/types';
 import { LocalStorageKeys } from '@/shared/types';
 import { changeRoute, errorHandler } from '@/shared/utils';
@@ -15,9 +16,11 @@ export class AuthService {
 	}
 
 	async getUserInfo(): Promise<UserInfo> {
-		const response = await this.authApi.getUserInfo<UserInfo>();
-		localStorage.setItem(LocalStorageKeys.AUTH_USER_ID, String(response.id));
-		return response;
+		const authUser = await this.authApi.getUserInfo<UserInfo>();
+		store.setState({
+			authUser,
+		});
+		return authUser;
 	}
 
 	async login(data: LoginBody): Promise<void> {

@@ -21,36 +21,36 @@ abstract class Block<P = any> {
 
 	id: string = nanoid(6);
 	element: Nullable<HTMLElement> = null;
-	private readonly eventBus: () => EventBus<Events>;
+	readonly #eventBus: () => EventBus<Events>;
 	protected props: P;
 	protected state: any = {};
 	protected children: Record<string, Block> = {};
 	protected refs: Record<string, HTMLElement> = {};
 
-	private meta: {
+	#meta: {
 		lastCssDisplayProperty: Nullable<string>;
 	};
 
 	protected constructor(props?: P) {
-		this.meta = {
+		this.#meta = {
 			lastCssDisplayProperty: null,
 		};
 
 		const eventBus = new EventBus<Events>();
-		this.eventBus = () => eventBus;
+		this.#eventBus = () => eventBus;
 
-		this.props = this.makeProxy(props || ({} as P));
+		this.props = this.#makeProxy(props || ({} as P));
 
 		this.getStateFromProps();
 
-		this.state = this.makeProxy(this.state);
+		this.state = this.#makeProxy(this.state);
 
-		this.registerEvents(eventBus);
+		this.#registerEvents(eventBus);
 
 		eventBus.emit(Block.EVENTS.INIT);
 	}
 
-	private makeProxy(props: P): P {
+	#makeProxy(props: P): P {
 		const self = this;
 		return new Proxy(props as unknown as object, {
 			get(target: Record<string, unknown>, p: string) {
@@ -59,7 +59,7 @@ abstract class Block<P = any> {
 			},
 			set(target: Record<string, unknown>, p: string, value: unknown): boolean {
 				target[p] = value;
-				self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
+				self.#eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
 				return true;
 			},
 			deleteProperty() {
@@ -68,48 +68,52 @@ abstract class Block<P = any> {
 		}) as unknown as P;
 	}
 
-	private registerEvents(eventBus: EventBus<Events>) {
-		eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
-		eventBus.on(Block.EVENTS.FLOW_CDM, this.componentDidMount.bind(this));
-		eventBus.on(Block.EVENTS.FLOW_CDU, this.componentDidUpdate.bind(this));
-		eventBus.on(Block.EVENTS.FLOW_RENDER, this.flowRender.bind(this));
+	#registerEvents(eventBus: EventBus<Events>) {
+		eventBus.on(Block.EVENTS.INIT, this.#init.bind(this));
+		eventBus.on(Block.EVENTS.FLOW_CDM, this.#componentDidMount.bind(this));
+		eventBus.on(Block.EVENTS.FLOW_CDU, this.#componentDidUpdate.bind(this));
+		eventBus.on(Block.EVENTS.FLOW_RENDER, this.#flowRender.bind(this));
 	}
 
-	private init() {
-		this.createResources();
-		this.eventBus().emit(Block.EVENTS.FLOW_RENDER, this.props);
+	#init() {
+		this.#createResources();
+		this.#eventBus().emit(Block.EVENTS.FLOW_RENDER);
 	}
 
-	private componentDidMount() {}
+	#componentDidMount() {
+		this.componentDidMount();
+	}
 
-	private componentDidUpdate() {
-		if (!Block.propsComparison()) {
+	protected componentDidMount() {}
+
+	#componentDidUpdate() {
+		if (!this.componentDidUpdate()) {
 			return;
 		}
-		this.flowRender();
+		this.#flowRender();
 	}
 
-	private flowRender() {
-		const fragment = this.compile();
+	protected componentDidUpdate() {
+		return true;
+	}
 
-		this.removeEvents();
+	#flowRender() {
+		const fragment = this.#compile();
+
+		this.#removeEvents();
 		const newElement = fragment.firstElementChild!;
 
 		this.element!.replaceWith(newElement);
 
 		this.element = newElement as HTMLElement;
-		this.addEvents();
+		this.#addEvents();
 	}
 
-	private createResources() {
+	#createResources() {
 		this.element = Block.createDocumentElement('div');
 	}
 
-	private static propsComparison() {
-		return true;
-	}
-
-	private compile(): DocumentFragment {
+	#compile(): DocumentFragment {
 		const fragment = document.createElement('template');
 
 		const template = Handlebars.compile(this.render());
@@ -142,7 +146,7 @@ abstract class Block<P = any> {
 		return fragment.content;
 	}
 
-	private addEvents() {
+	#addEvents() {
 		const { events } = this.props as any;
 
 		if (!events) {
@@ -158,7 +162,7 @@ abstract class Block<P = any> {
 		}
 	}
 
-	private removeEvents() {
+	#removeEvents() {
 		const { events } = this.props as any;
 
 		if (!events || !this.element) {
@@ -178,7 +182,7 @@ abstract class Block<P = any> {
 		if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
 			setTimeout(() => {
 				if (this.element?.parentNode?.nodeType !== Node.DOCUMENT_FRAGMENT_NODE) {
-					this.eventBus().emit(Block.EVENTS.FLOW_CDM, this.props);
+					this.#eventBus().emit(Block.EVENTS.FLOW_CDM, this.props);
 				}
 			}, 100);
 		}
@@ -205,7 +209,7 @@ abstract class Block<P = any> {
 	show() {
 		let cssDisplayProperty: string;
 		if (this.element?.style.display !== 'none') {
-			cssDisplayProperty = this.meta.lastCssDisplayProperty ?? '';
+			cssDisplayProperty = this.#meta.lastCssDisplayProperty ?? '';
 		} else {
 			cssDisplayProperty = '';
 		}
@@ -221,7 +225,7 @@ abstract class Block<P = any> {
 		}
 
 		if (this.element.style.display !== 'none') {
-			this.meta.lastCssDisplayProperty = this.element.style.display;
+			this.#meta.lastCssDisplayProperty = this.element.style.display;
 		}
 		this.element.style.display = 'none';
 	}

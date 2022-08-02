@@ -1,3 +1,4 @@
+import { store } from '@/app';
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
 import { PagesRoutes } from '@/shared/types';
@@ -19,6 +20,12 @@ class Profile extends Block {
 
 	constructor() {
 		super({ events: { click } });
+	}
+
+	componentDidMount() {
+		store.subscribe(state => {
+			console.log(state.authUser);
+		}, 'authUser');
 	}
 
 	render(): string {

@@ -19,8 +19,8 @@ export class HttpClient {
 		return this.request<T>(`${url}${query}`, Methods.GET, { ...config });
 	};
 
-	post = (url: string, data?: any, config?: RequestConfig) => {
-		return this.request(url, Methods.POST, { data, ...config });
+	post = <T>(url: string, data?: any, config?: RequestConfig) => {
+		return this.request<T>(url, Methods.POST, { data, ...config });
 	};
 
 	// put = (url: string, options: MethodOptions) => {

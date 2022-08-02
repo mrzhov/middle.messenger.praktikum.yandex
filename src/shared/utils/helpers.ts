@@ -57,6 +57,12 @@ export function cloneDeep<T = unknown>(obj: IObject<T> | Array<T> | T): IObject<
 }
 
 export function merge(lhs: IObject, rhs: IObject): IObject {
+	if (lhs === null) {
+		return rhs;
+	}
+	if (rhs === null) {
+		return lhs;
+	}
 	let result = {};
 	if (isObject(lhs) && isObject(rhs)) {
 		for (const key in rhs) {

@@ -12,15 +12,15 @@ export class AuthApi {
 		return this.http.get<T>('/auth/user');
 	}
 
-	login(data: LoginBody): Promise<unknown> {
-		return this.http.post('/auth/signin', data);
+	login<T>(data: LoginBody): Promise<T> {
+		return this.http.post<T>('/auth/signin', data);
 	}
 
-	registry(data: RegistryBody): Promise<unknown> {
-		return this.http.post('/auth/signup', data);
+	registry<T>(data: RegistryBody): Promise<T> {
+		return this.http.post<T>('/auth/signup', data);
 	}
 
-	logout(): Promise<unknown> {
-		return this.http.post('/auth/logout');
+	logout<T>(): Promise<T> {
+		return this.http.post<T>('/auth/logout');
 	}
 }

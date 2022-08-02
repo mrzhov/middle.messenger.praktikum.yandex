@@ -11,11 +11,12 @@ export class Store {
 		STORE_EMIT: 'flow:store-emit',
 	};
 
+	static #instance: Store;
 	readonly #eventBus: () => EventBus<StoreEvents>;
 	readonly #state: StoreState;
 	subscribers: StoreSubscribers;
 
-	constructor(initialState: StoreState = {}) {
+	constructor(initialState: StoreState) {
 		const eventBus = new EventBus<StoreEvents>();
 		this.#eventBus = () => eventBus;
 
@@ -26,10 +27,21 @@ export class Store {
 		eventBus.emit(Store.EVENTS.INIT);
 	}
 
+	static getInstance(initialState?: StoreState): Store {
+		if (this.#instance) {
+			return this.#instance;
+		}
+		if (!initialState) {
+			throw Error('First initialization required initial state!');
+		}
+		this.#instance = new Store(initialState);
+		return this.#instance;
+	}
+
 	#makeProxy(obj: StoreState) {
 		const self = this;
 		return new Proxy<StoreState>(obj, {
-			set(target: StoreState, p: string, value: unknown): boolean {
+			set(target: StoreState, p: Keys<StoreState>, value: any): boolean {
 				const oldState = cloneDeep(self.#state);
 				target[p] = value;
 				self.#eventBus().emit(Store.EVENTS.STORE_DU, oldState, target);
