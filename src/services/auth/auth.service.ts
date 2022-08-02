@@ -12,7 +12,6 @@ export class AuthService {
 		this.authApi = new AuthApi();
 		this.login = errorHandler(this.login.bind(this));
 		this.registry = errorHandler(this.registry.bind(this));
-		// this.getUserInfo = errorHandler(this.getUserInfo.bind(this));
 		this.logout = errorHandler(this.logout.bind(this));
 	}
 

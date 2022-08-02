@@ -46,9 +46,11 @@ export class App {
 
 	#addAuthGuard() {
 		this.#router.addAuthGuard(async ({ pathname }) => {
+			const authUserId = localStorage.getItem(LocalStorageKeys.AUTH_USER_ID);
 			const privateRoutes = routes.filter(r => r.private).map(r => r.url);
+			const authRoutes = routes.filter(r => r.auth).map(r => r.url);
 			if (privateRoutes.includes(pathname)) {
-				if (localStorage.getItem(LocalStorageKeys.AUTH_USER_ID)) {
+				if (authUserId) {
 					return {};
 				}
 				const authService = new AuthService();
@@ -60,6 +62,11 @@ export class App {
 						redirect: '/login',
 					};
 				}
+			}
+			if (authRoutes.includes(pathname) && authUserId) {
+				return {
+					redirect: '/',
+				};
 			}
 			return {};
 		});

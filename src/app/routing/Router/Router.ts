@@ -33,6 +33,14 @@ export class Router {
 		return this.#routes.find(route => route.match(pathname)) ?? this.#defaultRoute;
 	}
 
+	#renderRoute(route: Route) {
+		if (this.currentRoute) {
+			this.currentRoute.leave();
+		}
+		this.currentRoute = route;
+		route.render();
+	}
+
 	#onRoute(pathname: string) {
 		const route = this.#getRoute(pathname);
 		if (!route) {
@@ -41,18 +49,15 @@ export class Router {
 
 		if (this.#authGuard) {
 			this.#authGuard({ pathname, router: this }).then(result => {
-				if (typeof result.redirect === 'string') {
+				if (result.redirect) {
 					this.go(result.redirect);
+				} else {
+					this.#renderRoute(route);
 				}
 			});
+		} else {
+			this.#renderRoute(route);
 		}
-
-		if (this.currentRoute) {
-			this.currentRoute.leave();
-		}
-
-		this.currentRoute = route;
-		route.render();
 	}
 
 	use(pathname: string, view: BlockConstructable) {

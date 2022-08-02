@@ -16,6 +16,7 @@ export type RouteConfigItem = {
 	title: string;
 	url: string;
 	component: BlockConstructable;
+	auth?: true;
 	private?: true;
 };
 

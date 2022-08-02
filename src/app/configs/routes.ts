@@ -12,16 +12,6 @@ import { PagesRoutes } from '@/shared/types';
 
 export const routes: Array<RouteConfigItem> = [
 	{
-		title: 'Вход',
-		url: PagesRoutes.LOGIN,
-		component: LoginPage,
-	},
-	{
-		title: 'Регистрация',
-		url: PagesRoutes.REGISTRY,
-		component: RegistryPage,
-	},
-	{
 		title: '404',
 		url: PagesRoutes.NOT_FOUND,
 		component: NotFoundPage,
@@ -30,6 +20,18 @@ export const routes: Array<RouteConfigItem> = [
 		title: '500',
 		url: PagesRoutes.SERVER_ERROR,
 		component: ServerErrorPage,
+	},
+	{
+		title: 'Вход',
+		url: PagesRoutes.LOGIN,
+		component: LoginPage,
+		auth: true,
+	},
+	{
+		title: 'Регистрация',
+		url: PagesRoutes.REGISTRY,
+		component: RegistryPage,
+		auth: true,
 	},
 	{
 		title: 'Выберите чат',
