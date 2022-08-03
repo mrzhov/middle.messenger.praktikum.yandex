@@ -66,6 +66,8 @@
       background-color: $blue-darken-4;
       border-radius: 50%;
       text-align: center;
+      color: $white;
+      padding: 0 2px;
    }
 
    &:hover {

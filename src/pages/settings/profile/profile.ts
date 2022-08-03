@@ -2,7 +2,14 @@ import { store } from '@/app';
 import { AccountService } from '@/services';
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
-import { blurHandler, changeRoute, focusHandler, getValueFromRefs } from '@/shared/utils';
+import {
+	blurHandler,
+	changeRoute,
+	findParentElementByCondition,
+	focusHandler,
+	getValueFromRefs,
+	openChangeAvatarModal,
+} from '@/shared/utils';
 import { emailValidator, loginValidator, nameValidator, phoneValidator } from '@/shared/validators';
 
 const initialFieldsState = {
@@ -18,9 +25,19 @@ const initialState = {
 	errors: initialFieldsState,
 };
 
+const click = (event: MouseEvent) => {
+	event.preventDefault();
+	const openChangeAvatarModalButton = findParentElementByCondition(event, (target: any) =>
+		target.classList.contains('settings-page-avatar')
+	);
+	if (openChangeAvatarModalButton) {
+		openChangeAvatarModal();
+	}
+};
+
 class ProfilePage extends Block {
 	constructor() {
-		super();
+		super({ events: { click } });
 	}
 
 	componentDidMount() {
@@ -89,12 +106,12 @@ class ProfilePage extends Block {
 					<div class="settings-page-wrapper">
 						<div class="flex-center flex-col w-full space-y-6">
 							<div class="flex-center">
-								<div class="settings-page-avatar flex-center">
+								<button class="settings-page-avatar flex-center">
 									${icons.avatarOverlay}
 									<div class="settings-page-avatar-overlay flex-center">
-										<div class="text-base">Поменять аватар</div>
+										<p class="text-base">Поменять аватар</p>
 									</div>
-								</div>
+								</button>
 							</div>
 							<form class="space-y-3">
 								<fieldset class="space-y-3">
@@ -165,3 +182,10 @@ class ProfilePage extends Block {
 }
 
 export default ProfilePage;
+
+// <button>
+// 										${icons.avatarOverlay}
+// 										<div class="settings-page-avatar-overlay flex-center">
+// 											<div class="text-base">Поменять аватар</div>
+// 										</div>
+// 									</button>
