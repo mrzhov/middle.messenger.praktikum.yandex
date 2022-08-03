@@ -41,7 +41,13 @@ class Profile extends Block {
 				<div class="sidebar-profile ${isProfilePage ? 'active' : ''}">
 					<a href="/settings/profile">
 						<div class="flex items-center">
-							<div class="mock-avatar"></div>
+							{{#if ${Boolean(authUser && authUser?.avatar)}}}
+								<img class="sidebar-profile-avatar" src="${process.env.RESOURCES_URL}${
+			authUser?.avatar
+		}" alt="Avatar">
+							{{else}}
+								<div class="mock-avatar"></div>
+							{{/if}}
 							<div>
 								<p class="text">${authUser?.first_name || ''}&nbsp;${authUser?.second_name || ''}</p>
 								<p class="subtext">${authUser?.phone || ''}</p>

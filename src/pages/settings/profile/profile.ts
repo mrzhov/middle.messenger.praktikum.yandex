@@ -8,7 +8,6 @@ import {
 	findParentElementByCondition,
 	focusHandler,
 	getValueFromRefs,
-	openChangeAvatarModal,
 } from '@/shared/utils';
 import { emailValidator, loginValidator, nameValidator, phoneValidator } from '@/shared/validators';
 
@@ -25,13 +24,27 @@ const initialState = {
 	errors: initialFieldsState,
 };
 
+async function inputOnChangeHandler(this: any) {
+	const { files } = this;
+	const file = files ? files[0] : null;
+	if (file) {
+		const formData = new FormData();
+		formData.append('avatar', file);
+		const accountService = new AccountService();
+		await accountService.changeAvatar(formData);
+	}
+}
+
 const click = (event: MouseEvent) => {
 	event.preventDefault();
 	const openChangeAvatarModalButton = findParentElementByCondition(event, (target: any) =>
 		target.classList.contains('settings-page-avatar')
 	);
 	if (openChangeAvatarModalButton) {
-		openChangeAvatarModal();
+		const input = document.createElement('input');
+		input.type = 'file';
+		input.onchange = inputOnChangeHandler;
+		input.click();
 	}
 };
 
@@ -66,6 +79,7 @@ class ProfilePage extends Block {
 					phone: getValueFromRefs(this.refs, 'phone'),
 					email: getValueFromRefs(this.refs, 'email'),
 					login: getValueFromRefs(this.refs, 'login'),
+					avatar: this.state.values.avatar,
 				};
 
 				const nextState = {
@@ -107,7 +121,11 @@ class ProfilePage extends Block {
 						<div class="flex-center flex-col w-full space-y-6">
 							<div class="flex-center">
 								<button class="settings-page-avatar flex-center">
-									${icons.avatarOverlay}
+									{{#if ${Boolean(values.avatar)}}}
+										<img src="${process.env.RESOURCES_URL}${values.avatar}" alt="Avatar">
+									{{else}}
+										${icons.avatarOverlay}
+									{{/if}}
 									<div class="settings-page-avatar-overlay flex-center">
 										<p class="text-base">Поменять аватар</p>
 									</div>

@@ -11,6 +11,7 @@ export const errorHandler = (original: (...args: any) => Promise<any>) => {
 		try {
 			return await original(...args);
 		} catch (error: any) {
+			console.log(error);
 			const toast = new Toast({ type: 'error', text: error.reason });
 
 			document.body.append(toast.getContent());

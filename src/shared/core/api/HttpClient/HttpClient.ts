@@ -4,7 +4,7 @@ import type { Options, RequestConfig } from './HttpClient.types';
 import { Methods } from './HttpClient.types';
 
 const defaultHeaders = {
-	'Content-type': 'application/json',
+	'content-type': 'application/json',
 };
 
 export class HttpClient {
@@ -42,12 +42,14 @@ export class HttpClient {
 			xhr.withCredentials = true;
 
 			xhr.onload = () => {
-				const response: any =
-					xhr.response === 'OK' ? { status: 'OK' } : JSON.parse(xhr.response);
-
 				if (xhr.status >= 200 && xhr.status < 300) {
+					const response = xhr.response === 'OK' ? { status: 'OK' } : JSON.parse(xhr.response);
 					resolve(response);
 				} else {
+					const response =
+						xhr.response === 'Internal Server Error'
+							? { reason: 'Internal Server Error' }
+							: JSON.parse(xhr.response);
 					reject(response);
 				}
 
@@ -64,6 +66,8 @@ export class HttpClient {
 
 			if (method === Methods.GET || !data) {
 				xhr.send();
+			} else if (data instanceof FormData) {
+				xhr.send(data);
 			} else {
 				xhr.send(JSON.stringify(data));
 			}

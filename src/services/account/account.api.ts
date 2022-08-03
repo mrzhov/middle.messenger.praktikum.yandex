@@ -15,4 +15,10 @@ export class AccountApi {
 	changePassword<T>(data: ChangePasswordData): Promise<T> {
 		return this.http.put<T>('/user/password', data);
 	}
+
+	changeAvatar<T>(data: FormData): Promise<T> {
+		return this.http.put<T>('/user/profile/avatar', data, {
+			headers: { 'content-type': 'multipart/form-data' },
+		});
+	}
 }

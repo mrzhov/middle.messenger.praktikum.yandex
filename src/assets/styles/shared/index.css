@@ -70,6 +70,11 @@
       padding: 0 2px;
    }
 
+   img {
+      @mixin size 130px;
+      border-radius: 50%;
+   }
+
    &:hover {
       .settings-page-avatar-overlay {
          opacity: 1;

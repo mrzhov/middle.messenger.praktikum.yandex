@@ -11,6 +11,7 @@ export class AccountService {
 		this.accountApi = new AccountApi();
 		this.changeProfile = errorHandler(this.changeProfile.bind(this));
 		this.changePassword = errorHandler(this.changePassword.bind(this));
+		this.changeAvatar = errorHandler(this.changeAvatar.bind(this));
 	}
 
 	async changeProfile(data: ProfileData): Promise<UserInfo> {
@@ -23,5 +24,14 @@ export class AccountService {
 
 	async changePassword(data: ChangePasswordData): Promise<void> {
 		await this.accountApi.changePassword(data);
+	}
+
+	async changeAvatar(data: FormData): Promise<UserInfo> {
+		const authUser = await this.accountApi.changeAvatar<UserInfo>(data);
+		store.setState({
+			authUser,
+		});
+		console.log(authUser);
+		return authUser;
 	}
 }
