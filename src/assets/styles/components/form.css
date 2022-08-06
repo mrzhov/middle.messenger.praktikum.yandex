@@ -27,6 +27,12 @@
    }
 }
 
+.input-standard-black {
+   input {
+      background-color: $black-2;
+   }
+}
+
 .input-standard-error {
    input {
       border-color: $red;

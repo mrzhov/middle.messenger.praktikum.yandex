@@ -9,7 +9,11 @@ export type LastMessage = {
 export type Chat = {
 	id: number;
 	title: string;
-	avatar: string;
+	avatar: Nullable<string>;
 	unread_count: number;
-	last_message: LastMessage;
+	last_message: Nullable<LastMessage>;
+};
+
+export type ChatTitle = {
+	title: string;
 };

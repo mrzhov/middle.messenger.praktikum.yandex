@@ -1,4 +1,4 @@
-export type InputVariant = 'standard' | 'gradient' | 'chat-message';
+export type InputVariant = 'standard' | 'standard-black' | 'gradient' | 'chat-message';
 
 export type InputProps = {
 	variant?: InputVariant;

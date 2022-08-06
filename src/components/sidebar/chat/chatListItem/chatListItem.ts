@@ -12,7 +12,7 @@ const click = (event: MouseEvent) => {
 	}
 };
 
-class ChatListItem extends Block<Omit<ChatListItemProps, 'id'> & { itemId: string } & BlockEvents> {
+class ChatListItem extends Block<Omit<ChatListItemProps, 'id'> & { itemId: number } & BlockEvents> {
 	static componentName = 'ChatListItem';
 
 	constructor(props: ChatListItemProps) {
@@ -25,23 +25,23 @@ class ChatListItem extends Block<Omit<ChatListItemProps, 'id'> & { itemId: strin
 
 		// language=hbs
 		return `
-			<div class="chat-list-item${itemId === id ? ' active' : ''}">
+			<div class="chat-list-item${String(itemId) === id ? ' active' : ''}">
 				<a href="/chat/{{itemId}}">
 					<div class="mock-avatar"></div>
 					<div class="chat-list-item-content">
 						<div class="chat-list-item-content-wrapper">
 							<div class="chat-list-item-content-top">
-								<p class="text">{{name}}</p>
+								<p class="text">{{title}}</p>
 								<time class="subtext">{{lastMessageTime}}</time>
 							</div>
 							<div class="chat-list-item-content-message">
 								<div>
-									<p class="subtext">{{lastMessageText}}</p>
+									<p class="subtext">{{lastMessageContent}}</p>
 								</div>
-								{{#if unreadCount}}
+								{{#if unread_count}}
 									<div class="chat-list-item-content-unread-count">
 										<div>
-											<p class="subtext">{{unreadCount}}</p>
+											<p class="subtext">{{unread_count}}</p>
 										</div>
 									</div>
 								{{/if}}

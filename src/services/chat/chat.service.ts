@@ -1,5 +1,5 @@
 import { store } from '@/app';
-import type { Chat } from '@/shared/types';
+import type { Chat, ChatTitle } from '@/shared/types';
 import { errorHandler } from '@/shared/utils';
 
 import { ChatApi } from './chat.api';
@@ -18,5 +18,10 @@ export class ChatService {
 			chats,
 		});
 		return chats;
+	}
+
+	async createChat(data: ChatTitle): Promise<void> {
+		await this.chatApi.createChat(data);
+		await this.getChats();
 	}
 }

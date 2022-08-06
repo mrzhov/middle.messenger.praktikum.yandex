@@ -1,7 +1,7 @@
 import { store } from '@/app';
 import { ChatService } from '@/services';
-import { mockChatList } from '@/shared/content';
 import { Block } from '@/shared/core';
+import { openCreateChatModal } from '@/shared/utils';
 
 class SidebarChat extends Block {
 	static componentName = 'SidebarChat';
@@ -22,9 +22,13 @@ class SidebarChat extends Block {
 
 	protected getStateFromProps() {
 		this.state = {
-			chatList: mockChatList,
+			openCreateChatModal: () => {
+				openCreateChatModal();
+			},
 		};
 	}
+
+	// TODO: last_message может быть null, поэтому не передаются его поля и падает ошибка
 
 	render(): string {
 		const { chats } = this.state;
@@ -33,18 +37,29 @@ class SidebarChat extends Block {
 		return `
 			<div class="w-full h-full">
 				<div class="sidebar-top pr-1">
-					{{{Search}}}
+					<div class="flex items-center justify-between space-x-2">
+						{{{Search}}}
+						{{{Button
+							icon="pencil"
+							onClick=openCreateChatModal
+						}}}
+					</div>
 				</div>
 				<div class="chat-list">
-					{{#each chatList}}
-						{{{ChatListItem
-							id=this.id
-							name=this.name
-							unreadCount=this.unreadCount
-							lastMessageText=this.lastMessage.text
-							lastMessageTime=this.lastMessage.time
-						}}}
-					{{/each}}
+					{{#if this.chats}}
+						{{#each this.chats}}
+							{{{ChatListItem
+								id=this.id
+								title=this.title
+								avatar=this.avatar
+								unread_count=this.unread_count
+								lastMessageTime=this.last_message.time
+								lastMessageContent=this.last_message.content
+							}}}
+						{{/each}}
+					{{else}}
+						loading...
+					{{/if}}
 				</div>
 				{{{Navigation}}}
 			</div>

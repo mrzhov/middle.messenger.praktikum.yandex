@@ -1,4 +1,5 @@
 import { HttpClient } from '@/shared/core';
+import type { ChatTitle } from '@/shared/types';
 
 export class ChatApi {
 	private http: HttpClient;
@@ -9,5 +10,9 @@ export class ChatApi {
 
 	getChats<T>(): Promise<T> {
 		return this.http.get<T>('/chats');
+	}
+
+	createChat(data: ChatTitle): Promise<unknown> {
+		return this.http.post('/chats', data);
 	}
 }

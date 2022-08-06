@@ -1,11 +1,7 @@
-import { ChangeAvatarModal } from '@/components/modals/changeAvatarModal';
+import { CreateChatModal } from '@/components/modals/createChatModal';
 
-export const openChangeAvatarModal = () => {
-	const changeAvatarModal = new ChangeAvatarModal();
-
-	document.body.append(changeAvatarModal.getContent());
-
-	setTimeout(() => {
-		changeAvatarModal.setState({ isOpen: true });
-	}, 100);
+export const openCreateChatModal = () => {
+	const createChatModal = new CreateChatModal();
+	createChatModal.setState({ isOpen: true });
+	document.body.append(createChatModal.getContent());
 };
