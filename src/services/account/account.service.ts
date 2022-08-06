@@ -1,5 +1,5 @@
 import { store } from '@/app';
-import type { ChangePasswordData, ProfileData, UserInfo } from '@/shared/types';
+import type { ChangePasswordData, ProfileData, User } from '@/shared/types';
 import { errorHandler } from '@/shared/utils';
 
 import { AccountApi } from './account.api';
@@ -14,8 +14,8 @@ export class AccountService {
 		this.changeAvatar = errorHandler(this.changeAvatar.bind(this));
 	}
 
-	async changeProfile(data: ProfileData): Promise<UserInfo> {
-		const authUser = await this.accountApi.changeProfile<UserInfo>(data);
+	async changeProfile(data: ProfileData): Promise<User> {
+		const authUser = await this.accountApi.changeProfile<User>(data);
 		store.setState({
 			authUser,
 		});
@@ -26,12 +26,11 @@ export class AccountService {
 		await this.accountApi.changePassword(data);
 	}
 
-	async changeAvatar(data: FormData): Promise<UserInfo> {
-		const authUser = await this.accountApi.changeAvatar<UserInfo>(data);
+	async changeAvatar(data: FormData): Promise<User> {
+		const authUser = await this.accountApi.changeAvatar<User>(data);
 		store.setState({
 			authUser,
 		});
-		console.log(authUser);
 		return authUser;
 	}
 }

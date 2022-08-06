@@ -1,3 +1,5 @@
+import { store } from '@/app';
+import { ChatService } from '@/services';
 import { mockChatList } from '@/shared/content';
 import { Block } from '@/shared/core';
 
@@ -8,6 +10,16 @@ class SidebarChat extends Block {
 		super();
 	}
 
+	async componentDidMount() {
+		store.subscribe(state => {
+			this.setState({
+				chats: state.chats,
+			});
+		}, 'chats');
+		const chatService = new ChatService();
+		await chatService.getChats();
+	}
+
 	protected getStateFromProps() {
 		this.state = {
 			chatList: mockChatList,
@@ -15,6 +27,8 @@ class SidebarChat extends Block {
 	}
 
 	render(): string {
+		const { chats } = this.state;
+		console.log(chats);
 		// language=hbs
 		return `
 			<div class="w-full h-full">

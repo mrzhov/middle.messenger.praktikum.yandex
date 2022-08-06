@@ -79,9 +79,6 @@ class RegistryPage extends Block {
 					} else {
 						const authService = new AuthService();
 						await authService.registry(registryData);
-						// console.log('registry:', registryData);
-						// this.setState(initialState);
-						// changeRoute('/chat/4');
 					}
 				}
 			},

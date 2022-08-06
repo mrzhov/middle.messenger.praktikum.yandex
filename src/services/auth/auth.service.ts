@@ -1,5 +1,5 @@
 import { store } from '@/app';
-import type { LoginBody, RegistryBody, UserInfo } from '@/shared/types';
+import type { LoginBody, RegistryBody, User } from '@/shared/types';
 import { LocalStorageKeys } from '@/shared/types';
 import { changeRoute, errorHandler } from '@/shared/utils';
 
@@ -15,8 +15,8 @@ export class AuthService {
 		this.logout = errorHandler(this.logout.bind(this));
 	}
 
-	async getUserInfo(): Promise<UserInfo> {
-		const authUser = await this.authApi.getUserInfo<UserInfo>();
+	async getUserInfo(): Promise<User> {
+		const authUser = await this.authApi.getUserInfo<User>();
 		store.setState({
 			authUser,
 		});

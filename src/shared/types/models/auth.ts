@@ -1,18 +1,4 @@
-export type LoginBody = {
-	login: string;
-	password: string;
-};
-
-export type RegistryBody = {
-	first_name: string;
-	second_name: string;
-	login: string;
-	email: string;
-	password: string;
-	phone: string;
-};
-
-export type UserInfo = {
+export type User = {
 	id: number;
 	first_name: string;
 	second_name: string;
@@ -22,3 +8,12 @@ export type UserInfo = {
 	phone: string;
 	avatar: string;
 };
+
+export type UserSmall = Omit<User, 'id' | 'display_name'>;
+
+export type LoginBody = {
+	login: string;
+	password: string;
+};
+
+export type RegistryBody = Omit<UserSmall, 'avatar'> & LoginBody;

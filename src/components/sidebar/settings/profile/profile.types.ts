@@ -1,5 +1,5 @@
-import type { UserInfo } from '@/shared/types';
+import type { User } from '@/shared/types';
 
 export type ProfileState = {
-	authUser: Omit<UserInfo, 'display_name'>;
+	authUser: Omit<User, 'display_name'>;
 };

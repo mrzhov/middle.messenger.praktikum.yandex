@@ -48,7 +48,7 @@ export class HttpClient {
 				} else {
 					const response =
 						xhr.response === 'Internal Server Error'
-							? { reason: 'Internal Server Error' }
+							? { reason: 'Внутренняя ошибка, повторите позже' }
 							: JSON.parse(xhr.response);
 					reject(response);
 				}

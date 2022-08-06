@@ -59,7 +59,8 @@
           "error",
           "never",
           {
-            "css": "always"
+            "css": "always",
+            "types": "always"
           }
         ],
         "class-methods-use-this": "off",
