@@ -12,11 +12,11 @@ const click = (event: MouseEvent) => {
 	}
 };
 
-class ChatListItem extends Block<Omit<ChatListItemProps, 'id'> & { itemId: number } & BlockEvents> {
+class ChatListItem extends Block<ChatListItemProps & BlockEvents> {
 	static componentName = 'ChatListItem';
 
 	constructor(props: ChatListItemProps) {
-		super({ ...props, itemId: props.id, events: { click } });
+		super({ ...props, events: { click } });
 	}
 
 	render(): string {

@@ -4,6 +4,7 @@ import { ChatMessagesItem } from '@/components/chat/chatMessagesItem';
 import { ErrorPageContent } from '@/components/errorPageContent';
 import { Input } from '@/components/input';
 import { Link } from '@/components/link';
+import { Loader } from '@/components/loader';
 import { CreateChatModal } from '@/components/modals/createChatModal';
 import { ChatListItem } from '@/components/sidebar/chat/chatListItem';
 import { Search } from '@/components/sidebar/chat/search';
@@ -35,4 +36,5 @@ export const registerComponents = () => {
 	registerComponent(ChatMessagesItem);
 	registerComponent(Toast);
 	registerComponent(CreateChatModal);
+	registerComponent(Loader);
 };

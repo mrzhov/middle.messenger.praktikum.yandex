@@ -28,11 +28,7 @@ class SidebarChat extends Block {
 		};
 	}
 
-	// TODO: last_message может быть null, поэтому не передаются его поля и падает ошибка
-
 	render(): string {
-		const { chats } = this.state;
-		console.log(chats);
 		// language=hbs
 		return `
 			<div class="w-full h-full">
@@ -49,16 +45,15 @@ class SidebarChat extends Block {
 					{{#if this.chats}}
 						{{#each this.chats}}
 							{{{ChatListItem
-								id=this.id
+								itemId=this.id
 								title=this.title
 								avatar=this.avatar
 								unread_count=this.unread_count
-								lastMessageTime=this.last_message.time
-								lastMessageContent=this.last_message.content
+								last_message=this.last_message
 							}}}
 						{{/each}}
 					{{else}}
-						loading...
+						<div class="h-full flex-center">{{{Loader}}}</div>
 					{{/if}}
 				</div>
 				{{{Navigation}}}
