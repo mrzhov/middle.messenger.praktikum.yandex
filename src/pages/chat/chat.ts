@@ -41,14 +41,6 @@ class ChatPage extends Block {
 		}, 'currentChat');
 	}
 
-	protected async getStateFromProps() {
-		this.state = {
-			openChatActions: () => {
-				console.log('openChatActions');
-			},
-		};
-	}
-
 	render(): string {
 		const { currentChat } = this.state;
 		const chatTitle = currentChat?.title || '';
@@ -78,10 +70,7 @@ class ChatPage extends Block {
 								</div>
 							{{/if}}
 						</div>
-						{{{Button
-							icon="dots"
-							onClick=openChatActions
-						}}}
+						{{{ChatActionsDropdown}}}
 					</header>
 					<div class="chat-messages">
 						<div class="space-y-2">

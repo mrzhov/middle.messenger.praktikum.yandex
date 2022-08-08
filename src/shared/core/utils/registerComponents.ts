@@ -1,4 +1,5 @@
 import { Button } from '@/components/button';
+import { ChatActionsDropdown } from '@/components/chat/chatActionsDropdown';
 import { ChatBottomActions } from '@/components/chat/chatBottomActions';
 import { ChatMessagesItem } from '@/components/chat/chatMessagesItem';
 import { ErrorPageContent } from '@/components/errorPageContent';
@@ -37,4 +38,5 @@ export const registerComponents = () => {
 	registerComponent(Toast);
 	registerComponent(CreateChatModal);
 	registerComponent(Loader);
+	registerComponent(ChatActionsDropdown);
 };
