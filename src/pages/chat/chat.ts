@@ -1,10 +1,36 @@
 import { store } from '@/app';
+import { ChatService } from '@/services';
+import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
-import { numWord } from '@/shared/utils';
+import { findParentElementByCondition, numWord } from '@/shared/utils';
+
+async function inputOnChangeHandler(this: any) {
+	const { files } = this;
+	const file = files ? files[0] : null;
+	if (file) {
+		const formData = new FormData();
+		formData.append('avatar', file);
+		const chatService = new ChatService();
+		await chatService.changeAvatar(formData);
+	}
+}
+
+const click = (event: MouseEvent) => {
+	event.preventDefault();
+	const openChangeAvatarModalButton = findParentElementByCondition(event, (target: any) =>
+		target.classList.contains('chat-avatar')
+	);
+	if (openChangeAvatarModalButton) {
+		const input = document.createElement('input');
+		input.type = 'file';
+		input.onchange = inputOnChangeHandler;
+		input.click();
+	}
+};
 
 class ChatPage extends Block {
 	constructor() {
-		super();
+		super({ events: { click } });
 	}
 
 	componentDidMount() {
@@ -37,7 +63,14 @@ class ChatPage extends Block {
 				<main class="flex flex-col h-full">
 					<header class="page-header flex items-center justify-between">
 						<div class="flex-center">
-							<div class="mock-avatar small"></div>
+							<button class="chat-avatar flex-center">
+								{{#if ${Boolean(currentChat?.avatar)}}}
+									<img src="${process.env.RESOURCES_URL}${currentChat?.avatar}" alt="Avatar">
+								{{/if}}
+								<div class="chat-avatar-overlay flex-center">
+									${icons.avatarOverlay}
+								</div>
+							</button>
 							{{#if this.currentChat}}
 								<div>
 									<h3 class="text">${chatTitle}</h3>

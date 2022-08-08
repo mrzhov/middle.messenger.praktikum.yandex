@@ -19,4 +19,10 @@ export class ChatApi {
 	getChatUsers<T>(id: string): Promise<T> {
 		return this.http.get<T>(`/chats/${id}/users`);
 	}
+
+	changeAvatar<T>(data: FormData): Promise<T> {
+		return this.http.put<T>('/chats/avatar', data, {
+			headers: { 'content-type': 'multipart/form-data' },
+		});
+	}
 }

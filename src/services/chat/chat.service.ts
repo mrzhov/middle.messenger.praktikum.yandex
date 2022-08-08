@@ -12,6 +12,7 @@ export class ChatService {
 		this.getChats = errorHandler(this.getChats.bind(this));
 		this.createChat = errorHandler(this.createChat.bind(this));
 		this.getChatUsers = errorHandler(this.getChatUsers.bind(this));
+		this.changeAvatar = errorHandler(this.changeAvatar.bind(this));
 	}
 
 	async getChats(): Promise<Array<Chat>> {
@@ -42,6 +43,21 @@ export class ChatService {
 				return;
 			}
 			const users = await this.getChatUsers(id);
+			store.setState({
+				currentChat: {
+					...currentChat,
+					users,
+				},
+			});
+		}
+	}
+
+	async changeAvatar(data: FormData): Promise<void> {
+		const { currentChat: currentChatFromStore } = store.getState();
+		if (currentChatFromStore) {
+			data.append('chatId', String(currentChatFromStore.id));
+			const currentChat = await this.chatApi.changeAvatar<Chat>(data);
+			const users = await this.getChatUsers(String(currentChat.id));
 			store.setState({
 				currentChat: {
 					...currentChat,

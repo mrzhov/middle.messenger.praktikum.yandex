@@ -25,13 +25,19 @@ class ChatListItem extends Block<ChatListItemProps & BlockEvents> {
 
 	render(): string {
 		const { id } = useParams();
-		const { itemId } = this.props;
+		const { itemId, avatar } = this.props;
 
 		// language=hbs
 		return `
 			<div class="chat-list-item${String(itemId) === id ? ' active' : ''}">
 				<a href="/chat/{{itemId}}">
-					<div class="mock-avatar"></div>
+					<div class="chat-list-item-avatar">
+						{{#if ${Boolean(avatar)}}}
+							<img src="${process.env.RESOURCES_URL}${avatar}" alt="Avatar">
+						{{else}}
+							<div class="mock-avatar"></div>
+						{{/if}}
+					</div>
 					<div class="chat-list-item-content">
 						<div class="chat-list-item-content-wrapper">
 							<div class="chat-list-item-content-top">
