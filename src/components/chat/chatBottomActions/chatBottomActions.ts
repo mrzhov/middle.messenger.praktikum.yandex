@@ -1,4 +1,3 @@
-import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
 import { blurHandler, focusHandler, getValueFromRefs } from '@/shared/utils';
 import { messageValidator } from '@/shared/validators';
@@ -12,8 +11,8 @@ const initialState = {
 	},
 };
 
-class ChatActions extends Block {
-	static componentName = 'ChatActions';
+class ChatBottomActions extends Block {
+	static componentName = 'ChatBottomActions';
 
 	constructor() {
 		super();
@@ -49,6 +48,9 @@ class ChatActions extends Block {
 					this.setState(initialState);
 				}
 			},
+			openChatAttachments: () => {
+				console.log('openChatAttachments');
+			},
 		};
 	}
 
@@ -59,7 +61,10 @@ class ChatActions extends Block {
 		return `
       <div class="chat-actions">
 				<div class="flex items-center h-full px-4">
-					<button class="btn-icon">${icons.staple}</button>
+					{{{Button
+						icon="staple"
+						onClick=openChatAttachments
+					}}}
 					<div class="grow h-full">
 						<form>
 							{{{Input
@@ -84,4 +89,4 @@ class ChatActions extends Block {
 	}
 }
 
-export default ChatActions;
+export default ChatBottomActions;

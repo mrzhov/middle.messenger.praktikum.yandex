@@ -15,4 +15,8 @@ export class ChatApi {
 	createChat(data: ChatTitle): Promise<unknown> {
 		return this.http.post('/chats', data);
 	}
+
+	getChatUsers<T>(id: string): Promise<T> {
+		return this.http.get<T>(`/chats/${id}/users`);
+	}
 }

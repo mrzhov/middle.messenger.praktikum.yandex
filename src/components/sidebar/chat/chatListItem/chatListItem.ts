@@ -1,3 +1,4 @@
+import { store } from '@/app';
 import { Block } from '@/shared/core';
 import { changeRoute, findParentElementByCondition, useParams } from '@/shared/utils';
 
@@ -8,6 +9,9 @@ const click = (event: MouseEvent) => {
 	const linkElement = findParentElementByCondition(event, (target: any) => target.href);
 	if (!linkElement.parentElement?.classList.contains('active')) {
 		const path = (linkElement as HTMLAnchorElement).getAttribute('href')!;
+		store.setState({
+			currentChat: null,
+		});
 		changeRoute(path);
 	}
 };

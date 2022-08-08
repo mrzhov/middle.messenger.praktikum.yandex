@@ -1,4 +1,4 @@
-import { Toast } from '@/components/toast';
+import { openToast } from '@/shared/utils/shared';
 
 export const queryStringify = (data: Record<string, unknown>) => {
 	return `?${Object.entries(data)
@@ -11,23 +11,7 @@ export const errorHandler = (original: (...args: any) => Promise<any>) => {
 		try {
 			return await original(...args);
 		} catch (error: any) {
-			console.log(error);
-			const toast = new Toast({ type: 'error', text: error.reason });
-
-			document.body.append(toast.getContent());
-
-			setTimeout(() => {
-				toast.getContent()!.classList.add('toast-open');
-			}, 100);
-
-			setTimeout(() => {
-				toast.getContent()!.classList.remove('toast-open');
-			}, 3000);
-
-			setTimeout(() => {
-				toast.destroy();
-			}, 3300);
-
+			openToast(error.reason);
 			return undefined;
 		}
 	};

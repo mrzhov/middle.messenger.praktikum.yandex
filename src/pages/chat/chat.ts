@@ -1,26 +1,35 @@
-import { icons, mockChatList } from '@/shared/content';
+import { store } from '@/app';
 import { Block } from '@/shared/core';
-import { useParams } from '@/shared/utils';
-
-import type { ChatProps } from './chat.types';
-
-const getChatInfo = (id: string) => mockChatList.find(item => item.id === id);
+import { numWord } from '@/shared/utils';
 
 class ChatPage extends Block {
-	constructor(props: ChatProps) {
-		super(props);
+	constructor() {
+		super();
 	}
 
-	protected getStateFromProps() {
-		const { id } = useParams();
-		console.log(id);
+	componentDidMount() {
+		store.subscribe(state => {
+			this.setState({
+				currentChat: state.currentChat,
+			});
+		}, 'currentChat');
+	}
+
+	protected async getStateFromProps() {
 		this.state = {
-			chatInfo: getChatInfo(id),
+			openChatActions: () => {
+				console.log('openChatActions');
+			},
 		};
 	}
 
 	render(): string {
-		const { chatInfo } = this.state;
+		const { currentChat } = this.state;
+		const chatTitle = currentChat?.title || '';
+		const usersCount = currentChat?.users?.length || '';
+		const usersWord = currentChat?.users
+			? numWord(currentChat.users?.length, ['участник', 'участника', 'участников'])
+			: '';
 
 		// language=hbs
 		return `
@@ -29,32 +38,24 @@ class ChatPage extends Block {
 					<header class="page-header flex items-center justify-between">
 						<div class="flex-center">
 							<div class="mock-avatar small"></div>
-							<h3 class="text">${chatInfo.name}</h3>
+							{{#if this.currentChat}}
+								<div>
+									<h3 class="text">${chatTitle}</h3>
+									<h4 class="subtext">${usersCount} ${usersWord}</h4>
+								</div>
+							{{/if}}
 						</div>
-						<button class="btn-icon w-10 h-10">${icons.dots}</button>
+						{{{Button
+							icon="dots"
+							onClick=openChatActions
+						}}}
 					</header>
 					<div class="chat-messages">
 						<div class="space-y-2">
-							{{#each chatInfo.sortedMessages}}
-								<div class="chat-messages-item space-y-2">
-									<div class="chat-messages-item-date">
-										<p class="subtext">{{this.date}}</p>
-									</div>
-									<div class="space-y-4">
-										{{#each this.messages}}
-											{{{ChatMessagesItem
-												author=this.author
-												time=this.time
-												text=this.text
-												read=this.read
-											}}}
-										{{/each}}
-									</div>
-								</div>
-							{{/each}}
+							
 						</div>
 					</div>
-					{{{ChatActions}}}
+					{{{ChatBottomActions}}}
 				</main>
 			{{/BaseLayout}}
     `;
