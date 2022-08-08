@@ -22,6 +22,10 @@
    height: 40px;
 }
 
+.h-92px {
+   height: 92px;
+}
+
 .h-screen-with-header {
    height: calc(100vh - 69px) !important;
 }

@@ -20,7 +20,7 @@ const initialFieldsState = {
 };
 
 const initialState = {
-	values: initialFieldsState,
+	values: null,
 	errors: initialFieldsState,
 };
 
@@ -117,82 +117,86 @@ class ProfilePage extends Block {
 		return `
 			{{#BaseLayout title="Изменить профиль"}}
 				<main class="settings-page with-form">
-					<div class="settings-page-wrapper">
-						<div class="flex-center flex-col w-full space-y-6">
-							<div class="flex-center">
-								<button class="settings-page-avatar flex-center">
-									{{#if ${Boolean(values.avatar)}}}
-										<img src="${process.env.RESOURCES_URL}${values.avatar}" alt="Avatar">
-									{{else}}
-										${icons.avatarOverlay}
-									{{/if}}
-									<div class="settings-page-avatar-overlay flex-center">
-										<p class="text-base">Поменять аватар</p>
-									</div>
-								</button>
-							</div>
-							<form class="space-y-3">
-								<fieldset class="space-y-3">
-									{{{Input
-										ref="first_name"
-										name="first_name"
-										label="Имя"
-										value="${values.first_name}"
-										error="${errors.first_name}"
-										onFocus=onFocusHandler
-										onBlur=onBlurHandler
-									}}}
-
-									{{{Input
-										ref="second_name"
-										name="second_name"
-										label="Фамилия"
-										value="${values.second_name}"
-										error="${errors.second_name}"
-										onFocus=onFocusHandler
-										onBlur=onBlurHandler
-									}}}
-
-									{{{Input
-										ref="phone"
-										name="phone"
-										label="Телефон"
-										value="${values.phone}"
-										error="${errors.phone}"
-										onFocus=onFocusHandler
-										onBlur=onBlurHandler
-									}}}
-
-									{{{Input
-										ref="email"
-										name="email"
-										label="Почта"
-										type="email"
-										value="${values.email}"
-										error="${errors.email}"
-										onFocus=onFocusHandler
-										onBlur=onBlurHandler
-									}}}
-
-									{{{Input
-										ref="login"
-										name="login"
-										label="Логин"
-										value="${values.login}"
-										error="${errors.login}"
-										onFocus=onFocusHandler
-										onBlur=onBlurHandler
-									}}}
-								</fieldset>
-								<div class="submit-container">
-									{{{Button
-										text="Сохранить"
-										onClick=onSubmit
-									}}}
+					{{#if this.values}}
+						<div class="settings-page-wrapper">
+							<div class="flex-center flex-col w-full space-y-6">
+								<div class="flex-center">
+									<button class="settings-page-avatar flex-center">
+										{{#if ${Boolean(values?.avatar)}}}
+											<img src="${process.env.RESOURCES_URL}${values?.avatar}" alt="Avatar">
+										{{else}}
+											${icons.avatarOverlay}
+										{{/if}}
+										<div class="settings-page-avatar-overlay flex-center">
+											<p class="text-base">Поменять аватар</p>
+										</div>
+									</button>
 								</div>
-							</form>
+								<form class="space-y-3">
+									<fieldset class="space-y-3">
+										{{{Input
+											ref="first_name"
+											name="first_name"
+											label="Имя"
+											value="${values?.first_name}"
+											error="${errors.first_name}"
+											onFocus=onFocusHandler
+											onBlur=onBlurHandler
+										}}}
+	
+										{{{Input
+											ref="second_name"
+											name="second_name"
+											label="Фамилия"
+											value="${values?.second_name}"
+											error="${errors.second_name}"
+											onFocus=onFocusHandler
+											onBlur=onBlurHandler
+										}}}
+	
+										{{{Input
+											ref="phone"
+											name="phone"
+											label="Телефон"
+											value="${values?.phone}"
+											error="${errors.phone}"
+											onFocus=onFocusHandler
+											onBlur=onBlurHandler
+										}}}
+	
+										{{{Input
+											ref="email"
+											name="email"
+											label="Почта"
+											type="email"
+											value="${values?.email}"
+											error="${errors.email}"
+											onFocus=onFocusHandler
+											onBlur=onBlurHandler
+										}}}
+	
+										{{{Input
+											ref="login"
+											name="login"
+											label="Логин"
+											value="${values?.login}"
+											error="${errors.login}"
+											onFocus=onFocusHandler
+											onBlur=onBlurHandler
+										}}}
+									</fieldset>
+									<div class="submit-container">
+										{{{Button
+											text="Сохранить"
+											onClick=onSubmit
+										}}}
+									</div>
+								</form>
+							</div>
 						</div>
-					</div>
+					{{else}}
+						<div class="h-full flex-center">{{{Loader}}}</div>
+					{{/if}}
 				</main>
 			{{/BaseLayout}}
     `;

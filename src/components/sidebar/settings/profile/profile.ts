@@ -34,30 +34,34 @@ class Profile extends Block {
 		const { pathname } = window.location;
 		const isProfilePage = pathname === PagesRoutes.PROFILE;
 		const { authUser } = this.state as ProfileState;
+		const avatarPath =
+			authUser && authUser.avatar ? `${process.env.RESOURCES_URL}${authUser.avatar}` : null;
 
 		// language=hbs
 		return `
 			<div class="sidebar-profile-container">
 				<div class="sidebar-profile ${isProfilePage ? 'active' : ''}">
-					<a href="/settings/profile">
-						<div class="flex items-center">
-							{{#if ${Boolean(authUser && authUser?.avatar)}}}
-								<img class="sidebar-profile-avatar" src="${process.env.RESOURCES_URL}${
-			authUser?.avatar
-		}" alt="Avatar">
-							{{else}}
-								<div class="mock-avatar"></div>
-							{{/if}}
-							<div>
-								<p class="text">${authUser?.first_name || ''}&nbsp;${authUser?.second_name || ''}</p>
-								<p class="subtext">${authUser?.phone || ''}</p>
-								<p class="subtext">${authUser?.login || ''}</p>
+					{{#if this.authUser}}
+						<a href="/settings/profile">
+							<div class="flex items-center">
+								{{#if ${Boolean(avatarPath)}}}
+									<img class="sidebar-profile-avatar" src="${avatarPath}" alt="Avatar">
+								{{else}}
+									<div class="mock-avatar"></div>
+								{{/if}}
+								<div>
+									<p class="text">${authUser?.first_name || ''}&nbsp;${authUser?.second_name || ''}</p>
+									<p class="subtext">${authUser?.phone || ''}</p>
+									<p class="subtext">${authUser?.login || ''}</p>
+								</div>
 							</div>
-						</div>
-						<div class="sidebar-settings-arrow">
-							${icons.arrowRight}
-						</div>
-					</a>
+							<div class="sidebar-settings-arrow">
+								${icons.arrowRight}
+							</div>
+						</a>
+					{{else}}
+						<div class="flex-center h-92px">{{{Loader}}}</div>
+					{{/if}}
 				</div>
 			</div>
 		`;
