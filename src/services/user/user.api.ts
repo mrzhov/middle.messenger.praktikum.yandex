@@ -1,7 +1,7 @@
 import { HttpClient } from '@/shared/core';
 import type { ChangePasswordData, ProfileData } from '@/shared/types';
 
-export class AccountApi {
+export class UserApi {
 	private http: HttpClient;
 
 	constructor() {
@@ -20,5 +20,9 @@ export class AccountApi {
 		return this.http.put<T>('/user/profile/avatar', data, {
 			headers: { 'content-type': 'multipart/form-data' },
 		});
+	}
+
+	searchUsers<T>(login: string): Promise<T> {
+		return this.http.post<T>('/user/search', { login });
 	}
 }

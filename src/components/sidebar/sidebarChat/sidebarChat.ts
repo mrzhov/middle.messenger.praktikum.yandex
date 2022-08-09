@@ -36,7 +36,7 @@ class SidebarChat extends Block {
 					</div>
 				</div>
 				<div class="chat-list">
-					{{#if this.chats}}
+					{{#if this.chats.length}}
 						{{#each this.chats}}
 							{{{ChatListItem
 								itemId=this.id
@@ -47,7 +47,9 @@ class SidebarChat extends Block {
 							}}}
 						{{/each}}
 					{{else}}
-						<div class="h-full flex-center">{{{Loader}}}</div>
+						<div class="h-full flex-center">
+							<p class="text">Начните общение, создайте чат!</p>
+						</div>
 					{{/if}}
 				</div>
 				{{{Navigation}}}

@@ -1,4 +1,4 @@
-import { AccountService } from '@/services';
+import { UserService } from '@/services';
 import { Block } from '@/shared/core';
 import { blurHandler, focusHandler, getValueFromRefs } from '@/shared/utils';
 import { passwordValidator } from '@/shared/validators';
@@ -57,8 +57,8 @@ class ChangePasswordPage extends Block {
 						nextState.errors.new_password_repeat = 'Пароли не совпадают';
 						this.setState(nextState);
 					} else {
-						const accountService = new AccountService();
-						await accountService.changePassword({
+						const userService = new UserService();
+						await userService.changePassword({
 							oldPassword: changePasswordData.old_password,
 							newPassword: changePasswordData.new_password,
 						});

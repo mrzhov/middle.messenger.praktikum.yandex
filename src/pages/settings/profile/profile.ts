@@ -1,5 +1,5 @@
 import { store } from '@/app';
-import { AccountService } from '@/services';
+import { UserService } from '@/services';
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
 import {
@@ -30,8 +30,8 @@ async function inputOnChangeHandler(this: any) {
 	if (file) {
 		const formData = new FormData();
 		formData.append('avatar', file);
-		const accountService = new AccountService();
-		await accountService.changeAvatar(formData);
+		const userService = new UserService();
+		await userService.changeAvatar(formData);
 	}
 }
 
@@ -96,10 +96,10 @@ class ProfilePage extends Block {
 				this.setState(nextState);
 
 				if (Object.values(nextState.errors).every(e => !e)) {
-					const accountService = new AccountService();
+					const userService = new UserService();
 					// eslint-disable-next-line @typescript-eslint/naming-convention
 					const display_name = `${profileData.first_name} ${profileData.second_name}`;
-					await accountService.changeProfile({ ...profileData, display_name });
+					await userService.changeProfile({ ...profileData, display_name });
 				}
 			},
 			linkClickHandler: (event: MouseEvent) => {

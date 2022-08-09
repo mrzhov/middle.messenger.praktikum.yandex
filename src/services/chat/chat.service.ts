@@ -1,5 +1,5 @@
 import { store } from '@/app';
-import type { Chat, ChatTitle, User } from '@/shared/types';
+import type { AddChatUsersBody, Chat, ChatTitle, User } from '@/shared/types';
 import { changeRoute, errorHandler, openToast } from '@/shared/utils';
 
 import { ChatApi } from './chat.api';
@@ -23,9 +23,10 @@ export class ChatService {
 		return chats;
 	}
 
-	async createChat(data: ChatTitle): Promise<void> {
-		await this.chatApi.createChat(data);
+	async createChat(data: ChatTitle): Promise<{ id: number }> {
+		const response = await this.chatApi.createChat<{ id: number }>(data);
 		await this.getChats();
+		return response;
 	}
 
 	async getChatUsers(id: string): Promise<Array<User>> {
@@ -65,5 +66,9 @@ export class ChatService {
 				},
 			});
 		}
+	}
+
+	async addChatUsers(data: AddChatUsersBody): Promise<void> {
+		await this.chatApi.addChatUsers(data);
 	}
 }

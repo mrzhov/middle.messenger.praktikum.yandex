@@ -20,4 +20,13 @@
          background-color: $red-hover;
       }
    }
+
+   &.disabled {
+      cursor: default;
+      background-color: $blue-darken-5;
+
+      &:hover {
+         background-color: $blue-darken-5;
+      }
+   }
 }

@@ -1,5 +1,5 @@
 import { HttpClient } from '@/shared/core';
-import type { ChatTitle } from '@/shared/types';
+import type { AddChatUsersBody, ChatTitle } from '@/shared/types';
 
 export class ChatApi {
 	private http: HttpClient;
@@ -12,8 +12,8 @@ export class ChatApi {
 		return this.http.get<T>('/chats');
 	}
 
-	createChat(data: ChatTitle): Promise<unknown> {
-		return this.http.post('/chats', data);
+	createChat<T>(data: ChatTitle): Promise<T> {
+		return this.http.post<T>('/chats', data);
 	}
 
 	getChatUsers<T>(id: string): Promise<T> {
@@ -24,5 +24,9 @@ export class ChatApi {
 		return this.http.put<T>('/chats/avatar', data, {
 			headers: { 'content-type': 'multipart/form-data' },
 		});
+	}
+
+	addChatUsers<T>(data: AddChatUsersBody): Promise<T> {
+		return this.http.put<T>(`/chats/users`, data);
 	}
 }
