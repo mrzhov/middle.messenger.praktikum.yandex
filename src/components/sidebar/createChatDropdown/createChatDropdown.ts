@@ -1,6 +1,10 @@
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
-import { findParentElementByCondition, openCreateChatModal } from '@/shared/utils';
+import {
+	findParentElementByCondition,
+	openCreateDialogModal,
+	openCreateGroupModal,
+} from '@/shared/utils';
 
 const click = (event: MouseEvent) => {
 	event.preventDefault();
@@ -13,10 +17,10 @@ const click = (event: MouseEvent) => {
 		(target: any) => target.id === 'create-group-btn'
 	);
 	if (openCreateDialogModalButton) {
-		console.log('Открыть модальное окно "Создать диалог"');
+		openCreateDialogModal();
 	}
 	if (openCreateGroupModalButton) {
-		openCreateChatModal();
+		openCreateGroupModal();
 	}
 };
 

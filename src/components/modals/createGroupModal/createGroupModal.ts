@@ -13,8 +13,8 @@ const initialState = {
 	},
 };
 
-class CreateChatModal extends Block {
-	static componentName = 'CreateChatModal';
+class CreateGroupModal extends Block {
+	static componentName = 'CreateGroupModal';
 
 	constructor() {
 		super({
@@ -47,23 +47,23 @@ class CreateChatModal extends Block {
 			onSubmit: async (event: MouseEvent) => {
 				event.preventDefault();
 
-				const createChatData = {
+				const createGroupData = {
 					title: getValueFromRefs(this.refs, 'title'),
 				};
 
 				const nextState = {
-					values: { ...createChatData },
+					values: { ...createGroupData },
 					errors: initialState.errors,
 				};
 
-				nextState.errors.title = requiredValidator(createChatData.title);
+				nextState.errors.title = requiredValidator(createGroupData.title);
 
 				this.setState(nextState);
 
 				if (Object.values(nextState.errors).every(e => !e)) {
 					const chatService = new ChatService();
 					await chatService.createChat({
-						title: createChatData.title,
+						title: createGroupData.title,
 					});
 					this.closeModal();
 					this.setState(initialState);
@@ -79,13 +79,13 @@ class CreateChatModal extends Block {
 		return `
 			<div class="modal-container ${this.state.isOpen ? 'modal-open' : ''}">
 				<div class="modal space-y-4">
-					<p class="text-center text-xl">Создать чат</p>
+					<p class="text-center text-xl">Создать группу</p>
 					<form class="space-y-4">
 						{{{Input
 							variant="standard-black"
 							ref="title"
 							name="title"
-							label="Название чата"
+							label="Название группы"
 							value="${values.title}"
 							error="${errors.title}"
 							onFocus=onFocusHandler
@@ -104,4 +104,4 @@ class CreateChatModal extends Block {
 	}
 }
 
-export default CreateChatModal;
+export default CreateGroupModal;
