@@ -70,11 +70,11 @@ class CreateChatDropdown extends Block {
 				}}}
 				<div class="dropdown-content left-0 ${isOpen ? 'dropdown-content-open' : ''}">
 					<button class="space-x-2" id="create-dialog-btn">
-						${icons.people}
+						${icons.chat}
 						<span>Создать диалог</span>
 					</button>
 					<button class="space-x-2" id="create-group-btn">
-						${icons.removePeople}
+						${icons.people}
 						<span>Создать группу</span>
 					</button>
 				</div>
