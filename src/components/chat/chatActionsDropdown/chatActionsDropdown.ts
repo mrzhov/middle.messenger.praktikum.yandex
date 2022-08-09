@@ -64,7 +64,7 @@ class ChatActionsDropdown extends Block {
 					icon="dots"
 					onClick=toggleChatActions
 				}}}
-				<div class="dropdown-content ${isOpen ? 'dropdown-content-open' : ''}">
+				<div class="dropdown-content right-0 ${isOpen ? 'dropdown-content-open' : ''}">
 					<button class="space-x-2" id="add-people-btn">
 						${icons.people}
 						<span>Добавить участников</span>

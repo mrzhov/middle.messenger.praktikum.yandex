@@ -1,7 +1,7 @@
 import { store } from '@/app';
 import { ChatService } from '@/services';
 import { Block } from '@/shared/core';
-import { openCreateChatModal, useParams } from '@/shared/utils';
+import { useParams } from '@/shared/utils';
 
 class SidebarChat extends Block {
 	static componentName = 'SidebarChat';
@@ -25,14 +25,6 @@ class SidebarChat extends Block {
 		});
 	}
 
-	protected getStateFromProps() {
-		this.state = {
-			openCreateChatModal: () => {
-				openCreateChatModal();
-			},
-		};
-	}
-
 	render(): string {
 		// language=hbs
 		return `
@@ -40,10 +32,7 @@ class SidebarChat extends Block {
 				<div class="sidebar-top pr-1">
 					<div class="flex items-center justify-between space-x-2">
 						{{{Search}}}
-						{{{Button
-							icon="pencil"
-							onClick=openCreateChatModal
-						}}}
+						{{{CreateChatDropdown}}}
 					</div>
 				</div>
 				<div class="chat-list">

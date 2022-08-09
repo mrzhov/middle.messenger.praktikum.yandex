@@ -9,6 +9,7 @@ import { Loader } from '@/components/loader';
 import { CreateChatModal } from '@/components/modals/createChatModal';
 import { ChatListItem } from '@/components/sidebar/chat/chatListItem';
 import { Search } from '@/components/sidebar/chat/search';
+import { CreateChatDropdown } from '@/components/sidebar/createChatDropdown';
 import { Navigation } from '@/components/sidebar/navigation';
 import { CategoryItem } from '@/components/sidebar/settings/categoryItem';
 import { Profile } from '@/components/sidebar/settings/profile';
@@ -39,4 +40,5 @@ export const registerComponents = () => {
 	registerComponent(CreateChatModal);
 	registerComponent(Loader);
 	registerComponent(ChatActionsDropdown);
+	registerComponent(CreateChatDropdown);
 };
