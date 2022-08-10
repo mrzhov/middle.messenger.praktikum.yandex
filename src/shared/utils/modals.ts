@@ -2,6 +2,7 @@ import { CreateDialogModal } from '@/components/modals/createDialogModal';
 import { CreateGroupModal } from '@/components/modals/createGroupModal';
 import type { IModal } from '@/shared/types';
 
+import AddChatUsersModal from '../../components/modals/addChatUsersModal/addChatUsersModal';
 import DeleteChatWarningModal from '../../components/modals/deleteChatWarningModal/deleteChatWarningModal';
 
 export function closeModalHandler<T extends IModal>(this: T, target: Element) {
@@ -27,4 +28,10 @@ export const openDeleteChatWarningModal = () => {
 	const deleteChatWarningModal = new DeleteChatWarningModal();
 	deleteChatWarningModal.setState({ isOpen: true });
 	document.body.append(deleteChatWarningModal.getContent());
+};
+
+export const openAddChatUsersModal = () => {
+	const addChatUsersModal = new AddChatUsersModal();
+	addChatUsersModal.setState({ isOpen: true });
+	document.body.append(addChatUsersModal.getContent());
 };

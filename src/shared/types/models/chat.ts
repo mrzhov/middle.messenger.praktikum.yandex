@@ -10,6 +10,7 @@ export type Chat = {
 	id: number;
 	title: string;
 	avatar: Nullable<string>;
+	created_by: number;
 	unread_count: number;
 	last_message: Nullable<LastMessage>;
 };

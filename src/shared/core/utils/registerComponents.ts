@@ -6,6 +6,7 @@ import { ErrorPageContent } from '@/components/errorPageContent';
 import { Input } from '@/components/input';
 import { Link } from '@/components/link';
 import { Loader } from '@/components/loader';
+import { AddChatUsersModal } from '@/components/modals/addChatUsersModal';
 import { CreateDialogModal } from '@/components/modals/createDialogModal';
 import { CreateGroupModal } from '@/components/modals/createGroupModal';
 import { DeleteChatWarningModal } from '@/components/modals/deleteChatWarningModal';
@@ -45,4 +46,5 @@ export const registerComponents = () => {
 	registerComponent(ChatActionsDropdown);
 	registerComponent(CreateChatDropdown);
 	registerComponent(DeleteChatWarningModal);
+	registerComponent(AddChatUsersModal);
 };

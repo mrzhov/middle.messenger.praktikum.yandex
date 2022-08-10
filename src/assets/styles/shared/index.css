@@ -4,6 +4,7 @@
 @import "card.css";
 @import "space.css";
 @import "placement.css";
+@import "chip.css";
 
 .mock-avatar {
    @mixin size 60px;

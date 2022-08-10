@@ -47,7 +47,7 @@ class ChatPage extends Block {
 			const { currentChat, authUser } = state;
 			if (currentChat && authUser) {
 				const chatService = new ChatService();
-				const authUserIsAdmin = await chatService.checkRoleIsAdmin(currentChat, authUser);
+				const authUserIsAdmin = currentChat.created_by === authUser.id;
 				const isDialogChat = await chatService.isDialogChat(currentChat);
 				this.setState({
 					currentChat,

@@ -1,7 +1,12 @@
-import type { ChatActionsDropdownProps } from '@/components/chat/chatActionsDropdown/chatActionsDropdown.types';
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
-import { findParentElementByCondition, openDeleteChatWarningModal } from '@/shared/utils';
+import {
+	findParentElementByCondition,
+	openAddChatUsersModal,
+	openDeleteChatWarningModal,
+} from '@/shared/utils';
+
+import type { ChatActionsDropdownProps } from './chatActionsDropdown.types';
 
 const click = (event: MouseEvent) => {
 	event.preventDefault();
@@ -18,7 +23,7 @@ const click = (event: MouseEvent) => {
 		(target: any) => target.id === 'delete-chat-btn'
 	);
 	if (openAddPeopleModalButton) {
-		console.log('Открыть модальное окно "Добавить участников"');
+		openAddChatUsersModal();
 	}
 	if (openRemovePeopleModalButton) {
 		console.log('Открыть модальное окно "Удалить участников"');

@@ -7,7 +7,13 @@ import type {
 	ChatWithUsers,
 	User,
 } from '@/shared/types';
-import { changeRoute, errorHandler, getDialogChatTitle, openToast } from '@/shared/utils';
+import {
+	changeRoute,
+	errorHandler,
+	getDialogChatTitle,
+	openToast,
+	useParams,
+} from '@/shared/utils';
 
 import { ChatApi } from './chat.api';
 
@@ -83,15 +89,6 @@ export class ChatService {
 		await this.chatApi.addChatUsers(data);
 	}
 
-	async checkRoleIsAdmin(
-		currentChat: Chat & { users: Array<User> },
-		authUser: Omit<User, 'display_name'>
-	): Promise<boolean> {
-		const chatUsers = await this.getChatUsers(String(currentChat.id));
-		const authUserFromChatUsers = chatUsers.find(user => user.id === authUser.id);
-		return authUserFromChatUsers ? authUserFromChatUsers.role === 'admin' : false;
-	}
-
 	async isDialogChat(currentChat: ChatWithUsers): Promise<boolean> {
 		if (currentChat.users.length === 2) {
 			const [user1, user2] = currentChat.users;
@@ -108,5 +105,13 @@ export class ChatService {
 	async deleteChat(data: ChatId): Promise<void> {
 		await this.chatApi.deleteChat(data);
 		await this.getAndSetChats();
+	}
+
+	async updateChatsAndCurrentChat(): Promise<void> {
+		const { id } = useParams();
+		await this.getAndSetChats();
+		if (id) {
+			await this.getCurrentChat(id);
+		}
 	}
 }

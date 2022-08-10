@@ -1,7 +1,6 @@
 import { store } from '@/app';
 import { ChatService } from '@/services';
 import { Block } from '@/shared/core';
-import { useParams } from '@/shared/utils';
 
 class SidebarChat extends Block {
 	static componentName = 'SidebarChat';
@@ -16,13 +15,8 @@ class SidebarChat extends Block {
 				chats: state.chats,
 			});
 		}, 'chats');
-		const { id } = useParams();
 		const chatService = new ChatService();
-		chatService.getAndSetChats().then(() => {
-			if (id) {
-				chatService.getCurrentChat(id);
-			}
-		});
+		await chatService.updateChatsAndCurrentChat();
 	}
 
 	render(): string {
