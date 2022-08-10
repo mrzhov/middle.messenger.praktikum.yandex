@@ -25,7 +25,7 @@ export type ChatId = {
 	chatId: number;
 };
 
-export type AddChatUsersBody = {
+export type ChatUsersBody = {
 	chatId: number;
 	users: Array<number>;
 };

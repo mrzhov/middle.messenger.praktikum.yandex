@@ -5,6 +5,7 @@
 @import "space.css";
 @import "placement.css";
 @import "chip.css";
+@import "checkbox.css";
 
 .mock-avatar {
    @mixin size 60px;

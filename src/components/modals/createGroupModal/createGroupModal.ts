@@ -4,8 +4,8 @@ import { blurHandler, closeModalHandler, focusHandler, getValueFromRefs } from '
 import { requiredValidator } from '@/shared/validators/required';
 
 const initialState = {
+	isOpen: false,
 	values: {
-		isOpen: false,
 		title: '',
 	},
 	errors: {

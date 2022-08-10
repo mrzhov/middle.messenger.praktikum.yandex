@@ -9,7 +9,7 @@ const initialState = {
 	isOpen: false,
 	usersVariants: null,
 	selectedUsers: [],
-	addUsersBtnText: 'Добавить пользователей',
+	addUsersBtnText: 'Добавить участников',
 	values: {
 		login: '',
 	},
@@ -54,8 +54,8 @@ class AddChatUsersModal extends Block {
 								selectedUsers,
 								addUsersBtnText:
 									selectedUsers.length === 1
-										? `Добавить пользователя ${selectedUser.login}`
-										: `Добавить пользователей (${selectedUsers.length})`,
+										? `Добавить участника ${selectedUser.login}`
+										: `Добавить участников (${selectedUsers.length})`,
 								values: initialState.values,
 								errors: initialState.errors,
 							});
@@ -130,7 +130,7 @@ class AddChatUsersModal extends Block {
 		return `
 			<div class="modal-container ${this.state.isOpen ? 'modal-open' : ''}">
 				<div class="modal space-y-4">
-					<p class="text-center text-xl">Добавить пользователей</p>
+					<p class="text-center text-xl">Добавить участников</p>
 					<form class="space-y-4">
 						<div class="flex space-x-2">
 							<div class="relative grow">
@@ -138,7 +138,7 @@ class AddChatUsersModal extends Block {
 									variant="standard-black"
 									ref="login"
 									name="login"
-									label="Логин пользователя"
+									label="Логин участника"
 									value="${values.login}"
 									error="${errors.login}"
 									onFocus=onFocusHandler
@@ -171,7 +171,7 @@ class AddChatUsersModal extends Block {
 								</div>
 							{{/each}}
 						{{else}}
-							<p class="text">Найдите пользователей...</p>
+							<p class="text">Найдите участников...</p>
 						{{/if}}
 					</div>
 					<div class="submit-container flex-center">

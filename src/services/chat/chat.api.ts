@@ -1,5 +1,5 @@
 import { HttpClient } from '@/shared/core';
-import type { AddChatUsersBody, ChatId, ChatTitle } from '@/shared/types';
+import type { ChatId, ChatTitle, ChatUsersBody } from '@/shared/types';
 
 export class ChatApi {
 	private http: HttpClient;
@@ -30,7 +30,11 @@ export class ChatApi {
 		});
 	}
 
-	addChatUsers<T>(data: AddChatUsersBody): Promise<T> {
+	addChatUsers<T>(data: ChatUsersBody): Promise<T> {
 		return this.http.put<T>(`/chats/users`, data);
+	}
+
+	deleteChatUsers<T>(data: ChatUsersBody): Promise<T> {
+		return this.http.delete<T>(`/chats/users`, data);
 	}
 }

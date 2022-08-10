@@ -1,4 +1,8 @@
-import { AddChatUsersModal, DeleteChatWarningModal } from '@/components/modals';
+import {
+	AddChatUsersModal,
+	DeleteChatUsersModal,
+	DeleteChatWarningModal,
+} from '@/components/modals';
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
 import { findParentElementByCondition, openModal } from '@/shared/utils';
@@ -11,7 +15,7 @@ const click = (event: MouseEvent) => {
 		event,
 		(target: any) => target.id === 'add-people-btn'
 	);
-	const openRemovePeopleModalButton = findParentElementByCondition(
+	const openDeleteChatUsersModalButton = findParentElementByCondition(
 		event,
 		(target: any) => target.id === 'remove-people-btn'
 	);
@@ -22,8 +26,8 @@ const click = (event: MouseEvent) => {
 	if (openAddChatUsersModalButton) {
 		openModal(AddChatUsersModal);
 	}
-	if (openRemovePeopleModalButton) {
-		console.log('Открыть модальное окно "Удалить участников"');
+	if (openDeleteChatUsersModalButton) {
+		openModal(DeleteChatUsersModal);
 	}
 	if (openDeleteChatWarningModalButton) {
 		openModal(DeleteChatWarningModal);

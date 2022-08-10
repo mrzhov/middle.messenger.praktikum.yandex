@@ -1,12 +1,5 @@
 import { store } from '@/app';
-import type {
-	AddChatUsersBody,
-	Chat,
-	ChatId,
-	ChatTitle,
-	ChatWithUsers,
-	User,
-} from '@/shared/types';
+import type { Chat, ChatId, ChatTitle, ChatUsersBody, ChatWithUsers, User } from '@/shared/types';
 import {
 	changeRoute,
 	errorHandler,
@@ -85,8 +78,12 @@ export class ChatService {
 		}
 	}
 
-	async addChatUsers(data: AddChatUsersBody): Promise<void> {
+	async addChatUsers(data: ChatUsersBody): Promise<void> {
 		await this.chatApi.addChatUsers(data);
+	}
+
+	async deleteChatUsers(data: ChatUsersBody): Promise<void> {
+		await this.chatApi.deleteChatUsers(data);
 	}
 
 	async isDialogChat(currentChat: ChatWithUsers): Promise<boolean> {
