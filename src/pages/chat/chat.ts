@@ -93,10 +93,19 @@ class ChatPage extends Block {
 								</div>
 							{{/if}}
 						</div>
-						{{{ChatActionsDropdown
-							authUserIsAdmin=this.authUserIsAdmin
-							isDialogChat=this.isDialogChat
-						}}}
+						{{#if (eq this.isDialogChat 'true')}}
+							{{{ChatActionsDropdown
+								authUserIsAdmin=this.authUserIsAdmin
+								isDialogChat=this.isDialogChat
+							}}}
+						{{else}}
+							{{#if (eq this.authUserIsAdmin 'true')}}
+								{{{ChatActionsDropdown
+									authUserIsAdmin=this.authUserIsAdmin
+									isDialogChat=this.isDialogChat
+								}}}
+							{{/if}}
+						{{/if}}
 					</header>
 					<div class="chat-messages">
 						<div class="space-y-2">
