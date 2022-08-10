@@ -1,4 +1,4 @@
-import type { UserSmall } from '@/shared/types';
+import type { User, UserSmall } from '@/shared/types';
 
 export type LastMessage = {
 	user: UserSmall;
@@ -13,6 +13,8 @@ export type Chat = {
 	unread_count: number;
 	last_message: Nullable<LastMessage>;
 };
+
+export type ChatWithUsers = Chat & { users: Array<User> };
 
 export type ChatTitle = {
 	title: string;

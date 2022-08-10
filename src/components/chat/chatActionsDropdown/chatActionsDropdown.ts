@@ -1,3 +1,4 @@
+import type { ChatActionsDropdownProps } from '@/components/chat/chatActionsDropdown/chatActionsDropdown.types';
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
 import { findParentElementByCondition } from '@/shared/utils';
@@ -12,19 +13,30 @@ const click = (event: MouseEvent) => {
 		event,
 		(target: any) => target.id === 'remove-people-btn'
 	);
+	const openRemoveChatModalButton = findParentElementByCondition(
+		event,
+		(target: any) => target.id === 'remove-chat-btn'
+	);
 	if (openAddPeopleModalButton) {
 		console.log('Открыть модальное окно "Добавить участников"');
 	}
 	if (openRemovePeopleModalButton) {
 		console.log('Открыть модальное окно "Удалить участников"');
 	}
+	if (openRemoveChatModalButton) {
+		console.log('Открыть модальное окно "Удалить чат"');
+	}
 };
 
-class ChatActionsDropdown extends Block {
+class ChatActionsDropdown extends Block<ChatActionsDropdownProps<boolean>> {
 	static componentName = 'ChatActionsDropdown';
 
-	constructor() {
-		super({ events: { click } });
+	constructor(props: ChatActionsDropdownProps<StringBoolean>) {
+		const transformedProps = {
+			authUserIsAdmin: props.authUserIsAdmin === 'true',
+			isDialogChat: props.isDialogChat === 'true',
+		};
+		super({ ...transformedProps, events: { click } });
 	}
 
 	protected getStateFromProps() {
@@ -65,13 +77,21 @@ class ChatActionsDropdown extends Block {
 					onClick=toggleChatActions
 				}}}
 				<div class="dropdown-content right-0 ${isOpen ? 'dropdown-content-open' : ''}">
-					<button class="space-x-2" id="add-people-btn">
-						${icons.people}
-						<span>Добавить участников</span>
-					</button>
-					<button class="space-x-2" id="remove-people-btn">
-						${icons.removePeople}
-						<span>Удалить участников</span>
+					{{#unless this.isDialogChat}}
+						{{#if this.authUserIsAdmin}}
+							<button class="dropdown-content-btn space-x-2" id="add-people-btn">
+								${icons.people}
+								<span>Добавить участников</span>
+							</button>
+							<button class="dropdown-content-btn space-x-2" id="remove-people-btn">
+								${icons.removePeople}
+								<span>Удалить участников</span>
+							</button>
+						{{/if}}
+					{{/unless}}
+					<button class="dropdown-content-btn color-red space-x-2 " id="remove-chat-btn">
+						${icons.trash}
+						<span>Удалить чат</span>
 					</button>
 				</div>
 			</div>

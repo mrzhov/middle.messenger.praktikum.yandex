@@ -13,6 +13,7 @@ export type IconsKeys =
 	| 'staple'
 	| 'people'
 	| 'removePeople'
+	| 'trash'
 	| 'doubleCheck';
 
 export const icons: Record<IconsKeys, string> = {
@@ -111,6 +112,15 @@ export const icons: Record<IconsKeys, string> = {
 					<path d="M9.37496 8.71594C9.26527 10.2384 8.12246 11.4375 6.89058 11.4375C5.65871 11.4375 4.51402 10.2389 4.40621 8.71594C4.29418 7.13203 5.40652 6 6.89058 6C8.37465 6 9.48699 7.16109 9.37496 8.71594Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 					<path d="M9.65622 14.3437C8.81013 13.9561 7.87825 13.807 6.8906 13.807C4.4531 13.807 2.10466 15.0187 1.51638 17.3789C1.43903 17.6911 1.63497 18 1.9556 18H7.21872" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"/>
 					<path d="M23 1L1 23" stroke="white"/>
+				</svg>
+		`,
+	trash: `
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M4 6h16l-1.58 14.22A2 2 0 0 1 16.432 22H7.568a2 2 0 0 1-1.988-1.78L4 6z"/>
+					<path d="M7.345 3.147A2 2 0 0 1 9.154 2h5.692a2 2 0 0 1 1.81 1.147L18 6H6l1.345-2.853z"/>
+					<path d="M2 6h20"/>
+					<path d="M10 11v5"/>
+					<path d="M14 11v5"/>
 				</svg>
 		`,
 	doubleCheck: `

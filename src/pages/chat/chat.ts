@@ -4,6 +4,12 @@ import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
 import { findParentElementByCondition, numWord } from '@/shared/utils';
 
+const initialState = {
+	currentChat: null,
+	authUserIsAdmin: 'false',
+	isDialogChat: 'false',
+};
+
 async function inputOnChangeHandler(this: any) {
 	const { files } = this;
 	const file = files ? files[0] : null;
@@ -15,34 +21,51 @@ async function inputOnChangeHandler(this: any) {
 	}
 }
 
-const click = (event: MouseEvent) => {
-	event.preventDefault();
-	const openChangeAvatarModalButton = findParentElementByCondition(event, (target: any) =>
-		target.classList.contains('chat-avatar')
-	);
-	if (openChangeAvatarModalButton) {
-		const input = document.createElement('input');
-		input.type = 'file';
-		input.onchange = inputOnChangeHandler;
-		input.click();
-	}
-};
-
 class ChatPage extends Block {
 	constructor() {
-		super({ events: { click } });
+		super({
+			events: {
+				click: (event: MouseEvent) => {
+					event.preventDefault();
+					const openChangeAvatarModalButton = findParentElementByCondition(
+						event,
+						(target: any) => target.classList.contains('chat-avatar')
+					);
+					if (openChangeAvatarModalButton && this.state.authUserIsAdmin) {
+						const input = document.createElement('input');
+						input.type = 'file';
+						input.onchange = inputOnChangeHandler;
+						input.click();
+					}
+				},
+			},
+		});
 	}
 
 	componentDidMount() {
-		store.subscribe(state => {
-			this.setState({
-				currentChat: state.currentChat,
-			});
+		store.subscribe(async state => {
+			const { currentChat, authUser } = state;
+			if (currentChat && authUser) {
+				const chatService = new ChatService();
+				const authUserIsAdmin = await chatService.checkRoleIsAdmin(currentChat, authUser);
+				const isDialogChat = await chatService.isDialogChat(currentChat);
+				this.setState({
+					currentChat,
+					authUserIsAdmin: String(authUserIsAdmin),
+					isDialogChat: String(isDialogChat),
+				});
+			}
 		}, 'currentChat');
 	}
 
+	protected getStateFromProps() {
+		this.state = {
+			...initialState,
+		};
+	}
+
 	render(): string {
-		const { currentChat } = this.state;
+		const { currentChat, authUserIsAdmin } = this.state;
 		const chatTitle = currentChat?.title || '';
 		const usersCount = currentChat?.users?.length || '';
 		const usersWord = currentChat?.users
@@ -55,7 +78,7 @@ class ChatPage extends Block {
 				<main class="flex flex-col h-full">
 					<header class="page-header flex items-center justify-between">
 						<div class="flex-center">
-							<button class="chat-avatar flex-center">
+							<button class="flex-center chat-avatar${authUserIsAdmin === 'true' ? ' chat-avatar-hover' : ''}">
 								{{#if ${Boolean(currentChat?.avatar)}}}
 									<img src="${process.env.RESOURCES_URL}${currentChat?.avatar}" alt="Avatar">
 								{{/if}}
@@ -70,7 +93,10 @@ class ChatPage extends Block {
 								</div>
 							{{/if}}
 						</div>
-						{{{ChatActionsDropdown}}}
+						{{{ChatActionsDropdown
+							authUserIsAdmin=this.authUserIsAdmin
+							isDialogChat=this.isDialogChat
+						}}}
 					</header>
 					<div class="chat-messages">
 						<div class="space-y-2">

@@ -1,7 +1,8 @@
+import { store } from '@/app';
 import { ChatService, UserService } from '@/services';
 import { Block } from '@/shared/core';
 import type { User } from '@/shared/types';
-import { blurHandler, focusHandler, getValueFromRefs } from '@/shared/utils';
+import { blurHandler, focusHandler, getDialogChatTitle, getValueFromRefs } from '@/shared/utils';
 import { loginValidator } from '@/shared/validators';
 
 const initialState = {
@@ -96,15 +97,34 @@ class CreateDialogModal extends Block {
 				}
 			},
 			onCreate: async () => {
+				const { authUser } = store.getState();
 				const { selectedUser } = this.state;
-				const chatService = new ChatService();
-				const { id: chatId } = await chatService.createChat({
-					title: `${selectedUser.first_name} ${selectedUser.second_name}`,
-				});
-				await chatService.addChatUsers({ chatId, users: [selectedUser.id] });
-				await chatService.getChats();
-				this.closeModal();
-				this.destroy();
+				if (authUser && selectedUser) {
+					const chatService = new ChatService();
+					const title = getDialogChatTitle(authUser, selectedUser);
+					const titleWithReversedUsers = getDialogChatTitle(selectedUser, authUser);
+					const chats = await chatService.getChats();
+					const chatExist = chats.some(
+						chat => chat.title === title || chat.title === titleWithReversedUsers
+					);
+					if (chatExist) {
+						const nextState = {
+							...this.state,
+							values: {
+								login: getValueFromRefs(this.refs, 'login'),
+							},
+							errors: initialState.errors,
+						};
+						nextState.errors.login = `Диалог с ${selectedUser.login} уже существует`;
+						this.setState(nextState);
+						return;
+					}
+					const { id: chatId } = await chatService.createChat({ title });
+					await chatService.addChatUsers({ chatId, users: [selectedUser.id] });
+					await chatService.getAndSetChats();
+					this.closeModal();
+					this.destroy();
+				}
 			},
 		};
 	}

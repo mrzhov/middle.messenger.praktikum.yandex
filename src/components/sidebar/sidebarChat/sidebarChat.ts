@@ -18,7 +18,7 @@ class SidebarChat extends Block {
 		}, 'chats');
 		const { id } = useParams();
 		const chatService = new ChatService();
-		chatService.getChats().then(() => {
+		chatService.getAndSetChats().then(() => {
 			if (id) {
 				chatService.getCurrentChat(id);
 			}

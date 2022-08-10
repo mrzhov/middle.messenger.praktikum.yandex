@@ -1,5 +1,6 @@
 import { Toast } from '@/components/toast';
 import { Router } from '@/shared/core';
+import type { User } from '@/shared/types';
 
 import { omit } from './helpers';
 
@@ -58,4 +59,10 @@ export const numWord = (value: number, words: Array<string>) => {
 	if (num > 1 && num < 5) return words[1];
 	if (num === 1) return words[0];
 	return words[2];
+};
+
+export const getDialogChatTitle = (user1: User, user2: User) => {
+	const user1FullName = `${user1.first_name} ${user1.second_name}`;
+	const user2FullName = `${user2.first_name} ${user2.second_name}`;
+	return `Диалог ${user1FullName} и ${user2FullName}`;
 };

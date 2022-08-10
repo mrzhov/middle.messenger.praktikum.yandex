@@ -1,3 +1,5 @@
+type UserRole = 'admin' | 'regular';
+
 export type User = {
 	id: number;
 	first_name: string;
@@ -7,6 +9,7 @@ export type User = {
 	email: string;
 	phone: string;
 	avatar: string;
+	role: UserRole;
 };
 
 export type UserSmall = Omit<User, 'id' | 'display_name'>;

@@ -19,6 +19,7 @@ declare global {
 		values: Record<T, string>;
 		errors: Record<T, string>;
 	};
+	export type StringBoolean = 'true' | 'false';
 }
 
 export {};
