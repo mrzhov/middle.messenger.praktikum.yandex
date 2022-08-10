@@ -1,10 +1,7 @@
+import { CreateDialogModal, CreateGroupModal } from '@/components/modals';
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
-import {
-	findParentElementByCondition,
-	openCreateDialogModal,
-	openCreateGroupModal,
-} from '@/shared/utils';
+import { findParentElementByCondition, openModal } from '@/shared/utils';
 
 const click = (event: MouseEvent) => {
 	event.preventDefault();
@@ -17,10 +14,10 @@ const click = (event: MouseEvent) => {
 		(target: any) => target.id === 'create-group-btn'
 	);
 	if (openCreateDialogModalButton) {
-		openCreateDialogModal();
+		openModal(CreateDialogModal);
 	}
 	if (openCreateGroupModalButton) {
-		openCreateGroupModal();
+		openModal(CreateGroupModal);
 	}
 };
 
