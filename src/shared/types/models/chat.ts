@@ -20,6 +20,10 @@ export type ChatTitle = {
 	title: string;
 };
 
+export type ChatId = {
+	chatId: number;
+};
+
 export type AddChatUsersBody = {
 	chatId: number;
 	users: Array<number>;

@@ -27,9 +27,9 @@ export class HttpClient {
 		return this.request<T>(url, Methods.PUT, { data, ...config });
 	};
 
-	// delete = (url: string, options: MethodOptions) => {
-	// 	return this.request(url, { ...options, method: Methods.DELETE });
-	// };
+	delete = <T>(url: string, data?: any, config?: RequestConfig) => {
+		return this.request<T>(url, Methods.DELETE, { data, ...config });
+	};
 
 	request = <T>(url: string, method: Methods, options: Options) => {
 		const { data, headers } = options;
@@ -52,8 +52,6 @@ export class HttpClient {
 							: JSON.parse(xhr.response);
 					reject(response);
 				}
-
-				// resolve(xhr);
 			};
 
 			xhr.onabort = reject;

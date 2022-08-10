@@ -204,10 +204,3 @@ class ProfilePage extends Block {
 }
 
 export default ProfilePage;
-
-// <button>
-// 										${icons.avatarOverlay}
-// 										<div class="settings-page-avatar-overlay flex-center">
-// 											<div class="text-base">Поменять аватар</div>
-// 										</div>
-// 									</button>

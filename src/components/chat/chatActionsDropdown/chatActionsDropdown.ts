@@ -1,7 +1,7 @@
 import type { ChatActionsDropdownProps } from '@/components/chat/chatActionsDropdown/chatActionsDropdown.types';
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
-import { findParentElementByCondition } from '@/shared/utils';
+import { findParentElementByCondition, openDeleteChatWarningModal } from '@/shared/utils';
 
 const click = (event: MouseEvent) => {
 	event.preventDefault();
@@ -13,9 +13,9 @@ const click = (event: MouseEvent) => {
 		event,
 		(target: any) => target.id === 'remove-people-btn'
 	);
-	const openRemoveChatModalButton = findParentElementByCondition(
+	const openDeleteChatWarningModalButton = findParentElementByCondition(
 		event,
-		(target: any) => target.id === 'remove-chat-btn'
+		(target: any) => target.id === 'delete-chat-btn'
 	);
 	if (openAddPeopleModalButton) {
 		console.log('Открыть модальное окно "Добавить участников"');
@@ -23,8 +23,8 @@ const click = (event: MouseEvent) => {
 	if (openRemovePeopleModalButton) {
 		console.log('Открыть модальное окно "Удалить участников"');
 	}
-	if (openRemoveChatModalButton) {
-		console.log('Открыть модальное окно "Удалить чат"');
+	if (openDeleteChatWarningModalButton) {
+		openDeleteChatWarningModal();
 	}
 };
 
@@ -89,7 +89,7 @@ class ChatActionsDropdown extends Block<ChatActionsDropdownProps<boolean>> {
 							</button>
 						{{/if}}
 					{{/unless}}
-					<button class="dropdown-content-btn color-red space-x-2 " id="remove-chat-btn">
+					<button class="dropdown-content-btn color-red space-x-2 " id="delete-chat-btn">
 						${icons.trash}
 						<span>Удалить чат</span>
 					</button>

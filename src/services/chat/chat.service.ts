@@ -1,5 +1,12 @@
 import { store } from '@/app';
-import type { AddChatUsersBody, Chat, ChatTitle, ChatWithUsers, User } from '@/shared/types';
+import type {
+	AddChatUsersBody,
+	Chat,
+	ChatId,
+	ChatTitle,
+	ChatWithUsers,
+	User,
+} from '@/shared/types';
 import { changeRoute, errorHandler, getDialogChatTitle, openToast } from '@/shared/utils';
 
 import { ChatApi } from './chat.api';
@@ -96,5 +103,10 @@ export class ChatService {
 			);
 		}
 		return false;
+	}
+
+	async deleteChat(data: ChatId): Promise<void> {
+		await this.chatApi.deleteChat(data);
+		await this.getAndSetChats();
 	}
 }

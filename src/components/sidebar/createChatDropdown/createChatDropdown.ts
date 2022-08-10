@@ -69,11 +69,11 @@ class CreateChatDropdown extends Block {
 					onClick=toggleCreateChat
 				}}}
 				<div class="dropdown-content left-0 ${isOpen ? 'dropdown-content-open' : ''}">
-					<button class="space-x-2" id="create-dialog-btn">
+					<button class="dropdown-content-btn space-x-2" id="create-dialog-btn">
 						${icons.chat}
 						<span>Создать диалог</span>
 					</button>
-					<button class="space-x-2" id="create-group-btn">
+					<button class="dropdown-content-btn space-x-2" id="create-group-btn">
 						${icons.people}
 						<span>Создать группу</span>
 					</button>

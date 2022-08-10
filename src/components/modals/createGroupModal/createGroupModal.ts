@@ -1,6 +1,6 @@
 import { ChatService } from '@/services';
 import { Block } from '@/shared/core';
-import { blurHandler, focusHandler, getValueFromRefs } from '@/shared/utils';
+import { blurHandler, closeModalHandler, focusHandler, getValueFromRefs } from '@/shared/utils';
 import { requiredValidator } from '@/shared/validators/required';
 
 const initialState = {
@@ -22,17 +22,14 @@ class CreateGroupModal extends Block {
 				click: (event: MouseEvent) => {
 					event.preventDefault();
 					const target = event.target as Element;
-					if (target.classList.contains('modal-container')) {
-						this.closeModal();
-						this.destroy();
-					}
+					closeModalHandler.call(this, target);
 				},
 			},
 		});
 	}
 
 	closeModal() {
-		this.state.isOpen = false;
+		this.setState(initialState);
 	}
 
 	protected getStateFromProps() {

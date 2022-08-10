@@ -8,6 +8,7 @@ import { Link } from '@/components/link';
 import { Loader } from '@/components/loader';
 import { CreateDialogModal } from '@/components/modals/createDialogModal';
 import { CreateGroupModal } from '@/components/modals/createGroupModal';
+import { DeleteChatWarningModal } from '@/components/modals/deleteChatWarningModal';
 import { ChatListItem } from '@/components/sidebar/chat/chatListItem';
 import { Search } from '@/components/sidebar/chat/search';
 import { CreateChatDropdown } from '@/components/sidebar/createChatDropdown';
@@ -43,4 +44,5 @@ export const registerComponents = () => {
 	registerComponent(Loader);
 	registerComponent(ChatActionsDropdown);
 	registerComponent(CreateChatDropdown);
+	registerComponent(DeleteChatWarningModal);
 };

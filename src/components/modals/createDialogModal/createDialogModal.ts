@@ -2,7 +2,13 @@ import { store } from '@/app';
 import { ChatService, UserService } from '@/services';
 import { Block } from '@/shared/core';
 import type { User } from '@/shared/types';
-import { blurHandler, focusHandler, getDialogChatTitle, getValueFromRefs } from '@/shared/utils';
+import {
+	blurHandler,
+	closeModalHandler,
+	focusHandler,
+	getDialogChatTitle,
+	getValueFromRefs,
+} from '@/shared/utils';
 import { loginValidator } from '@/shared/validators';
 
 const initialState = {
@@ -27,10 +33,7 @@ class CreateDialogModal extends Block {
 				click: (event: MouseEvent) => {
 					event.preventDefault();
 					const target = event.target as Element;
-					if (target.classList.contains('modal-container')) {
-						this.closeModal();
-						this.destroy();
-					}
+					closeModalHandler.call(this, target);
 					if (target.classList.contains('input-options-btn') && this.state.usersVariants) {
 						const selectedUser = this.state.usersVariants.find(
 							(user: User) => user.login === target.textContent
@@ -55,7 +58,7 @@ class CreateDialogModal extends Block {
 	}
 
 	closeModal() {
-		this.state.isOpen = false;
+		this.setState(initialState);
 	}
 
 	protected getStateFromProps() {
