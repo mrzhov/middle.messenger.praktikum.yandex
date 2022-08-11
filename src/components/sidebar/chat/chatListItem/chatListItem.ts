@@ -45,9 +45,11 @@ class ChatListItem extends Block<ChatListItemProps & BlockEvents> {
 								<time class="subtext">{{lastMessageTime}}</time>
 							</div>
 							<div class="chat-list-item-content-message">
-								<div>
-									<p class="subtext">{{lastMessageContent}}</p>
-								</div>
+								{{#if last_message}}
+									<p class="subtext">{{last_message}}</p>
+								{{else}}
+									<p class="subtext">Здесь пока ничего нет...</p>
+								{{/if}}
 								{{#if unread_count}}
 									<div class="chat-list-item-content-unread-count">
 										<div>

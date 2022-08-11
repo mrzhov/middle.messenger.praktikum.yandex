@@ -63,14 +63,6 @@
          height: 39px;
          display: flex;
          justify-content: space-between;
-         & > div:first-child {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            width: calc(100% - 1.25rem);
-         }
       }
 
       &-unread-count {

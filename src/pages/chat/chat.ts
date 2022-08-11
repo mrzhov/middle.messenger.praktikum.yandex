@@ -119,9 +119,19 @@ class ChatPage extends Block {
 						{{/if}}
 					</header>
 					<div class="chat-messages">
-						<div class="space-y-2">
-							
-						</div>
+						{{#if this.currentChat}}
+							{{#if this.currentChat.last_message}}
+
+							{{else}}
+								<div class="flex-center h-full">
+									<p class="subtext">Здесь пока ничего нет...</p>
+								</div>
+							{{/if}}
+						{{else}}
+							<div class="flex-center h-full">
+								{{{Loader}}}
+							</div>
+						{{/if}}
 					</div>
 					{{{ChatBottomActions}}}
 				</main>
