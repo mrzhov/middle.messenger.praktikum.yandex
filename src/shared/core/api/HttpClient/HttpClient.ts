@@ -3,10 +3,6 @@ import { queryStringify } from '@/shared/utils';
 import type { Options, RequestConfig } from './HttpClient.types';
 import { Methods } from './HttpClient.types';
 
-const defaultHeaders = {
-	'content-type': 'application/json',
-};
-
 export class HttpClient {
 	private readonly baseURL: string;
 
@@ -58,15 +54,18 @@ export class HttpClient {
 			xhr.onerror = reject;
 			xhr.ontimeout = reject;
 
-			Object.entries(Object.assign(defaultHeaders, headers)).forEach(([key, value]) => {
-				xhr.setRequestHeader(key, value);
-			});
+			if (headers) {
+				Object.entries(headers).forEach(([key, value]) => {
+					xhr.setRequestHeader(key, value);
+				});
+			}
 
 			if (method === Methods.GET || !data) {
 				xhr.send();
 			} else if (data instanceof FormData) {
 				xhr.send(data);
 			} else {
+				xhr.setRequestHeader('content-type', 'application/json');
 				xhr.send(JSON.stringify(data));
 			}
 		});
