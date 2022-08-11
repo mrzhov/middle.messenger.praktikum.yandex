@@ -79,6 +79,9 @@ class AddChatUsersModal extends Block {
 			onBlurHandler: (event: FocusEvent) => {
 				blurHandler.call(this, event);
 			},
+			closeModal: () => {
+				this.setState(initialState);
+			},
 			onSearch: async (event: MouseEvent) => {
 				event.preventDefault();
 
@@ -129,57 +132,66 @@ class AddChatUsersModal extends Block {
 		// language=hbs
 		return `
 			<div class="modal-container ${this.state.isOpen ? 'modal-open' : ''}">
-				<div class="modal space-y-4">
-					<p class="text-center text-xl">Добавить участников</p>
-					<form class="space-y-4">
-						<div class="flex space-x-2">
-							<div class="relative grow">
-								{{{Input
-									variant="standard-black"
-									ref="login"
-									name="login"
-									label="Логин участника"
-									value="${values.login}"
-									error="${errors.login}"
-									onFocus=onFocusHandler
-									onBlur=onBlurHandler
-								}}}
-								{{#if this.usersVariants}}
-									<div class="input-options">
-										<div class="input-options-content">
-											{{#each this.usersVariants}}
-												<button class="input-options-btn">{{this.login}}</button>
-											{{/each}}
-										</div>
-									</div>
-								{{/if}}
-							</div>
-							<div>
-								{{{Button
-									text="Найти"
-									onClick=onSearch
-									classes="py-4"
-								}}}
-							</div>
-						</div>
-					</form>
-					<div class="chips-container">
-						{{#if this.selectedUsers.length}}
-							{{#each this.selectedUsers}}
-								<div class="chip">
-									<p class="text">{{this.login}}</p>
-								</div>
-							{{/each}}
-						{{else}}
-							<p class="text">Найдите участников...</p>
-						{{/if}}
-					</div>
-					<div class="submit-container flex-center">
+				<div class="modal">
+					<div class="modal-close-btn">
 						{{{Button
-							text=addUsersBtnText
-							onClick=onAddUsers
-							disabled=${!selectedUsers.length}
+							icon="closeModal"
+							onClick=closeModal
+							classes="btn-icon"
 						}}}
+					</div>
+					<div class="space-y-4">
+						<p class="text-center text-xl">Добавить участников</p>
+						<form class="space-y-4">
+							<div class="flex space-x-2">
+								<div class="relative grow">
+									{{{Input
+										variant="standard-black"
+										ref="login"
+										name="login"
+										label="Логин участника"
+										value="${values.login}"
+										error="${errors.login}"
+										onFocus=onFocusHandler
+										onBlur=onBlurHandler
+									}}}
+									{{#if this.usersVariants}}
+										<div class="input-options">
+											<div class="input-options-content">
+												{{#each this.usersVariants}}
+													<button class="input-options-btn">{{this.login}}</button>
+												{{/each}}
+											</div>
+										</div>
+									{{/if}}
+								</div>
+								<div>
+									{{{Button
+										text="Найти"
+										onClick=onSearch
+										classes="py-4"
+									}}}
+								</div>
+							</div>
+						</form>
+						<div class="chips-container">
+							{{#if this.selectedUsers.length}}
+								{{#each this.selectedUsers}}
+									<div class="chip">
+										<p class="text">{{this.login}}</p>
+									</div>
+								{{/each}}
+							{{else}}
+								<p class="text">Найдите участников...</p>
+							{{/if}}
+						</div>
+						<div class="submit-container flex-center">
+							{{{Button
+								text=addUsersBtnText
+								onClick=onAddUsers
+								disabled=${!selectedUsers.length}
+							}}}
+						</div>
 					</div>
 				</div>
 			</div>

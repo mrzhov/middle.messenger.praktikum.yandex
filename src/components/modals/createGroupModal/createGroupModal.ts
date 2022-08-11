@@ -41,6 +41,9 @@ class CreateGroupModal extends Block {
 			onBlurHandler: (event: FocusEvent) => {
 				blurHandler.call(this, event);
 			},
+			closeModal: () => {
+				this.setState(initialState);
+			},
 			onSubmit: async (event: MouseEvent) => {
 				event.preventDefault();
 
@@ -75,26 +78,35 @@ class CreateGroupModal extends Block {
 		// language=hbs
 		return `
 			<div class="modal-container ${this.state.isOpen ? 'modal-open' : ''}">
-				<div class="modal space-y-4">
-					<p class="text-center text-xl">Создать группу</p>
-					<form class="space-y-4">
-						{{{Input
-							variant="standard-black"
-							ref="title"
-							name="title"
-							label="Название группы"
-							value="${values.title}"
-							error="${errors.title}"
-							onFocus=onFocusHandler
-							onBlur=onBlurHandler
+				<div class="modal">
+					<div class="modal-close-btn">
+						{{{Button
+							icon="closeModal"
+							onClick=closeModal
+							classes="btn-icon"
 						}}}
-						<div class="submit-container flex-center">
-							{{{Button
-								text="Создать"
-								onClick=onSubmit
+					</div>
+					<div class="space-y-4">
+						<p class="text-center text-xl">Создать группу</p>
+						<form class="space-y-4">
+							{{{Input
+								variant="standard-black"
+								ref="title"
+								name="title"
+								label="Название группы"
+								value="${values.title}"
+								error="${errors.title}"
+								onFocus=onFocusHandler
+								onBlur=onBlurHandler
 							}}}
-						</div>
-					</form>
+							<div class="submit-container flex-center">
+								{{{Button
+									text="Создать"
+									onClick=onSubmit
+								}}}
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		`;

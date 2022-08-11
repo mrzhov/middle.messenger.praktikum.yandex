@@ -1,8 +1,9 @@
 import { store } from '@/app';
+import { GroupChatUsersModal } from '@/components/modals/groupChatUsersModal';
 import { ChatService } from '@/services';
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
-import { findParentElementByCondition, numWord } from '@/shared/utils';
+import { findParentElementByCondition, numWord, openModal } from '@/shared/utils';
 
 const initialState = {
 	currentChat: null,
@@ -21,22 +22,28 @@ async function inputOnChangeHandler(this: any) {
 	}
 }
 
+function click(this: any, event: MouseEvent) {
+	const openChangeAvatarModalButton = findParentElementByCondition(event, (target: any) =>
+		target.classList.contains('chat-avatar')
+	);
+	if (openChangeAvatarModalButton && this.state.authUserIsAdmin) {
+		const input = document.createElement('input');
+		input.type = 'file';
+		input.onchange = inputOnChangeHandler;
+		input.click();
+	}
+	if ((event.target as Element).id === 'open-users-modal-btn') {
+		openModal(GroupChatUsersModal);
+	}
+}
+
 class ChatPage extends Block {
 	constructor() {
 		super({
 			events: {
 				click: (event: MouseEvent) => {
 					event.preventDefault();
-					const openChangeAvatarModalButton = findParentElementByCondition(
-						event,
-						(target: any) => target.classList.contains('chat-avatar')
-					);
-					if (openChangeAvatarModalButton && this.state.authUserIsAdmin) {
-						const input = document.createElement('input');
-						input.type = 'file';
-						input.onchange = inputOnChangeHandler;
-						input.click();
-					}
+					click.call(this, event);
 				},
 			},
 		});
@@ -89,7 +96,11 @@ class ChatPage extends Block {
 							{{#if this.currentChat}}
 								<div>
 									<h3 class="text">${chatTitle}</h3>
-									<h4 class="subtext">${usersCount} ${usersWord}</h4>
+									{{#if (eq this.isDialogChat 'false')}}
+										<h4 class="subtext hover-underline" id="open-users-modal-btn">
+											${usersCount} ${usersWord}
+										</h4>
+									{{/if}}
 								</div>
 							{{/if}}
 						</div>

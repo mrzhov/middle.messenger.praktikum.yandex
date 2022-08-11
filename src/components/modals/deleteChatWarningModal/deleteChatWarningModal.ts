@@ -40,6 +40,9 @@ class DeleteChatWarningModal extends Block {
 	protected getStateFromProps() {
 		this.state = {
 			...initialState,
+			closeModal: () => {
+				this.setState(initialState);
+			},
 			onDelete: async (event: MouseEvent) => {
 				event.preventDefault();
 
@@ -63,22 +66,31 @@ class DeleteChatWarningModal extends Block {
 		// language=hbs
 		return `
 			<div class="modal-container ${this.state.isOpen ? 'modal-open' : ''}">
-				<div class="modal space-y-4">
-					{{#if this.currentChat}}
-						<div>
-							<p class="text-center text-xl">Вы действительно хотите удалить этот чат?</p>
-							<p class="text-center subtext">${currentChat?.title}</p>
-						</div>
-						<div class="submit-container flex-center">
-							{{{Button
-								text="Удалить чат"
-								onClick=onDelete
-								classes="error"
-							}}}
-						</div>
-					{{else}}
-						<div class="h-full flex-center">{{{Loader}}}</div>
-					{{/if}}
+				<div class="modal">
+					<div class="modal-close-btn">
+						{{{Button
+							icon="closeModal"
+							onClick=closeModal
+							classes="btn-icon"
+						}}}
+					</div>
+					<div class="space-y-4">
+						{{#if this.currentChat}}
+							<div>
+								<p class="text-center text-xl">Вы действительно хотите удалить этот чат?</p>
+								<p class="text-center subtext">${currentChat?.title}</p>
+							</div>
+							<div class="submit-container flex-center">
+								{{{Button
+									text="Удалить чат"
+									onClick=onDelete
+									classes="error"
+								}}}
+							</div>
+						{{else}}
+							<div class="h-full flex-center">{{{Loader}}}</div>
+						{{/if}}
+					</div>
 				</div>
 			</div>
 		`;

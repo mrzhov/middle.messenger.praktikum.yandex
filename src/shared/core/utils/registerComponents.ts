@@ -11,6 +11,7 @@ import { CreateDialogModal } from '@/components/modals/createDialogModal';
 import { CreateGroupModal } from '@/components/modals/createGroupModal';
 import { DeleteChatUsersModal } from '@/components/modals/deleteChatUsersModal';
 import { DeleteChatWarningModal } from '@/components/modals/deleteChatWarningModal';
+import { GroupChatUsersModal } from '@/components/modals/groupChatUsersModal';
 import { ChatListItem } from '@/components/sidebar/chat/chatListItem';
 import { Search } from '@/components/sidebar/chat/search';
 import { CreateChatDropdown } from '@/components/sidebar/createChatDropdown';
@@ -49,4 +50,5 @@ export const registerComponents = () => {
 	registerComponent(DeleteChatWarningModal);
 	registerComponent(AddChatUsersModal);
 	registerComponent(DeleteChatUsersModal);
+	registerComponent(GroupChatUsersModal);
 };

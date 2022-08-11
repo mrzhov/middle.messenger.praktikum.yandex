@@ -67,6 +67,9 @@ class DeleteChatUsersModal extends Block {
 	protected getStateFromProps() {
 		this.state = {
 			...initialState,
+			closeModal: () => {
+				this.setState(initialState);
+			},
 			onDeleteUsers: async () => {
 				const { selectedUsersIds } = this.state;
 				const { currentChat } = store.getState();
@@ -90,35 +93,44 @@ class DeleteChatUsersModal extends Block {
 		// language=hbs
 		return `
 			<div class="modal-container ${this.state.isOpen ? 'modal-open' : ''}">
-				<div class="modal space-y-4">
-					<p class="text-center text-xl">Удалить участников</p>
-					<div class="checkboxes-container">
-						{{#if this.chatUsers}}
-							{{#each this.chatUsers}}
-								<div class="custom-checkbox">
-									<p class="text">{{this.login}}</p>
-									<div class="relative">
-										<input
-											type="checkbox"
-											class="checkbox"
-											id="checkbox-{{this.id}}"
-											{{this.checked}}
-										/>
-										<label for="checkbox-{{this.id}}" />
-									</div>
-								</div>
-							{{/each}}
-						{{else}}
-							<p class="text text-center">Вы последний участник чата</p>
-						{{/if}}
-					</div>
-					<div class="submit-container flex-center">
+				<div class="modal">
+					<div class="modal-close-btn">
 						{{{Button
-							text="Удалить участников"
-							classes="red"
-							onClick=onDeleteUsers
-							disabled=${!selectedUsersIds.length}
+							icon="closeModal"
+							onClick=closeModal
+							classes="btn-icon"
 						}}}
+					</div>
+					<div class="space-y-4">
+						<p class="text-center text-xl">Удалить участников</p>
+						<div class="checkboxes-container">
+							{{#if this.chatUsers}}
+								{{#each this.chatUsers}}
+									<div class="custom-checkbox">
+										<p class="text">{{this.login}}</p>
+										<div class="relative">
+											<input
+												type="checkbox"
+												class="checkbox"
+												id="checkbox-{{this.id}}"
+												{{this.checked}}
+											/>
+											<label for="checkbox-{{this.id}}" />
+										</div>
+									</div>
+								{{/each}}
+							{{else}}
+								<p class="text text-center">Вы последний участник чата</p>
+							{{/if}}
+						</div>
+						<div class="submit-container flex-center">
+							{{{Button
+								text="Удалить участников"
+								classes="red"
+								onClick=onDeleteUsers
+								disabled=${!selectedUsersIds.length}
+							}}}
+						</div>
 					</div>
 				</div>
 			</div>
