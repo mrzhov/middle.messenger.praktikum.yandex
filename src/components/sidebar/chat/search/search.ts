@@ -5,24 +5,47 @@ class Search extends Block {
 	static componentName = 'Search';
 
 	constructor() {
-		super();
+		super({
+			events: {
+				submit: (event: SubmitEvent) => {
+					event.preventDefault();
+					const form = event.target as HTMLFormElement;
+					const input = form.querySelector('input')!;
+					console.log(input.value);
+				},
+			},
+		});
+	}
+
+	protected getStateFromProps() {
+		this.state = {
+			onClose: () => {
+				console.log('Close Search');
+			},
+		};
 	}
 
 	render(): string {
 		// language=hbs
 		return `
-			<div class="search-form-field">
-				<input
-					id="search"
-					type="text"
-					name="search"
-					placeholder="Поиск"
-				/>
-				<label for="search">
-					${icons.search}
-					<span>Поиск</span>
-				</label>
-			</div>
+			<form class="search-form">
+				<div class="search-form-field">
+					<input
+						id="search"
+						type="text"
+						name="search"
+						placeholder="Поиск"
+					/>
+					<label for="search">
+						${icons.search}
+						<span>Поиск</span>
+					</label>
+					{{{Button
+						icon="closeModal"
+						onClick=onClose
+					}}}
+				</div>
+			</form>
 		`;
 	}
 }
