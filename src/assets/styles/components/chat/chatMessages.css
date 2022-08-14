@@ -5,6 +5,9 @@
    transition: color .3s ease;
    color: transparent;
    padding: 0 1rem;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-end;
 
    &::-webkit-scrollbar {
       width: 0.5rem;

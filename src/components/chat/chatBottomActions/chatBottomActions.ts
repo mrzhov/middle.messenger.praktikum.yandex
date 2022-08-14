@@ -1,3 +1,4 @@
+import { store } from '@/app';
 import { Block } from '@/shared/core';
 import { blurHandler, focusHandler, getValueFromRefs } from '@/shared/utils';
 import { messageValidator } from '@/shared/validators';
@@ -44,7 +45,10 @@ class ChatBottomActions extends Block {
 				this.setState(nextState);
 
 				if (Object.values(nextState.errors).every(e => !e)) {
-					console.log('message:', chatData);
+					const { messageService } = store.getState();
+					if (messageService) {
+						messageService.sendMessage(chatData);
+					}
 					this.setState(initialState);
 				}
 			},

@@ -1,4 +1,5 @@
-import type { MessageData, MessageItem, WSSParams } from '@/shared/types';
+import { store } from '@/app';
+import type { MessageData, WSSParams } from '@/shared/types';
 import { openToast } from '@/shared/utils';
 
 const ABNORMAL_CLOSURE = 1006;
@@ -38,12 +39,24 @@ export class MessageService {
 					type: 'ping',
 				})
 			);
-		}, 5000);
+		}, 20000);
 	}
 
 	static #onMessage(event: MessageEvent) {
-		const data = JSON.parse(event.data) as Array<MessageItem>;
-		console.log(data);
+		const data = JSON.parse(event.data);
+		if (data.type && data.type === 'pong') {
+			return;
+		}
+		if (Array.isArray(data)) {
+			store.setState({
+				messages: data.reverse(),
+			});
+			return;
+		}
+		const { messages } = store.getState();
+		store.setState({
+			messages: messages ? messages.concat(data) : [data],
+		});
 	}
 
 	static #onError(event: Event & { reason?: string }) {

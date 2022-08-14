@@ -8,6 +8,7 @@ import { findParentElementByCondition, numWord, openModal, useParams } from '@/s
 
 const initialState = {
 	currentChat: null,
+	messages: null,
 	authUserIsAdmin: 'false',
 	isDialogChat: 'false',
 };
@@ -51,15 +52,16 @@ class ChatPage extends Block {
 	}
 
 	async componentDidMount() {
-		store.subscribe(this.updateCurrentChatHandler.bind(this), 'currentChat');
+		this.storeSubscribe();
 		const { id: chatId } = useParams();
 		const chatService = new ChatService();
 		await chatService.updateChatsAndCurrentChat(chatId);
 		const token = await chatService.getChatToken(chatId);
 		const { authUser } = store.getState();
 		if (authUser && chatId && token) {
-			this.setState({
-				messageService: new MessageService({ userId: authUser.id, chatId, token }),
+			const messageService = new MessageService({ userId: authUser.id, chatId, token });
+			store.setState({
+				messageService,
 			});
 		}
 	}
@@ -68,6 +70,29 @@ class ChatPage extends Block {
 		this.state = {
 			...initialState,
 		};
+	}
+
+	onDestroy() {
+		const { messageService } = store.getState();
+		if (messageService) {
+			messageService.closeConnection();
+			store.setState({
+				messageService: null,
+				messages: null,
+			});
+		}
+	}
+
+	storeSubscribe() {
+		store.subscribe(this.updateCurrentChatHandler.bind(this), 'currentChat');
+		store.subscribe(state => {
+			const { messages } = state;
+			if (messages) {
+				this.setState({
+					messages,
+				});
+			}
+		}, 'messages');
 	}
 
 	async updateCurrentChatHandler(state: StoreState) {
@@ -82,10 +107,6 @@ class ChatPage extends Block {
 				isDialogChat: String(isDialogChat),
 			});
 		}
-	}
-
-	onDestroy() {
-		this.state.messageService.closeConnection();
 	}
 
 	render(): string {
@@ -136,17 +157,17 @@ class ChatPage extends Block {
 						{{/if}}
 					</header>
 					<div class="chat-messages">
-						{{#if this.currentChat}}
-							{{#if this.currentChat.last_message}}
-
-							{{else}}
-								<div class="flex-center h-full">
-									<p class="subtext">Здесь пока ничего нет...</p>
-								</div>
-							{{/if}}
+						{{#if this.messages.length}}
+							<div class="space-y-2">
+								{{#each this.messages}}
+									{{{ChatMessagesItem
+										message=this
+									}}}
+								{{/each}}
+							</div>
 						{{else}}
 							<div class="flex-center h-full">
-								{{{Loader}}}
+								<p class="subtext">Здесь пока ничего нет...</p>
 							</div>
 						{{/if}}
 					</div>

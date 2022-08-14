@@ -1,4 +1,6 @@
 import { Toast } from '@/components/toast';
+import type { WeeksKeys } from '@/shared/content';
+import { weeks } from '@/shared/content';
 import { Router } from '@/shared/core';
 import type { User } from '@/shared/types';
 
@@ -65,4 +67,30 @@ export const getDialogChatTitle = (user1: User, user2: User) => {
 	const user1FullName = `${user1.first_name} ${user1.second_name}`;
 	const user2FullName = `${user2.first_name} ${user2.second_name}`;
 	return `Диалог ${user1FullName} и ${user2FullName}`;
+};
+
+const addZeroChat = (value: number) => (value > 9 ? value : `0${value}`);
+
+export const toTimeTransformer = (dateTime: string) => {
+	const date = new Date(dateTime);
+	const hours = date.getHours();
+	const minutes = date.getMinutes();
+	return `${addZeroChat(hours)}:${addZeroChat(minutes)}`;
+};
+
+export const dateTimeTransformer = (dateTime: string) => {
+	const date = new Date(dateTime);
+	const currDate = new Date();
+	const diff = new Date(currDate.getTime() - date.getTime());
+	const diffInDays = Math.floor(diff.getTime() / (24 * 3600 * 1000));
+	if (diffInDays > 0) {
+		if (diffInDays > 7) {
+			const day = date.getDate();
+			const month = date.getMonth() + 1;
+			const year = String(date.getFullYear()).slice(2);
+			return `${day}.${addZeroChat(month)}.${year}`;
+		}
+		return weeks[date.getDay() as WeeksKeys];
+	}
+	return toTimeTransformer(dateTime);
 };

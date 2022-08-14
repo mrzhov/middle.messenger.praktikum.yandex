@@ -1,6 +1,12 @@
 import { store } from '@/app';
 import { Block } from '@/shared/core';
-import { changeRoute, findParentElementByCondition, useParams } from '@/shared/utils';
+import type { Chat } from '@/shared/types';
+import {
+	changeRoute,
+	dateTimeTransformer,
+	findParentElementByCondition,
+	useParams,
+} from '@/shared/utils';
 
 import type { ChatListItemProps } from './chatListItem.types';
 
@@ -16,16 +22,31 @@ const click = (event: MouseEvent) => {
 	}
 };
 
-class ChatListItem extends Block<ChatListItemProps & BlockEvents> {
+class ChatListItem extends Block<
+	Omit<ChatListItemProps, 'last_message'> & Pick<Chat, 'last_message'> & BlockEvents
+> {
 	static componentName = 'ChatListItem';
 
 	constructor(props: ChatListItemProps) {
-		super({ ...props, events: { click } });
+		const last_message = JSON.parse(props.last_message) as Chat['last_message'];
+		if (last_message) {
+			last_message.time = dateTimeTransformer(last_message.time);
+		}
+		super({
+			...props,
+			unread_count: Number(props.unread_count),
+			last_message,
+			events: { click },
+		});
 	}
 
 	render(): string {
 		const { id } = useParams();
 		const { itemId, avatar } = this.props;
+
+		if (this.props.last_message) {
+			dateTimeTransformer(this.props.last_message.time);
+		}
 
 		// language=hbs
 		return `
@@ -42,11 +63,13 @@ class ChatListItem extends Block<ChatListItemProps & BlockEvents> {
 						<div class="chat-list-item-content-wrapper">
 							<div class="chat-list-item-content-top">
 								<p class="text">{{title}}</p>
-								<time class="subtext">{{lastMessageTime}}</time>
+								{{#if last_message}}
+									<time class="subtext">{{last_message.time}}</time>
+								{{/if}}
 							</div>
 							<div class="chat-list-item-content-message">
 								{{#if last_message}}
-									<p class="subtext">{{last_message}}</p>
+									<p class="subtext">{{last_message.content}}</p>
 								{{else}}
 									<p class="subtext">Здесь пока ничего нет...</p>
 								{{/if}}

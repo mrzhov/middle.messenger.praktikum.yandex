@@ -1,3 +1,7 @@
-import type { Chat } from '@/shared/types';
-
-export type ChatListItemProps = Omit<Chat, 'id'> & { itemId: number };
+export type ChatListItemProps = {
+	itemId: number;
+	title: string;
+	avatar: Nullable<string>;
+	unread_count: number;
+	last_message: string;
+};

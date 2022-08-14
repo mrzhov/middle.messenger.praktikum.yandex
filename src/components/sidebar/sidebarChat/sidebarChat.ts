@@ -12,7 +12,13 @@ class SidebarChat extends Block {
 	async componentDidMount() {
 		store.subscribe(state => {
 			this.setState({
-				chats: state.chats,
+				chats: !state.chats
+					? null
+					: state.chats.map(chat => ({
+							...chat,
+							unread_count: String(chat.unread_count),
+							last_message: JSON.stringify(chat.last_message),
+					  })),
 			});
 		}, 'chats');
 		const chatService = new ChatService();

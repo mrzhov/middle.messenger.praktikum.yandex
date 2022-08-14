@@ -229,9 +229,7 @@ abstract class Block<P = any> {
 		}
 		this.element.style.display = 'none';
 
-		setTimeout(() => {
-			this.destroy();
-		}, 300);
+		this.destroy();
 	}
 
 	public destroy() {

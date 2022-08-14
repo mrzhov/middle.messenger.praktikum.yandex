@@ -5,11 +5,13 @@ export type WSSParams = {
 };
 
 export type MessageItem = {
+	id: number;
+	user_id: number;
 	chat_id: number;
-	time: string;
 	type: string;
-	user_id: string;
+	time: string;
 	content: string;
+	is_read: boolean;
 	file?: {
 		id: number;
 		user_id: number;
@@ -20,6 +22,8 @@ export type MessageItem = {
 		upload_date: string;
 	};
 };
+
+export type MessageItemSmall = Omit<MessageItem, 'chat_id' | 'is_read' | 'file'>;
 
 export type MessageData = {
 	message: string;
