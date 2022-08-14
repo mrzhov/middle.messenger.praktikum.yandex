@@ -16,7 +16,7 @@ class SidebarChat extends Block {
 			});
 		}, 'chats');
 		const chatService = new ChatService();
-		await chatService.updateChatsAndCurrentChat();
+		await chatService.getAndSetChats();
 	}
 
 	render(): string {

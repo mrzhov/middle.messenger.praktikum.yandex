@@ -79,7 +79,8 @@ class DeleteChatUsersModal extends Block {
 						chatId: currentChat.id,
 						users: selectedUsersIds,
 					});
-					await chatService.updateChatsAndCurrentChat();
+					// TODO
+					// await chatService.updateChatsAndCurrentChat();
 					this.closeModal();
 					this.destroy();
 				}
@@ -123,14 +124,16 @@ class DeleteChatUsersModal extends Block {
 								<p class="text text-center">Вы последний участник чата</p>
 							{{/if}}
 						</div>
-						<div class="submit-container flex-center">
-							{{{Button
-								text="Удалить участников"
-								classes="red"
-								onClick=onDeleteUsers
-								disabled=${!selectedUsersIds.length}
-							}}}
-						</div>
+						{{#if this.chatUsers}}
+							<div class="submit-container flex-center">
+								{{{Button
+									text="Удалить участников"
+									classes="red"
+									onClick=onDeleteUsers
+									disabled=${!selectedUsersIds.length}
+								}}}
+							</div>
+						{{/if}}
 					</div>
 				</div>
 			</div>

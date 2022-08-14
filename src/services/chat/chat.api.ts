@@ -37,4 +37,8 @@ export class ChatApi {
 	deleteChatUsers<T>(data: ChatUsersBody): Promise<T> {
 		return this.http.delete<T>(`/chats/users`, data);
 	}
+
+	getChatToken<T>(id: string): Promise<T> {
+		return this.http.post<T>(`/chats/token/${id}`);
+	}
 }

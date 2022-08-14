@@ -1,9 +1,10 @@
 import { store } from '@/app';
 import { GroupChatUsersModal } from '@/components/modals/groupChatUsersModal';
-import { ChatService } from '@/services';
+import { ChatService, MessageService } from '@/services';
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
-import { findParentElementByCondition, numWord, openModal } from '@/shared/utils';
+import type { StoreState } from '@/shared/core/store/Store.types';
+import { findParentElementByCondition, numWord, openModal, useParams } from '@/shared/utils';
 
 const initialState = {
 	currentChat: null,
@@ -49,26 +50,42 @@ class ChatPage extends Block {
 		});
 	}
 
-	componentDidMount() {
-		store.subscribe(async state => {
-			const { currentChat, authUser } = state;
-			if (currentChat && authUser) {
-				const chatService = new ChatService();
-				const authUserIsAdmin = currentChat.created_by === authUser.id;
-				const isDialogChat = await chatService.isDialogChat(currentChat);
-				this.setState({
-					currentChat,
-					authUserIsAdmin: String(authUserIsAdmin),
-					isDialogChat: String(isDialogChat),
-				});
-			}
-		}, 'currentChat');
+	async componentDidMount() {
+		store.subscribe(this.updateCurrentChatHandler.bind(this), 'currentChat');
+		const { id: chatId } = useParams();
+		const chatService = new ChatService();
+		await chatService.updateChatsAndCurrentChat(chatId);
+		const token = await chatService.getChatToken(chatId);
+		const { authUser } = store.getState();
+		if (authUser && chatId && token) {
+			this.setState({
+				messageService: new MessageService({ userId: authUser.id, chatId, token }),
+			});
+		}
 	}
 
-	protected getStateFromProps() {
+	getStateFromProps() {
 		this.state = {
 			...initialState,
 		};
+	}
+
+	async updateCurrentChatHandler(state: StoreState) {
+		const { currentChat, authUser } = state;
+		if (currentChat && authUser) {
+			const chatService = new ChatService();
+			const authUserIsAdmin = currentChat.created_by === authUser.id;
+			const isDialogChat = await chatService.isDialogChat(currentChat);
+			this.setState({
+				currentChat,
+				authUserIsAdmin: String(authUserIsAdmin),
+				isDialogChat: String(isDialogChat),
+			});
+		}
+	}
+
+	onDestroy() {
+		this.state.messageService.closeConnection();
 	}
 
 	render(): string {

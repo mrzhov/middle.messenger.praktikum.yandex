@@ -1,12 +1,6 @@
 import { store } from '@/app';
 import type { Chat, ChatId, ChatTitle, ChatUsersBody, ChatWithUsers, User } from '@/shared/types';
-import {
-	changeRoute,
-	errorHandler,
-	getDialogChatTitle,
-	openToast,
-	useParams,
-} from '@/shared/utils';
+import { changeRoute, errorHandler, getDialogChatTitle, openToast } from '@/shared/utils';
 
 import { ChatApi } from './chat.api';
 
@@ -104,11 +98,18 @@ export class ChatService {
 		await this.getAndSetChats();
 	}
 
-	async updateChatsAndCurrentChat(): Promise<void> {
-		const { id } = useParams();
-		await this.getAndSetChats();
+	async updateChatsAndCurrentChat(id: string): Promise<void> {
+		const { chats } = store.getState();
+		if (!chats) {
+			await this.getAndSetChats();
+		}
 		if (id) {
 			await this.getCurrentChat(id);
 		}
+	}
+
+	async getChatToken(id: string): Promise<string> {
+		const { token } = await this.chatApi.getChatToken<{ token: string }>(id);
+		return token;
 	}
 }

@@ -228,6 +228,10 @@ abstract class Block<P = any> {
 			this.#meta.lastCssDisplayProperty = this.element.style.display;
 		}
 		this.element.style.display = 'none';
+
+		setTimeout(() => {
+			this.destroy();
+		}, 300);
 	}
 
 	public destroy() {

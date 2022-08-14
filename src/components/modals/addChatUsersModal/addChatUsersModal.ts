@@ -118,7 +118,8 @@ class AddChatUsersModal extends Block {
 					const chatService = new ChatService();
 					const usersIds = selectedUsers.map((user: User) => user.id);
 					await chatService.addChatUsers({ chatId: currentChat.id, users: usersIds });
-					await chatService.updateChatsAndCurrentChat();
+					// TODO
+					// await chatService.updateChatsAndCurrentChat();
 					this.closeModal();
 					this.destroy();
 				}
