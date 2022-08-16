@@ -6,8 +6,8 @@ import { Methods } from './HttpClient.types';
 export class HttpClient {
 	private readonly baseURL: string;
 
-	constructor() {
-		this.baseURL = process.env.API_URL!;
+	constructor(baseUrl?: string) {
+		this.baseURL = baseUrl || process.env.API_URL!;
 	}
 
 	get = <T>(url: string, config?: RequestConfig) => {
@@ -28,7 +28,7 @@ export class HttpClient {
 	};
 
 	request = <T>(url: string, method: Methods, options: Options) => {
-		const { data, headers } = options;
+		const { data, headers, responseType } = options;
 
 		return new Promise<T>((resolve, reject) => {
 			const xhr = new XMLHttpRequest();
@@ -37,10 +37,19 @@ export class HttpClient {
 
 			xhr.withCredentials = true;
 
+			if (responseType) {
+				xhr.responseType = responseType;
+			}
+
 			xhr.onload = () => {
 				if (xhr.status >= 200 && xhr.status < 300) {
-					const response = xhr.response === 'OK' ? { status: 'OK' } : JSON.parse(xhr.response);
-					resolve(response);
+					try {
+						const response =
+							xhr.response === 'OK' ? { status: 'OK' } : JSON.parse(xhr.response);
+						resolve(response);
+					} catch (err: any) {
+						resolve(xhr.response);
+					}
 				} else {
 					const response =
 						xhr.response === 'Internal Server Error'

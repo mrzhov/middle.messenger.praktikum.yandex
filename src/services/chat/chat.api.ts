@@ -26,7 +26,7 @@ export class ChatApi {
 
 	changeAvatar<T>(data: FormData): Promise<T> {
 		return this.http.put<T>('/chats/avatar', data, {
-			headers: { 'content-type': 'multipart/form-data' },
+			headers: { accept: 'application/json' },
 		});
 	}
 

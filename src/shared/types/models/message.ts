@@ -1,3 +1,5 @@
+import type { Resource } from '@/shared/types';
+
 export type WSSParams = {
 	userId: number;
 	chatId: string;
@@ -12,15 +14,7 @@ export type MessageItem = {
 	time: string;
 	content: string;
 	is_read: boolean;
-	file?: {
-		id: number;
-		user_id: number;
-		path: string;
-		filename: string;
-		content_type: string;
-		content_size: number;
-		upload_date: string;
-	};
+	file: Nullable<Resource>;
 };
 
 export type MessageItemSmall = Omit<MessageItem, 'chat_id' | 'is_read' | 'file'>;

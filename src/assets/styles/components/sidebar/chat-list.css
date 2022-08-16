@@ -64,7 +64,7 @@
          display: flex;
          justify-content: space-between;
 
-         .subtext {
+         & > .subtext {
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
@@ -78,7 +78,7 @@
          height: 100%;
          display: flex;
          align-items: flex-end;
-         div {
+         & > div {
             @mixin size 1.25rem;
             background-color: $blue;
             border-radius: 50%;

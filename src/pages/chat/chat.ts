@@ -158,7 +158,7 @@ class ChatPage extends Block {
 					</header>
 					<div class="chat-messages">
 						{{#if this.messages.length}}
-							<div class="space-y-2">
+							<div class="chat-messages-content space-y-2">
 								{{#each this.messages}}
 									{{{ChatMessagesItem
 										message=this

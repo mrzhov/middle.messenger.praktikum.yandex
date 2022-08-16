@@ -3,6 +3,19 @@ import { Block } from '@/shared/core';
 import { blurHandler, focusHandler, getValueFromRefs } from '@/shared/utils';
 import { messageValidator } from '@/shared/validators';
 
+async function inputOnChangeHandler(this: any) {
+	const { files } = this;
+	const file = files ? files[0] : null;
+	if (file) {
+		const formData = new FormData();
+		formData.append('resource', file);
+		const { messageService } = store.getState();
+		if (messageService) {
+			await messageService.sendResourceMessage(formData);
+		}
+	}
+}
+
 const initialState = {
 	values: {
 		message: '',
@@ -53,7 +66,10 @@ class ChatBottomActions extends Block {
 				}
 			},
 			openChatAttachments: () => {
-				console.log('openChatAttachments');
+				const input = document.createElement('input');
+				input.type = 'file';
+				input.onchange = inputOnChangeHandler;
+				input.click();
 			},
 		};
 	}

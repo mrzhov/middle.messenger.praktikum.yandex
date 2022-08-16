@@ -10,11 +10,10 @@ class Link extends Block<LinkProps> {
 	}
 
 	render(): string {
+		const { classes } = this.props;
 		// language=hbs
 		return `
-			<div>
-				<a href="{{href}}" class="link">{{text}}</a>
-			</div>
+			<a href="{{href}}" class="link ${classes || ''}">{{text}}</a>
 		`;
 	}
 }

@@ -8,6 +8,7 @@ export enum Methods {
 export type RequestConfig = {
 	headers?: Record<string, string>;
 	params?: Record<string, unknown>;
+	responseType?: 'blob';
 };
 
 export type Options = {

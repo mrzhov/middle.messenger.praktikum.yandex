@@ -1,4 +1,5 @@
 import { store } from '@/app';
+import { ResourcesService } from '@/services/resources/resources.service';
 import type { MessageData, WSSParams } from '@/shared/types';
 import { openToast } from '@/shared/utils';
 
@@ -115,5 +116,18 @@ export class MessageService {
 				type: 'message',
 			})
 		);
+	}
+
+	async sendResourceMessage(data: FormData) {
+		const resourcesService = new ResourcesService();
+		const response = await resourcesService.uploadResource(data);
+		if (response) {
+			this.#wss.send(
+				JSON.stringify({
+					content: response.id,
+					type: 'file',
+				})
+			);
+		}
 	}
 }

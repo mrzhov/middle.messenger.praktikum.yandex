@@ -1,7 +1,8 @@
 import { store } from '@/app';
+import { ResourcesService } from '@/services';
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
-import { toTimeTransformer } from '@/shared/utils';
+import { formatBytes, toTimeTransformer } from '@/shared/utils';
 
 import type { ChatMessagesItemProps } from './chatMessagesItem.types';
 
@@ -28,7 +29,23 @@ class ChatMessagesItem extends Block<ChatMessagesItemProps> {
 		}, 'currentChat');
 	}
 
+	protected getStateFromProps() {
+		this.state = {
+			linkClickHandler: async () => {
+				if ('file' in this.props.message && this.props.message.file) {
+					const { path, filename } = this.props.message.file;
+					const resourcesService = new ResourcesService();
+					await resourcesService.downloadResource(path, filename);
+				}
+			},
+		};
+	}
+
 	render(): string {
+		const { message } = this.props;
+		const content_size =
+			'file' in message && message.file ? formatBytes(message.file.content_size, 0) : '';
+
 		// language=hbs
 		return `
 			<div class="message-item">
@@ -45,7 +62,27 @@ class ChatMessagesItem extends Block<ChatMessagesItemProps> {
 							</div>
 						</div>
 						<div class="message-item-content-message">
-							<p class="message-item-text">{{message.content}}</p>
+							{{#if message.file}}
+								<div class="flex mt-1">
+									<div class="message-item-file-icon">
+										${icons.file}
+									</div>
+									<div class="flex flex-col justify-center">
+										<p class="message-item-text">{{message.file.filename}}</p>
+										<div class="flex items-center mt-2px">
+											<p class="message-item-subtext">${content_size}&nbsp;-&nbsp;</p>
+											{{{Link
+												text="Загрузить"
+												href="/registry"
+												onClick=linkClickHandler
+												classes="link-small"
+											}}}
+										</div>
+									</div>
+								</div>
+							{{else}}
+								<p class="message-item-text">{{message.content}}</p>
+							{{/if}}
 						</div>
 					</div>
 				{{/if}}
