@@ -25,8 +25,9 @@ async function inputOnChangeHandler(this: any) {
 }
 
 function click(this: any, event: MouseEvent) {
-	const openChangeAvatarModalButton = findParentElementByCondition(event, (target: any) =>
-		target.classList.contains('chat-avatar')
+	const openChangeAvatarModalButton = findParentElementByCondition(
+		event,
+		(target: any) => target.id === 'chat-avatar'
 	);
 	if (openChangeAvatarModalButton && this.state.authUserIsAdmin) {
 		const input = document.createElement('input');
@@ -86,10 +87,18 @@ class ChatPage extends Block {
 	storeSubscribe() {
 		store.subscribe(this.updateCurrentChatHandler.bind(this), 'currentChat');
 		store.subscribe(state => {
-			const { messages } = state;
-			if (messages) {
+			const { messages, currentChat } = state;
+			if (messages && currentChat) {
+				const chatUsers = currentChat.users;
+				const messagesWithUserAvatar = messages.map(message => {
+					const messageAuthor = chatUsers.find(user => user.id === message.user_id);
+					return {
+						...message,
+						user_avatar: messageAuthor ? messageAuthor.avatar : null,
+					};
+				});
 				this.setState({
-					messages,
+					messages: messagesWithUserAvatar,
 				});
 			}
 		}, 'messages');
@@ -123,7 +132,9 @@ class ChatPage extends Block {
 				<main class="flex flex-col h-full">
 					<header class="page-header flex items-center justify-between">
 						<div class="flex-center">
-							<button class="flex-center chat-avatar${authUserIsAdmin === 'true' ? ' chat-avatar-hover' : ''}">
+							<button class="flex-center chat-avatar${
+								authUserIsAdmin === 'true' ? ' chat-avatar-hover' : ''
+							}" id="chat-avatar">
 								{{#if ${Boolean(currentChat?.avatar)}}}
 									<img src="${process.env.RESOURCES_URL}${currentChat?.avatar}" alt="Avatar">
 								{{/if}}

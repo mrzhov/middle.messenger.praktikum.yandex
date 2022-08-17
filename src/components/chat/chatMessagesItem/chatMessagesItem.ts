@@ -50,7 +50,13 @@ class ChatMessagesItem extends Block<ChatMessagesItemProps> {
 		return `
 			<div class="message-item">
 				{{#if authorName}}
-					<div class="mock-avatar small"></div>
+					<div class="chat-avatar">
+						{{#if ${Boolean(message.user_avatar)}}}
+							<img src="${process.env.RESOURCES_URL}${message.user_avatar}" alt="Avatar">
+						{{else}}
+							<div class="mock-avatar small"></div>
+						{{/if}}
+					</div>
 					<div class="message-item-content">
 						<div class="message-item-content-top">
 							<p class="message-item-author">{{authorName}}</p>
