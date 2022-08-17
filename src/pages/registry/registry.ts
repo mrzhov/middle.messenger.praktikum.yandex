@@ -11,13 +11,13 @@ import {
 
 const initialState = {
 	values: {
-		first_name: 'Danil',
-		second_name: 'Ryzhov',
-		phone: '+79857358996',
-		email: 'danil.ryzhov20@yandex.ru',
-		login: 'mrzhov',
-		password: 'Qwerty123',
-		password_repeat: 'Qwerty123',
+		first_name: '',
+		second_name: '',
+		phone: '',
+		email: '',
+		login: '',
+		password: '',
+		password_repeat: '',
 	},
 	errors: {
 		first_name: '',
