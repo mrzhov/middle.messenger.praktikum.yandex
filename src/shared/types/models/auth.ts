@@ -19,4 +19,4 @@ export type LoginBody = {
 	password: string;
 };
 
-export type RegistryBody = Omit<UserSmall, 'avatar'> & LoginBody;
+export type RegistryBody = Omit<UserSmall, 'avatar' | 'role'> & LoginBody;

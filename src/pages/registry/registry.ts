@@ -185,6 +185,7 @@ class RegistryPage extends Block {
 								{{{Button
 									text="Зарегистрироваться"
 									onClick=onSubmit
+									type="submit"
 								}}}
 							</form>
 							{{{Link

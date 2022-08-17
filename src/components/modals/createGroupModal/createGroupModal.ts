@@ -103,6 +103,7 @@ class CreateGroupModal extends Block {
 								{{{Button
 									text="Создать"
 									onClick=onSubmit
+									type="submit"
 								}}}
 							</div>
 						</form>

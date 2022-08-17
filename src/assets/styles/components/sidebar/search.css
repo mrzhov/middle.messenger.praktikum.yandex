@@ -52,11 +52,6 @@
             }
          }
 
-         &:focus ~ button {
-            opacity: 1;
-            visibility: visible;
-         }
-
          &:not(:placeholder-shown) ~ label {
             display: none;
          }
@@ -78,6 +73,13 @@
 
          &:active {
             transform: translateY(-50%) scale(0.95);
+         }
+      }
+
+      &.showCloseBtn {
+         button {
+            opacity: 1;
+            visibility: visible;
          }
       }
    }

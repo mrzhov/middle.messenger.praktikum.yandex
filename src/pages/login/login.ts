@@ -99,6 +99,7 @@ class LoginPage extends Block {
 								{{{Button
 									text="Войти"
 									onClick=onSubmit
+									type="submit"
 								}}}
 							</form>
 							{{{Link

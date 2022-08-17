@@ -11,7 +11,7 @@ class Search extends Block {
 					event.preventDefault();
 					const form = event.target as HTMLFormElement;
 					const input = form.querySelector('input')!;
-					console.log(input.value);
+					console.log('submit', input.value);
 				},
 			},
 		});
@@ -19,6 +19,7 @@ class Search extends Block {
 
 	protected getStateFromProps() {
 		this.state = {
+			showCloseBtn: true,
 			onClose: () => {
 				console.log('Close Search');
 			},
@@ -26,10 +27,12 @@ class Search extends Block {
 	}
 
 	render(): string {
+		const { showCloseBtn } = this.state;
+
 		// language=hbs
 		return `
 			<form class="search-form">
-				<div class="search-form-field">
+				<div class="search-form-field ${showCloseBtn ? 'showCloseBtn' : ''}">
 					<input
 						id="search"
 						type="text"

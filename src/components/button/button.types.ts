@@ -5,4 +5,5 @@ export type ButtonProps = {
 	classes?: string;
 	icon?: IconsKeys;
 	disabled?: boolean;
+	type?: 'button' | 'submit';
 } & BlockEvents;

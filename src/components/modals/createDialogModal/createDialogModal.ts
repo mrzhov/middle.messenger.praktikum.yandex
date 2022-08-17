@@ -179,6 +179,7 @@ class CreateDialogModal extends Block {
 										text="Найти"
 										onClick=onSearch
 										classes="py-4"
+										type="submit"
 									}}}
 								</div>
 							</div>

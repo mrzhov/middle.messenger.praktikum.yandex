@@ -11,14 +11,14 @@ class Button extends Block<ButtonProps> {
 	}
 
 	render(): string {
-		const { text, classes, icon, disabled } = this.props;
+		const { text, classes, icon, disabled, type } = this.props;
 
 		if (icon) {
 			// language=hbs
 			return `
           <button class="btn-icon w-10 h-10 ${disabled ? 'disabled' : ''}" ${
 				disabled ? 'disabled' : ''
-			}>${icons[icon]}</button>
+			} type="${type || 'button'}">${icons[icon]}</button>
       `;
 		}
 
@@ -26,7 +26,7 @@ class Button extends Block<ButtonProps> {
 		return `
         <button class="btn ${classes || ''} ${disabled ? 'disabled' : ''}" ${
 			disabled ? 'disabled' : ''
-		}>${text}</button>
+		} type="${type || 'button'}">${text}</button>
     `;
 	}
 }

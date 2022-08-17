@@ -100,6 +100,7 @@ class ChatBottomActions extends Block {
 							{{{Button
 								icon="send"
 								onClick=onSubmit
+								type="submit"
 							}}}
 						</form>
 					</div>

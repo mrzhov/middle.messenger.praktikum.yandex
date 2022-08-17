@@ -117,6 +117,7 @@ class ChangePasswordPage extends Block {
 									{{{Button
 										text="Сохранить"
 										onClick=onSubmit
+										type="submit"
 									}}}
 								</div>
 							</form>
