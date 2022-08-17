@@ -8,3 +8,10 @@
       text-decoration: underline;
    }
 }
+
+.link-small {
+   font-weight: 300;
+   font-size: 11px;
+   line-height: 14px;
+   white-space: pre-line;
+}

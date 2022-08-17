@@ -1,6 +1,7 @@
-import type { ChatListItemType } from '@/shared/types';
-
-export type ChatListItemProps = Omit<ChatListItemType, 'lastMessage' | 'sortedMessages'> & {
-	lastMessageText: string;
-	lastMessageTime: string;
+export type ChatListItemProps = {
+	itemId: number;
+	title: string;
+	avatar: Nullable<string>;
+	unread_count: number;
+	last_message: string;
 };

@@ -1,0 +1,47 @@
+.dropdown {
+   position: relative;
+
+   &-content {
+      display: block;
+      position: absolute;
+      background-color: $blue-darken;
+      min-width: 160px;
+      width: fit-content;
+      box-shadow: 0 8px 16px 0 rgb(0 0 0 / 0.2);
+      z-index: 1;
+      border-radius: 0.5rem;
+      padding: 0.5rem 0;
+      opacity: 0;
+      visibility: hidden;
+   }
+
+   &-content-btn {
+      white-space: nowrap;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: background-color .1s ease-in-out;
+      font-size: 0.75rem;
+      line-height: 1rem;
+      color: $white;
+      width: 100%;
+      display: flex;
+      align-items: center;
+
+      svg {
+         @mixin size 1.25rem;
+      }
+
+      &:hover {
+         background-color: $blue-darken-3;
+      }
+
+      &.color-red {
+         color: $red;
+      }
+   }
+
+   &-content-open {
+      opacity: 1;
+      visibility: visible;
+   }
+}

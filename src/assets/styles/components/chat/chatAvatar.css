@@ -1,0 +1,44 @@
+.chat-avatar {
+   @mixin size 48px;
+   margin-right: 0.75rem;
+   background-color: $grey-4;
+   border-radius: 50%;
+   position: relative;
+   cursor: default;
+
+   &-overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+      transition: .3s ease;
+      background-color: $blue-darken-4;
+      border-radius: 50%;
+      text-align: center;
+      color: $white;
+      padding: 0 2px;
+   }
+
+   img {
+      @mixin size 48px;
+      border-radius: 50%;
+   }
+
+   svg {
+      width: 16px;
+      height: 16px;
+   }
+
+   &-hover {
+      cursor: pointer;
+      &:hover {
+         .chat-avatar-overlay {
+            opacity: 1;
+         }
+      }
+   }
+}

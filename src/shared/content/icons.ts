@@ -11,6 +11,11 @@ export type IconsKeys =
 	| 'pencil'
 	| 'send'
 	| 'staple'
+	| 'people'
+	| 'removePeople'
+	| 'trash'
+	| 'file'
+	| 'closeModal'
 	| 'doubleCheck';
 
 export const icons: Record<IconsKeys, string> = {
@@ -23,6 +28,14 @@ export const icons: Record<IconsKeys, string> = {
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 					<path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
 					<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+				</svg>
+		`,
+	file: `
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M4 4v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.342a2 2 0 0 0-.602-1.43l-4.44-4.342A2 2 0 0 0 13.56 2H6a2 2 0 0 0-2 2z"/>
+					<path d="M9 13h6"/>
+					<path d="M9 17h3"/>
+					<path d="M14 2v4a2 2 0 0 0 2 2h4"/>
 				</svg>
 		`,
 	logo: `
@@ -92,6 +105,37 @@ export const icons: Record<IconsKeys, string> = {
 					<path fill-rule="evenodd" clip-rule="evenodd" d="M17.5575 23.8709C14.9423 26.486 10.7118 26.4954 8.10832 23.8919C5.50482 21.2884 5.51425 17.0579 8.12936 14.4428L7.18655 13.5C4.04841 16.6381 4.03711 21.7148 7.1613 24.839C10.2855 27.9632 15.3621 27.9518 18.5003 24.8137L17.5575 23.8709Z" fill="#ACBFD0"/>
 					<path fill-rule="evenodd" clip-rule="evenodd" d="M22.6195 13.7808L23.5623 14.7236C26.003 12.2828 26.0118 8.33434 23.5819 5.90441C21.152 3.47449 17.2035 3.48328 14.7627 5.92406L15.7055 6.86687C17.6233 4.94911 20.7257 4.9422 22.6349 6.85143C24.5441 8.76066 24.5372 11.863 22.6195 13.7808Z" fill="#ACBFD0"/>
 					<path fill-rule="evenodd" clip-rule="evenodd" d="M9.70093 16.0144C7.95752 17.7578 7.95123 20.5782 9.6869 22.3138C11.4226 24.0495 14.2429 24.0432 15.9863 22.2998L15.0435 21.357C13.8231 22.5774 11.8489 22.5818 10.6339 21.3668C9.41895 20.1518 9.42335 18.1776 10.6437 16.9572L9.70093 16.0144Z" fill="#ACBFD0"/>
+				</svg>
+		`,
+	people: `
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M18.8439 7.875C18.7065 9.78141 17.2923 11.25 15.7501 11.25C14.2079 11.25 12.7914 9.78188 12.6564 7.875C12.5157 5.89172 13.8925 4.5 15.7501 4.5C17.6078 4.5 18.9845 5.92781 18.8439 7.875Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M15.7498 14.25C12.695 14.25 9.75731 15.7673 9.02138 18.7223C8.92388 19.1133 9.16903 19.5 9.57075 19.5H21.9293C22.3311 19.5 22.5748 19.1133 22.4787 18.7223C21.7428 15.72 18.8051 14.25 15.7498 14.25Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10"/>
+					<path d="M9.37496 8.71594C9.26527 10.2384 8.12246 11.4375 6.89058 11.4375C5.65871 11.4375 4.51402 10.2389 4.40621 8.71594C4.29418 7.13203 5.40652 6 6.89058 6C8.37465 6 9.48699 7.16109 9.37496 8.71594Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M9.65622 14.3438C8.81013 13.9561 7.87825 13.807 6.8906 13.807C4.4531 13.807 2.10466 15.0188 1.51638 17.3789C1.43903 17.6911 1.63497 18 1.9556 18H7.21872" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"/>
+				</svg>
+		`,
+	removePeople: `
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M18.8437 7.875C18.7064 9.78141 17.2922 11.25 15.75 11.25C14.2078 11.25 12.7912 9.78188 12.6562 7.875C12.5156 5.89172 13.8923 4.5 15.75 4.5C17.6076 4.5 18.9844 5.92781 18.8437 7.875Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M15.7501 14.25C12.6952 14.25 9.75756 15.7673 9.02162 18.7223C8.92412 19.1133 9.16928 19.5 9.571 19.5H21.9296C22.3313 19.5 22.5751 19.1133 22.479 18.7223C21.743 15.72 18.8054 14.25 15.7501 14.25Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10"/>
+					<path d="M9.37496 8.71594C9.26527 10.2384 8.12246 11.4375 6.89058 11.4375C5.65871 11.4375 4.51402 10.2389 4.40621 8.71594C4.29418 7.13203 5.40652 6 6.89058 6C8.37465 6 9.48699 7.16109 9.37496 8.71594Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M9.65622 14.3437C8.81013 13.9561 7.87825 13.807 6.8906 13.807C4.4531 13.807 2.10466 15.0187 1.51638 17.3789C1.43903 17.6911 1.63497 18 1.9556 18H7.21872" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"/>
+					<path d="M23 1L1 23" stroke="white"/>
+				</svg>
+		`,
+	trash: `
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M4 6h16l-1.58 14.22A2 2 0 0 1 16.432 22H7.568a2 2 0 0 1-1.988-1.78L4 6z"/>
+					<path d="M7.345 3.147A2 2 0 0 1 9.154 2h5.692a2 2 0 0 1 1.81 1.147L18 6H6l1.345-2.853z"/>
+					<path d="M2 6h20"/>
+					<path d="M10 11v5"/>
+					<path d="M14 11v5"/>
+				</svg>
+		`,
+	closeModal: `
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke-width="2">
+					<path fill-rule="evenodd" clip-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zm3.707 8.707a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293a1 1 0 1 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293z"/>
 				</svg>
 		`,
 	doubleCheck: `

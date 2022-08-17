@@ -1,12 +1,16 @@
-import type Block from '@/shared/core/Block';
+import type Block from '@/shared/core';
 
 declare global {
+	export type IObject<T = unknown> = Record<string, T>;
 	export type Nullable<T> = T | null;
-	export type Keys<T extends Record<string, unknown>> = keyof T;
-	export type Values<T extends Record<string, unknown>> = T[Keys<T>];
+	export type Keys<T extends IObject> = keyof T;
+	export type Values<T extends IObject> = T[Keys<T>];
 	export interface BlockConstructable<Props = any> {
-		componentName: string;
 		new (props: Props): Block;
+	}
+	export interface BlockConstructableWithComponentName<Props = any>
+		extends BlockConstructable<Props> {
+		componentName: string;
 	}
 	export type BlockEvents = {
 		events: Record<string, ((...args: any) => any) | string>;
@@ -15,6 +19,7 @@ declare global {
 		values: Record<T, string>;
 		errors: Record<T, string>;
 	};
+	export type StringBoolean = 'true' | 'false';
 }
 
 export {};

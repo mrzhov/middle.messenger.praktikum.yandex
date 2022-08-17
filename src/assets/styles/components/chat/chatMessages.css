@@ -1,28 +1,30 @@
 .chat-messages {
    height: calc(100% - 69px - 61px);
-   overflow-x: hidden;
-   overflow-y: overlay;
-   transition: color .3s ease;
-   color: transparent;
-   padding: 0 1rem;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-end;
 
-   &::-webkit-scrollbar {
-      width: 0.5rem;
-      background-color: transparent;
-   }
+   &-content {
+      padding: 1rem;
+      overflow-x: hidden;
+      overflow-y: overlay;
+      transition: color .3s ease;
+      color: transparent;
 
-   &::-webkit-scrollbar-thumb {
-      background-color: transparent;
-      border-radius: 0.5rem;
-      box-shadow: inset 0 0 0 10px;
-   }
+      &::-webkit-scrollbar {
+         width: 0.5rem;
+         background-color: transparent;
+      }
 
-   &:hover {
-      color: $white-2;
-   }
+      &::-webkit-scrollbar-thumb {
+         background-color: transparent;
+         border-radius: 0.5rem;
+         box-shadow: inset 0 0 0 10px;
+      }
 
-   & > div {
-      padding: 1rem 0;
+      &:hover {
+         color: $white-2;
+      }
    }
 }
 

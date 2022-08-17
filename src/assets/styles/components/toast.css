@@ -1,0 +1,33 @@
+.toast {
+  @extend .text-base;
+  @extend .font-medium;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 50;
+  transition: opacity 300ms ease-in-out;
+  min-width: 300px;
+  max-width: 500px;
+  height: fit-content;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.toast-text {
+  line-break: anywhere;
+}
+
+.toast-error {
+  background-color: $red;
+}
+
+.toast-success {
+  background-color: $green;
+}
+
+.toast-open {
+  opacity: 1;
+}

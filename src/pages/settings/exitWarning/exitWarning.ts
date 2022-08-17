@@ -1,8 +1,18 @@
+import { AuthService } from '@/services';
 import { Block } from '@/shared/core';
 
 class ExitWarningPage extends Block {
 	constructor() {
 		super();
+	}
+
+	protected getStateFromProps() {
+		this.state = {
+			logoutHandler: async () => {
+				const authService = new AuthService();
+				await authService.logout();
+			},
+		};
 	}
 
 	render(): string {
@@ -16,6 +26,7 @@ class ExitWarningPage extends Block {
 							{{{Button
 								text="Выйти"
 								classes="error"
+								onClick=logoutHandler
 							}}}
 						</div>
 					</div>

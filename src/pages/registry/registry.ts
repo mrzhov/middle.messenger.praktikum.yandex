@@ -1,3 +1,4 @@
+import { AuthService } from '@/services';
 import { Block } from '@/shared/core';
 import { blurHandler, changeRoute, focusHandler, getValueFromRefs } from '@/shared/utils';
 import {
@@ -43,7 +44,7 @@ class RegistryPage extends Block {
 			onBlurHandler: (event: FocusEvent) => {
 				blurHandler.call(this, event);
 			},
-			onSubmit: (event: MouseEvent) => {
+			onSubmit: async (event: MouseEvent) => {
 				event.preventDefault();
 
 				const registryData = {
@@ -76,9 +77,8 @@ class RegistryPage extends Block {
 						nextState.errors.password_repeat = 'Пароли не совпадают';
 						this.setState(nextState);
 					} else {
-						console.log('registry:', registryData);
-						this.setState(initialState);
-						changeRoute('/chat/4');
+						const authService = new AuthService();
+						await authService.registry(registryData);
 					}
 				}
 			},
@@ -185,6 +185,7 @@ class RegistryPage extends Block {
 								{{{Button
 									text="Зарегистрироваться"
 									onClick=onSubmit
+									type="submit"
 								}}}
 							</form>
 							{{{Link

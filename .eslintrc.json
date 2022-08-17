@@ -59,7 +59,8 @@
           "error",
           "never",
           {
-            "css": "always"
+            "css": "always",
+            "types": "always"
           }
         ],
         "class-methods-use-this": "off",
@@ -70,9 +71,13 @@
           }
         ],
         "@typescript-eslint/no-useless-constructor": "off",
+        "@typescript-eslint/naming-convention": "off",
         "no-restricted-globals": "off",
+        "no-restricted-syntax": "off",
         "no-console": "off",
-        "no-useless-concat": "off"
+        "no-useless-concat": "off",
+        "no-plusplus": "off",
+        "no-continue": "off"
       }
     }
   ]

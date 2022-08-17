@@ -1,9 +1,10 @@
+import { store } from '@/app';
 import { icons } from '@/shared/content';
 import { Block } from '@/shared/core';
 import { PagesRoutes } from '@/shared/types';
 import { changeRoute, findParentElementByCondition } from '@/shared/utils';
 
-import content from './profile.content';
+import type { ProfileState } from './profile.types';
 
 const click = (event: MouseEvent) => {
 	event.preventDefault();
@@ -21,27 +22,46 @@ class Profile extends Block {
 		super({ events: { click } });
 	}
 
+	componentDidMount() {
+		store.subscribe(state => {
+			this.setState({
+				authUser: state.authUser,
+			});
+		}, 'authUser');
+	}
+
 	render(): string {
 		const { pathname } = window.location;
 		const isProfilePage = pathname === PagesRoutes.PROFILE;
+		const { authUser } = this.state as ProfileState;
+		const avatarPath =
+			authUser && authUser.avatar ? `${process.env.RESOURCES_URL}${authUser.avatar}` : null;
 
 		// language=hbs
 		return `
 			<div class="sidebar-profile-container">
 				<div class="sidebar-profile ${isProfilePage ? 'active' : ''}">
-					<a href="/settings/profile">
-						<div class="flex items-center">
-							<div class="mock-avatar"></div>
-							<div>
-								<p class="text">${content.mockProfile.first_name}&nbsp;${content.mockProfile.second_name}</p>
-								<p class="subtext">${content.mockProfile.phone}</p>
-								<p class="subtext">${content.mockProfile.login}</p>
+					{{#if this.authUser}}
+						<a href="/settings/profile">
+							<div class="flex items-center">
+								{{#if ${Boolean(avatarPath)}}}
+									<img class="sidebar-profile-avatar" src="${avatarPath}" alt="Avatar">
+								{{else}}
+									<div class="mock-avatar"></div>
+								{{/if}}
+								<div>
+									<p class="text">${authUser?.first_name || ''}&nbsp;${authUser?.second_name || ''}</p>
+									<p class="subtext">${authUser?.phone || ''}</p>
+									<p class="subtext">${authUser?.login || ''}</p>
+								</div>
 							</div>
-						</div>
-						<div class="sidebar-settings-arrow">
-							${icons.arrowRight}
-						</div>
-					</a>
+							<div class="sidebar-settings-arrow">
+								${icons.arrowRight}
+							</div>
+						</a>
+					{{else}}
+						<div class="flex-center h-92px">{{{Loader}}}</div>
+					{{/if}}
 				</div>
 			</div>
 		`;

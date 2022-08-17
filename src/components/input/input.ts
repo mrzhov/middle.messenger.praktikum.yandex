@@ -6,6 +6,9 @@ const getClasses = (error: InputProps['error'], variant?: InputVariant) => {
 	if (variant === 'standard') {
 		return `input-standard${error ? ' input-standard-error' : ''}`;
 	}
+	if (variant === 'standard-black') {
+		return `input-standard input-standard-black${error ? ' input-standard-error' : ''}`;
+	}
 	if (variant === 'gradient') {
 		return `input-gradient${error ? ' input-gradient-error' : ''}`;
 	}

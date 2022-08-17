@@ -7,6 +7,19 @@
    padding-right: 1rem;
 }
 
+.py-4 {
+   padding-top: 1rem !important;
+   padding-bottom: 1rem !important;
+}
+
+.mt-1 {
+   margin-top: 0.25rem;
+}
+
+.mt-2px {
+   margin-top: 2px;
+}
+
 .space-x-1 {
    & > *:not(:first-child) {
       margin-left: 0.25rem;
