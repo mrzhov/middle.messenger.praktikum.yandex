@@ -13,7 +13,6 @@ import { DeleteChatUsersModal } from '@/components/modals/deleteChatUsersModal';
 import { DeleteChatWarningModal } from '@/components/modals/deleteChatWarningModal';
 import { GroupChatUsersModal } from '@/components/modals/groupChatUsersModal';
 import { ChatListItem } from '@/components/sidebar/chat/chatListItem';
-import { Search } from '@/components/sidebar/chat/search';
 import { CreateChatDropdown } from '@/components/sidebar/createChatDropdown';
 import { Navigation } from '@/components/sidebar/navigation';
 import { CategoryItem } from '@/components/sidebar/settings/categoryItem';
@@ -34,7 +33,6 @@ export const registerComponents = () => {
 	registerComponent(ErrorPageContent);
 	registerComponent(SidebarChat);
 	registerComponent(SidebarSettings);
-	registerComponent(Search);
 	registerComponent(Navigation);
 	registerComponent(Profile);
 	registerComponent(CategoryItem);

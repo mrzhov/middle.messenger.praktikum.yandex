@@ -64,8 +64,6 @@
          @mixin size 20px;
          padding: 0;
          transform: translateY(-50%);
-         opacity: 0;
-         visibility: hidden;
 
          svg {
             fill: $blue-darken-2;
@@ -73,13 +71,6 @@
 
          &:active {
             transform: translateY(-50%) scale(0.95);
-         }
-      }
-
-      &.showCloseBtn {
-         button {
-            opacity: 1;
-            visibility: visible;
          }
       }
    }

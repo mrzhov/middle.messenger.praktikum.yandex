@@ -11,6 +11,11 @@
    &.border-bottom {
       border-bottom: 1px solid $blue-darken-2;
    }
+
+   &-create-btn-container {
+      position: absolute;
+      right: 0.25rem;
+   }
 }
 
 .app-logo {
